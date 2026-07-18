@@ -4,22 +4,23 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project: fps-site
 
-Static Telegram channel feed mockup for **FPS Girls** — a women's esports channel covering CS2, R6S, and Tarkov. Single `index.html`, no build step.
+Static site for **FPS Girls** — a women's esports community covering CS2, R6S, Tarkov Arena, and Valorant. No build step.
+
+- `index.html` — the production landing page (plain HTML/CSS, no JS frameworks): header with avatar, hero banner image, game badges, feature list, Faceit hub CTA, social links.
+- `telegram-feed.html` — legacy Telegram channel feed mockup (React 18 + Babel standalone via CDN, all inline): `CS2MatchCard`, `R6SPatchCard`, `TournamentCard` components, shared `Badge`/`Divider`/`ActionBar` primitives, design tokens in the `C` object.
+
+## Deployment
+
+Live at **https://fpsgirls.com/** via GitHub Pages:
+
+- Repo: `oxidizer05/fps-site`, Pages serves branch `main`, root. Custom domain set via `CNAME` file (do not delete it).
+- DNS is on **Cloudflare**, proxied (orange cloud): 4× A `@ → 185.199.108-111.153`, CNAME `www → oxidizer05.github.io`. TLS is terminated by Cloudflare.
+- Deploying = push to `main`; Pages rebuilds in ~1 minute. Technical URL: https://oxidizer05.github.io/fps-site/
+- Before Feb 2026 the domain pointed to a Tilda site (behind DDoS-Guard); it was switched to GitHub Pages on 2026-07-18.
 
 ## Dev Server
 
-Defined in `fps-site/.claude/launch.json`, served via `npx serve` on port **3456**. Use the `preview_start` tool with name `fps-site` to launch it.
-
-## Architecture
-
-`fps-site/index.html` — the entire app. React 18 + Babel standalone (CDN), all logic inline. No external component files are loaded at runtime.
-
-Three post card components, each self-contained:
-- `CS2MatchCard` — match result with score, stats row, collapsible action bar
-- `R6SPatchCard` — patch notes with BUFF/NERF/FIX badges and expand toggle
-- `TournamentCard` — leaderboard with progress bars and prize info
-
-Shared primitives: `Badge`, `Divider`, `ActionBar`. Design tokens in the `C` object at the top of the script.
+Defined in `.claude/launch.json`, served via `npx serve` on port **3456**. Use the `preview_start` tool with name `fps-site` to launch it.
 
 ## Design Tokens
 
@@ -40,3 +41,6 @@ Font: **Montserrat** (local, `fonts/`), weights 200–900 all available.
 
 - `fonts/Montserrat-{weight}.ttf` — full family, referenced via `@font-face`
 - `assets/logo.jpg` — channel avatar
+- `assets/hero-banner.jpg` — header banner (generated with GPT Image 2, 1600px web version)
+- `assets/hub-team.jpg` — team photo above the Faceit CTA (same origin)
+- `assets/hero-banner.png`, `assets/hub-team.png` — full-res originals, not referenced by the site (kept for social media reuse)
