@@ -4,9 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project: fps-site
 
-Static site for **FPS Girls** — a women's esports community covering CS2, R6S, Tarkov Arena, and Valorant. No build step.
+Static site for **FPS Girls** — a women's esports community covering CS2, R6S, Tarkov Arena, Valorant, and Apex Legends. No build step.
 
-- `index.html` — the production landing page (plain HTML/CSS, no JS frameworks): header with avatar, hero banner image, game badges, feature list, Faceit hub CTA, social links.
+- `index.html` — the production landing page (plain HTML/CSS + small vanilla-JS i18n): header with avatar and EN/RU language switcher (English default, choice saved to localStorage, translations in the inline `I18N` object), hero banner image, game badges, feature list, Faceit hub CTA, social links. Responsive: mobile card layout below 900px, wide (~1080px) grid layout above.
 - `telegram-feed.html` — legacy Telegram channel feed mockup (React 18 + Babel standalone via CDN, all inline): `CS2MatchCard`, `R6SPatchCard`, `TournamentCard` components, shared `Badge`/`Divider`/`ActionBar` primitives, design tokens in the `C` object.
 
 ## Deployment

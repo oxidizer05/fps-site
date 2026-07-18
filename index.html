@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Женский киберспорт — FPS Girls | Female esports</title>
-<meta name="description" content="Женские турниры, поиск игроков в женские команды, Faceit хаб для девушек. Сообщество девушек, играющих в CS2, Rainbow Six Siege, Tarkov Arena, Valorant.">
+<title>Women's Esports — FPS Girls | Female Esports</title>
+<meta name="description" content="Women's tournaments, player search for female teams, Faceit hub for girls. A community of girls playing CS2, Rainbow Six Siege, Tarkov Arena, Valorant, Apex Legends.">
 
 <style>
 @font-face { font-family: 'Montserrat'; src: url('fonts/Montserrat-Black.ttf') format('truetype');      font-weight: 900; font-display: swap; }
@@ -114,6 +114,34 @@ body::before {
   position: relative;
   z-index: 1;
 }
+
+/* ── Lang switch ── */
+.lang-switch {
+  position: absolute;
+  top: 14px; right: 14px;
+  display: flex;
+  gap: 2px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 2px;
+  z-index: 2;
+}
+.lang-btn {
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--gray1);
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 9px;
+  cursor: pointer;
+  transition: color 150ms ease-out, background 150ms ease-out;
+}
+.lang-btn:hover { color: var(--white); }
+.lang-btn.active { background: var(--accent); color: #fff; }
 
 /* ── Banner ── */
 .banner {
@@ -322,6 +350,50 @@ body::before {
 @media (max-width: 380px) {
   .socials { grid-template-columns: 1fr; }
 }
+
+/* ── Desktop layout ── */
+@media (min-width: 900px) {
+  body { padding: 48px 24px 64px; }
+  .page { max-width: 1080px; }
+  .header { padding: 44px 48px 36px; }
+  .header::after { width: 420px; height: 420px; top: -120px; }
+  .lang-switch { top: 20px; right: 20px; }
+  .avatar { width: 96px; height: 96px; }
+  .wordmark { font-size: 34px; margin-top: 18px; }
+  .tagline { font-size: 12px; margin-top: 8px; }
+  .hero { padding: 36px 48px 0; }
+  .hero h1 { font-size: 24px; }
+  .games { gap: 10px; margin-top: 18px; }
+  .game-badge { font-size: 12px; padding: 8px 16px; }
+  .features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    padding: 30px 48px 0;
+  }
+  .feature {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 16px;
+  }
+  .feature:last-child { border: 1px solid var(--border); }
+  .feature-text { font-size: 13px; }
+  .hub-photo { padding: 30px 48px 0; }
+  .cta-wrap {
+    padding: 28px 48px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .cta { max-width: 380px; font-size: 13px; }
+  .cta-sub { font-size: 10px; }
+  .section-label { padding: 30px 48px 16px; }
+  .socials { grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 0 48px; }
+  .footer { padding: 18px 48px; margin-top: 32px; }
+  .footer-games span { font-size: 10px; }
+  .footer-brand { font-size: 10px; }
+}
 </style>
 </head>
 
@@ -330,6 +402,10 @@ body::before {
 
   <!-- Header -->
   <header class="header">
+    <div class="lang-switch">
+      <button class="lang-btn active" type="button" data-lang="en">EN</button>
+      <button class="lang-btn" type="button" data-lang="ru">RU</button>
+    </div>
     <img class="avatar" src="assets/logo.jpg" alt="FPS Girls">
     <div class="wordmark">FPS Girls</div>
     <div class="tagline">Female Play Style</div>
@@ -337,17 +413,18 @@ body::before {
 
   <!-- Banner -->
   <div class="banner">
-    <img src="assets/hero-banner.jpg" alt="Девушка-киберспортсменка играет за ПК в неоновой комнате">
+    <img src="assets/hero-banner.jpg" data-i18n-alt="altBanner" alt="Female esports player at her PC in a neon-lit room">
   </div>
 
   <!-- Hero -->
   <section class="hero">
-    <h1>Cообщество девушек, играющих:</h1>
+    <h1 data-i18n="h1">A community of girls who play:</h1>
     <div class="games">
       <span class="game-badge">CS2</span>
       <span class="game-badge">Rainbow Six Siege</span>
       <span class="game-badge">Tarkov Arena</span>
       <span class="game-badge">Valorant</span>
+      <span class="game-badge">Apex Legends</span>
     </div>
   </section>
 
@@ -362,7 +439,7 @@ body::before {
           <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
         </svg>
       </div>
-      <div class="feature-text">Женские турниры</div>
+      <div class="feature-text" data-i18n="feat1">Women's tournaments</div>
     </div>
     <div class="feature">
       <div class="feature-icon">
@@ -371,7 +448,7 @@ body::before {
           <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
         </svg>
       </div>
-      <div class="feature-text">Поиск игроков в женские команды</div>
+      <div class="feature-text" data-i18n="feat2">Find players for women's teams</div>
     </div>
     <div class="feature">
       <div class="feature-icon">
@@ -379,29 +456,29 @@ body::before {
           <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
         </svg>
       </div>
-      <div class="feature-text">Faceit хаб для девушек</div>
+      <div class="feature-text" data-i18n="feat3">Faceit hub for girls</div>
     </div>
   </section>
 
   <!-- Hub photo -->
   <div class="hub-photo">
-    <img src="assets/hub-team.jpg" alt="Женская команда празднует победу на турнире">
+    <img src="assets/hub-team.jpg" data-i18n-alt="altTeam" alt="Women's team celebrating a tournament win">
   </div>
 
   <!-- Faceit CTA -->
   <div class="cta-wrap">
     <a class="cta" href="https://www.faceit.com/en/club/cd91474f-b1d0-412e-b210-6332dd7833fa" target="_blank" rel="noopener">
-      Faceit хаб
+      <span data-i18n="cta">Faceit Hub</span>
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
         <path d="M7 17L17 7"/><path d="M7 7h10v10"/>
       </svg>
     </a>
-    <div class="cta-sub">Играй в женском хабе на Faceit</div>
+    <div class="cta-sub" data-i18n="ctaSub">Play in the women's hub on Faceit</div>
   </div>
 
   <!-- Socials -->
   <div class="section-label">
-    <div class="line"></div><span>Мы в соцсетях</span><div class="line"></div>
+    <div class="line"></div><span data-i18n="socials">Follow us</span><div class="line"></div>
   </div>
 
   <nav class="socials">
@@ -438,12 +515,57 @@ body::before {
   <!-- Footer -->
   <footer class="footer">
     <div class="footer-games">
-      <span>CS2</span><span>R6S</span><span>EFT</span><span>VAL</span>
+      <span>CS2</span><span>R6S</span><span>EFT</span><span>VAL</span><span>APEX</span>
       <span class="x">×</span><span>FPS</span>
     </div>
     <div class="footer-brand">Female Play Style</div>
   </footer>
 
 </div>
+
+<script>
+const I18N = {
+  en: {
+    title: "Women's Esports — FPS Girls | Female Esports",
+    h1: 'A community of girls who play:',
+    feat1: "Women's tournaments",
+    feat2: "Find players for women's teams",
+    feat3: 'Faceit hub for girls',
+    cta: 'Faceit Hub',
+    ctaSub: "Play in the women's hub on Faceit",
+    socials: 'Follow us',
+    altBanner: 'Female esports player at her PC in a neon-lit room',
+    altTeam: "Women's team celebrating a tournament win"
+  },
+  ru: {
+    title: 'Женский киберспорт — FPS Girls | Female esports',
+    h1: 'Cообщество девушек, играющих:',
+    feat1: 'Женские турниры',
+    feat2: 'Поиск игроков в женские команды',
+    feat3: 'Faceit хаб для девушек',
+    cta: 'Faceit хаб',
+    ctaSub: 'Играй в женском хабе на Faceit',
+    socials: 'Мы в соцсетях',
+    altBanner: 'Девушка-киберспортсменка играет за ПК в неоновой комнате',
+    altTeam: 'Женская команда празднует победу на турнире'
+  }
+};
+
+function setLang(lang) {
+  const t = I18N[lang] || I18N.en;
+  document.documentElement.lang = lang;
+  document.title = t.title;
+  document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t[el.dataset.i18n]; });
+  document.querySelectorAll('[data-i18n-alt]').forEach(el => { el.alt = t[el.dataset.i18nAlt]; });
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+  try { localStorage.setItem('fpsg-lang', lang); } catch (e) {}
+}
+
+document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+
+let savedLang = null;
+try { savedLang = localStorage.getItem('fpsg-lang'); } catch (e) {}
+if (savedLang && savedLang !== 'en') setLang(savedLang);
+</script>
 </body>
 </html>
