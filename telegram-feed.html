@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FPS Girls — Telegram Feed</title>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<style>
+@font-face { font-family: 'Montserrat'; src: url('fonts/Montserrat-Black.ttf') format('truetype');      font-weight: 900; font-display: swap; }
+@font-face { font-family: 'Montserrat'; src: url('fonts/Montserrat-ExtraBold.ttf') format('truetype');  font-weight: 800; font-display: swap; }
+@font-face { font-family: 'Montserrat'; src: url('fonts/Montserrat-Bold.ttf') format('truetype');       font-weight: 700; font-display: swap; }
+@font-face { font-family: 'Montserrat'; src: url('fonts/Montserrat-SemiBold.ttf') format('truetype');   font-weight: 600; font-display: swap; }
+@font-face { font-family: 'Montserrat'; src: url('fonts/Montserrat-Medium.ttf') format('truetype');     font-weight: 500; font-display: swap; }
+@font-face { font-family: 'Montserrat'; src: url('fonts/Montserrat-Regular.ttf') format('truetype');    font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Montserrat'; src: url('fonts/Montserrat-Light.ttf') format('truetype');      font-weight: 300; font-display: swap; }
+@font-face { font-family: 'Montserrat'; src: url('fonts/Montserrat-ExtraLight.ttf') format('truetype'); font-weight: 200; font-display: swap; }
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #080808;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  font-family: 'Montserrat', sans-serif;
+  padding: 32px 16px 48px;
+}
+
+/* Subtle grain overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.35;
+}
+
+#root { width: 100%; max-width: 420px; position: relative; z-index: 1; }
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(206,97,223,0.3); border-radius: 2px; }
+</style>
+</head>
+
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+const { useState } = React;
+
+/* ── DESIGN TOKENS ──────────────────────── */
+const C = {
+  accent:       '#CE61DF',
+  accentGlow:   'rgba(206,97,223,0.30)',
+  accentSubtle: 'rgba(206,97,223,0.12)',
+  bg:           '#0D0D0D',
+  surface:      '#111111',
+  surface2:     '#1A1A1A',
+  border:       'rgba(255,255,255,0.08)',
+  borderAccent: 'rgba(206,97,223,0.40)',
+  white:        '#FFFFFF',
+  gray1:        '#969696',
+  gray2:        '#D9D9D9',
+};
+
+const M = (w) => ({ fontFamily: "'Montserrat', sans-serif", fontWeight: w });
+
+/* ── CHANNEL HEADER ─────────────────────── */
+const TABS = ['Все', 'CS2', 'R6S', 'Tarkov'];
+
+const ChannelHeader = () => {
+  const [active, setActive] = useState('Все');
+  return (
+    <div style={{ background: '#0D0D0D', borderBottom: `1px solid ${C.border}`, padding: '14px 14px 0' }}>
+      {/* Top bar */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 14 }}>
+        <div style={{
+          width: 44, height: 44, borderRadius: '50%', overflow: 'hidden',
+          border: `2px solid ${C.accent}`, flexShrink: 0,
+          boxShadow: `0 0 12px ${C.accentGlow}`,
+        }}>
+          <img src="assets/logo.jpg" alt="FPS Girls" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+        </div>
+        <div style={{ flex: 1 }}>
+          <div style={{ ...M(900), fontSize: 15, letterSpacing: '0.06em', textTransform: 'uppercase', color: C.white, lineHeight: 1 }}>FPS GIRLS</div>
+          <div style={{ ...M(200), fontSize: 9, letterSpacing: '0.14em', textTransform: 'uppercase', color: C.accent, marginTop: 3 }}>Female Play Style</div>
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 2 }}>
+          <div style={{ ...M(700), fontSize: 12, color: C.white }}>12.8K</div>
+          <div style={{ ...M(200), fontSize: 9, letterSpacing: '0.1em', textTransform: 'uppercase', color: C.gray1 }}>подписчиков</div>
+        </div>
+      </div>
+
+      {/* Tab bar */}
+      <div style={{ display: 'flex', gap: 0, overflowX: 'auto' }}>
+        {TABS.map(t => (
+          <button key={t} onClick={() => setActive(t)} style={{
+            background: 'none', border: 'none', cursor: 'pointer',
+            ...M(active === t ? 700 : 500),
+            fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase',
+            color: active === t ? C.accent : C.gray1,
+            padding: '8px 14px 12px',
+            borderBottom: active === t ? `2px solid ${C.accent}` : '2px solid transparent',
+            transition: 'color 80ms, border-color 80ms',
+            whiteSpace: 'nowrap',
+          }}>{t}</button>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+/* ── SHARED ──────────────────────────────── */
+const Badge = ({ children, color = C.accent, bg = C.accentSubtle }) => (
+  <span style={{
+    ...M(700), fontSize: 9, letterSpacing: '0.12em', textTransform: 'uppercase',
+    color, background: bg, padding: '3px 7px', borderRadius: 3,
+  }}>{children}</span>
+);
+
+const Divider = () => (
+  <div style={{ height: 1, background: 'rgba(255,255,255,0.06)', margin: '10px 0' }} />
+);
+
+const ActionBar = ({ views, time }) => (
+  <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginTop: 12 }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 5, ...M(400), fontSize: 10, color: C.gray1 }}>
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+      </svg>
+      {views}
+    </div>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 5, ...M(400), fontSize: 10, color: C.gray1 }}>
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+      </svg>
+      {time}
+    </div>
+    <div style={{ marginLeft: 'auto', display: 'flex', gap: 12 }}>
+      <button
+        style={{ background: 'none', border: 'none', cursor: 'pointer', color: C.gray1, display: 'flex', alignItems: 'center', transition: 'color 80ms' }}
+        onMouseEnter={e => e.currentTarget.style.color = C.accent}
+        onMouseLeave={e => e.currentTarget.style.color = C.gray1}>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="15 17 20 12 15 7"/><path d="M4 18v-2a4 4 0 0 1 4-4h12"/>
+        </svg>
+      </button>
+      <button
+        style={{ background: 'none', border: 'none', cursor: 'pointer', color: C.gray1, display: 'flex', alignItems: 'center', transition: 'color 80ms' }}
+        onMouseEnter={e => e.currentTarget.style.color = C.accent}
+        onMouseLeave={e => e.currentTarget.style.color = C.gray1}>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+);
+
+/* ── CARD 1: CS2 MATCH RESULT ───────────── */
+const CS2MatchCard = () => {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <div
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        background: C.surface,
+        border: `1px solid ${hovered ? C.borderAccent : C.border}`,
+        borderRadius: 8, overflow: 'hidden',
+        boxShadow: hovered ? `0 0 20px rgba(206,97,223,0.15)` : 'none',
+        transition: 'border-color 150ms ease-out, box-shadow 150ms ease-out',
+      }}>
+
+      {/* Map header */}
+      <div style={{
+        background: 'linear-gradient(135deg, #0f0f1a 0%, #16091f 50%, #0d0d0d 100%)',
+        padding: '12px 14px 10px',
+        borderBottom: `1px solid ${C.border}`,
+        position: 'relative', overflow: 'hidden',
+      }}>
+        <div style={{ position: 'absolute', top: 0, right: 0, width: 120, height: '100%', background: 'linear-gradient(90deg, transparent, rgba(206,97,223,0.05))', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 1, background: `linear-gradient(90deg, ${C.accent}, transparent)` }} />
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
+          <Badge>Результат матча</Badge>
+          <Badge color={C.gray1} bg="rgba(150,150,150,0.1)">CS2</Badge>
+          <span style={{ ...M(200), fontSize: 9, letterSpacing: '0.1em', textTransform: 'uppercase', color: C.gray1, marginLeft: 'auto' }}>BLAST Premier</span>
+        </div>
+
+        <div style={{ ...M(700), fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase', color: C.gray1, marginBottom: 10 }}>
+          Групповой этап · Карта 2/3 · Nuke
+        </div>
+
+        {/* Score block */}
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div style={{ flex: 1 }}>
+            <div style={{ ...M(900), fontSize: 18, letterSpacing: '0.06em', textTransform: 'uppercase', color: C.white, lineHeight: 1 }}>NaVi</div>
+            <div style={{ ...M(300), fontSize: 9, letterSpacing: '0.1em', textTransform: 'uppercase', color: C.gray1, marginTop: 2 }}>Natus Vincere</div>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '0 16px' }}>
+            <div style={{ ...M(900), fontSize: 40, color: C.white, lineHeight: 1, textShadow: `0 0 24px rgba(255,255,255,0.15)` }}>13</div>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+              <div style={{ width: 3, height: 3, borderRadius: '50%', background: C.accent }} />
+              <div style={{ ...M(800), fontSize: 11, color: C.gray1 }}>:</div>
+              <div style={{ width: 3, height: 3, borderRadius: '50%', background: C.accent }} />
+            </div>
+            <div style={{ ...M(900), fontSize: 40, color: C.accent, lineHeight: 1, textShadow: `0 0 24px ${C.accentGlow}` }}>16</div>
+          </div>
+          <div style={{ flex: 1, textAlign: 'right' }}>
+            <div style={{ ...M(900), fontSize: 18, letterSpacing: '0.06em', textTransform: 'uppercase', color: C.accent, lineHeight: 1 }}>Vitality</div>
+            <div style={{ ...M(300), fontSize: 9, letterSpacing: '0.1em', textTransform: 'uppercase', color: C.gray1, marginTop: 2 }}>Team Vitality</div>
+          </div>
+        </div>
+
+        {/* Winner banner */}
+        <div style={{ marginTop: 10, display: 'flex', alignItems: 'center', gap: 6 }}>
+          <div style={{ flex: 1, height: 1, background: 'rgba(206,97,223,0.2)' }} />
+          <span style={{ ...M(700), fontSize: 9, letterSpacing: '0.14em', textTransform: 'uppercase', color: C.accent }}>Vitality побеждает · 2–1</span>
+          <div style={{ flex: 1, height: 1, background: 'rgba(206,97,223,0.2)' }} />
+        </div>
+      </div>
+
+      {/* Stats row */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', borderBottom: `1px solid ${C.border}` }}>
+        {[
+          { label: 'MVP',    value: 'ZywOo', sub: '1.34 rating' },
+          { label: 'Карта',  value: 'Nuke',  sub: '2-я карта' },
+          { label: 'Формат', value: 'BO3',   sub: 'Group Stage' },
+        ].map((s, i) => (
+          <div key={i} style={{
+            padding: '10px 12px',
+            borderRight: i < 2 ? `1px solid ${C.border}` : 'none',
+            textAlign: 'center',
+          }}>
+            <div style={{ ...M(200), fontSize: 8, letterSpacing: '0.12em', textTransform: 'uppercase', color: C.gray1, marginBottom: 4 }}>{s.label}</div>
+            <div style={{ ...M(800), fontSize: 13, color: i === 0 ? C.accent : C.white }}>{s.value}</div>
+            <div style={{ ...M(300), fontSize: 9, color: C.gray1, marginTop: 2 }}>{s.sub}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* Body */}
+      <div style={{ padding: '12px 14px 14px' }}>
+        <p style={{ ...M(400), fontSize: 12, lineHeight: 1.65, color: C.gray1 }}>
+          ZywOo в решающем раунде принёс Vitality победу на Nuke — 16:13. Французы выходят из группы без потерь и встречаются с Faze Clan в полуфинале.
+        </p>
+        <ActionBar views="14 200" time="29 апр" />
+        <div style={{ display: 'flex', gap: 8, marginTop: 10 }}>
+          {['#fpsgirls', '#cs2', '#blast'].map(t => (
+            <span key={t} style={{ ...M(600), fontSize: 9, letterSpacing: '0.06em', color: 'rgba(206,97,223,0.6)' }}>{t}</span>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+/* ── CARD 2: R6S PATCH NOTES ────────────── */
+const R6SPatchCard = () => {
+  const [hovered, setHovered] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+
+  const changes = [
+    { type: 'buff', text: 'Ash — перезарядка дробовика сокращена с 3.2с до 2.8с' },
+    { type: 'nerf', text: 'Jäger — ADS больше не блокирует дымовые гранаты' },
+    { type: 'fix',  text: 'Bank — исправлена коллизия у лестницы на 2-м этаже' },
+    { type: 'buff', text: 'Ela — скорость прицеливания улучшена на 8%' },
+    { type: 'nerf', text: 'Lesion — иглы больше не срабатывают сквозь баррикады' },
+  ];
+
+  const typeColor = { buff: '#4ADE80', nerf: '#F87171', fix: C.accent };
+  const typeLabel = { buff: 'BUFF', nerf: 'NERF', fix: 'FIX' };
+  const visible = expanded ? changes : changes.slice(0, 3);
+
+  return (
+    <div
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        background: C.surface,
+        border: `1px solid ${hovered ? C.borderAccent : C.border}`,
+        borderRadius: 8, overflow: 'hidden',
+        boxShadow: hovered ? `0 0 20px rgba(206,97,223,0.15)` : 'none',
+        transition: 'border-color 150ms ease-out, box-shadow 150ms ease-out',
+      }}>
+
+      {/* Header stripe */}
+      <div style={{
+        background: 'linear-gradient(135deg, #100d1a 0%, #0d0d16 100%)',
+        padding: '12px 14px',
+        borderBottom: `1px solid ${C.border}`,
+        position: 'relative', overflow: 'hidden',
+      }}>
+        <div style={{ position: 'absolute', top: 0, left: 0, width: 3, height: '100%', background: C.accent }} />
+        <div style={{ paddingLeft: 10 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
+            <Badge>Патч-ноты</Badge>
+            <Badge color="#a78bfa" bg="rgba(167,139,250,0.1)">R6S</Badge>
+            <span style={{ ...M(800), fontSize: 11, letterSpacing: '0.08em', color: 'rgba(167,139,250,0.7)', marginLeft: 'auto' }}>Y10S2.1</span>
+          </div>
+          <div style={{ ...M(900), fontSize: 20, letterSpacing: '0.04em', textTransform: 'uppercase', color: C.white, lineHeight: 1.1 }}>
+            Rainbow Six Siege<br />
+            <span style={{ color: C.accent }}>Обновление баланса</span>
+          </div>
+          <div style={{ ...M(300), fontSize: 10, color: C.gray1, marginTop: 6, letterSpacing: '0.06em' }}>
+            Сезон 2 · Год 10 · 29 апреля 2026
+          </div>
+        </div>
+      </div>
+
+      {/* Patch notes list */}
+      <div style={{ padding: '0 14px' }}>
+        <div style={{ padding: '10px 0 4px', ...M(200), fontSize: 9, letterSpacing: '0.14em', textTransform: 'uppercase', color: C.gray1 }}>
+          Изменения операторов
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+          {visible.map((c, i) => (
+            <div key={i} style={{
+              display: 'flex', alignItems: 'flex-start', gap: 8,
+              padding: '8px 0',
+              borderBottom: '1px solid rgba(255,255,255,0.04)',
+            }}>
+              <span style={{
+                ...M(800), fontSize: 8, letterSpacing: '0.1em',
+                color: typeColor[c.type],
+                background: `${typeColor[c.type]}18`,
+                padding: '2px 5px', borderRadius: 3, flexShrink: 0, marginTop: 1,
+              }}>{typeLabel[c.type]}</span>
+              <span style={{ ...M(400), fontSize: 11, color: C.gray1, lineHeight: 1.5 }}>{c.text}</span>
+            </div>
+          ))}
+        </div>
+
+        {!expanded && (
+          <button onClick={() => setExpanded(true)} style={{
+            background: 'none', border: 'none', cursor: 'pointer',
+            ...M(600), fontSize: 10, letterSpacing: '0.08em', textTransform: 'uppercase',
+            color: C.accent, padding: '10px 0 4px', display: 'flex', alignItems: 'center', gap: 4,
+          }}>
+            Ещё {changes.length - 3} изменения
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </button>
+        )}
+      </div>
+
+      {/* Body */}
+      <div style={{ padding: '0 14px 14px' }}>
+        <Divider />
+        <p style={{ ...M(400), fontSize: 12, lineHeight: 1.65, color: C.gray1 }}>
+          Ubisoft выкатила внеплановый патч перед началом финалов Pro League. Основные изменения затронули Ash и Jäger — подробный разбор завтра на канале.
+        </p>
+        <ActionBar views="9 800" time="29 апр" />
+        <div style={{ display: 'flex', gap: 8, marginTop: 10 }}>
+          {['#fpsgirls', '#r6siege', '#patchnotes'].map(t => (
+            <span key={t} style={{ ...M(600), fontSize: 9, letterSpacing: '0.06em', color: 'rgba(206,97,223,0.6)' }}>{t}</span>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+/* ── CARD 3: WOMEN'S ESPORTS TOURNAMENT ─── */
+const TournamentCard = () => {
+  const [hovered, setHovered] = useState(false);
+
+  const teams = [
+    { name: 'Team Falcons',  flag: '🇸🇦', place: 1, pts: 120 },
+    { name: 'G2 Gozen',      flag: '🇪🇺', place: 2, pts: 104 },
+    { name: 'NAVI JAVELINS', flag: '🇺🇦', place: 3, pts: 96  },
+    { name: 'FPX Fe',        flag: '🇨🇳', place: 4, pts: 88  },
+  ];
+
+  return (
+    <div
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        background: C.surface,
+        border: `1px solid ${hovered ? C.borderAccent : C.border}`,
+        borderRadius: 8, overflow: 'hidden',
+        boxShadow: hovered ? `0 0 20px rgba(206,97,223,0.15)` : 'none',
+        transition: 'border-color 150ms ease-out, box-shadow 150ms ease-out',
+      }}>
+
+      {/* Hero header */}
+      <div style={{
+        background: 'linear-gradient(160deg, #180d20 0%, #0d0d14 60%, #0d0d0d 100%)',
+        padding: '14px 14px 12px',
+        borderBottom: `1px solid ${C.border}`,
+        position: 'relative', overflow: 'hidden',
+      }}>
+        <div style={{
+          position: 'absolute', top: -30, right: -20,
+          width: 120, height: 120, borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(206,97,223,0.18) 0%, transparent 70%)',
+          pointerEvents: 'none',
+        }} />
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
+          <Badge>Женский киберспорт</Badge>
+          <Badge color={C.accent} bg={C.accentSubtle}>Турнир</Badge>
+        </div>
+
+        {/* Trophy + title */}
+        <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+          <div style={{
+            width: 48, height: 48, borderRadius: 8, flexShrink: 0,
+            background: 'linear-gradient(135deg, rgba(206,97,223,0.2) 0%, rgba(206,97,223,0.05) 100%)',
+            border: `1px solid rgba(206,97,223,0.3)`,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+          }}>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#CE61DF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+              <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+              <path d="M4 22h16"/>
+              <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+              <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+              <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
+            </svg>
+          </div>
+          <div>
+            <div style={{ ...M(900), fontSize: 17, letterSpacing: '0.04em', textTransform: 'uppercase', color: C.white, lineHeight: 1.15 }}>
+              FPS Girls<br />
+              <span style={{ color: C.accent }}>Invitational 2026</span>
+            </div>
+            <div style={{ ...M(300), fontSize: 9, letterSpacing: '0.1em', textTransform: 'uppercase', color: C.gray1, marginTop: 5 }}>
+              Финал группового этапа · 29 апр
+            </div>
+          </div>
+        </div>
+
+        {/* Prize / stats row */}
+        <div style={{ display: 'flex', gap: 8, marginTop: 12 }}>
+          {[
+            { label: 'Призовой фонд',   value: '$50 000' },
+            { label: 'Команд',           value: '12' },
+            { label: 'Следующий матч',   value: '18:00 МСК' },
+          ].map((s, i) => (
+            <div key={i} style={{
+              flex: 1, background: 'rgba(255,255,255,0.03)', border: `1px solid ${C.border}`,
+              borderRadius: 6, padding: '7px 8px', textAlign: 'center',
+            }}>
+              <div style={{ ...M(200), fontSize: 8, letterSpacing: '0.1em', textTransform: 'uppercase', color: C.gray1, marginBottom: 3 }}>{s.label}</div>
+              <div style={{ ...M(800), fontSize: 12, color: i === 0 ? C.accent : C.white }}>{s.value}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Standings */}
+      <div style={{ padding: '10px 14px 0' }}>
+        <div style={{ ...M(200), fontSize: 9, letterSpacing: '0.14em', textTransform: 'uppercase', color: C.gray1, marginBottom: 6 }}>
+          Таблица лидеров
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          {teams.map((t, i) => (
+            <div key={i} style={{
+              display: 'flex', alignItems: 'center', gap: 10,
+              padding: '8px 0',
+              borderBottom: i < teams.length - 1 ? '1px solid rgba(255,255,255,0.05)' : 'none',
+            }}>
+              <div style={{
+                width: 20, height: 20, borderRadius: 4, flexShrink: 0,
+                background: i === 0 ? C.accent : 'rgba(255,255,255,0.06)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                ...M(900), fontSize: 10, color: i === 0 ? '#fff' : C.gray1,
+              }}>{t.place}</div>
+              <span style={{ fontSize: 11, lineHeight: 1 }}>{t.flag}</span>
+              <span style={{ ...M(i === 0 ? 700 : 500), fontSize: 11, color: i === 0 ? C.white : C.gray1, flex: 1, letterSpacing: '0.02em' }}>{t.name}</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                <div style={{ width: 32, height: 3, borderRadius: 2, background: 'rgba(255,255,255,0.06)', overflow: 'hidden' }}>
+                  <div style={{ height: '100%', width: `${(t.pts / 120) * 100}%`, background: i === 0 ? C.accent : 'rgba(206,97,223,0.3)', borderRadius: 2 }} />
+                </div>
+                <span style={{ ...M(700), fontSize: 11, color: i === 0 ? C.accent : C.gray1, minWidth: 28, textAlign: 'right' }}>{t.pts}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Body */}
+      <div style={{ padding: '10px 14px 14px' }}>
+        <Divider />
+        <p style={{ ...M(400), fontSize: 12, lineHeight: 1.65, color: C.gray1 }}>
+          Team Falcons уверенно ведут группу A — 4 победы подряд. G2 Gozen и NAVI Javelins сражаются за второе место. Финал плей-офф — 3 мая в прямом эфире на канале.
+        </p>
+        <ActionBar views="22 500" time="29 апр" />
+        <div style={{ display: 'flex', gap: 8, marginTop: 10 }}>
+          {['#fpsgirls', '#wesg', '#invitational2026'].map(t => (
+            <span key={t} style={{ ...M(600), fontSize: 9, letterSpacing: '0.06em', color: 'rgba(206,97,223,0.6)' }}>{t}</span>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+/* ── APP ─────────────────────────────────── */
+const App = () => (
+  <div style={{
+    background: C.bg,
+    borderRadius: 16,
+    overflow: 'hidden',
+    border: `1px solid ${C.border}`,
+    boxShadow: '0 12px 60px rgba(0,0,0,0.8)',
+  }}>
+    <ChannelHeader />
+
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 10, padding: '12px 12px 16px' }}>
+      <CS2MatchCard />
+      <R6SPatchCard />
+      <TournamentCard />
+    </div>
+
+    {/* Bottom branding */}
+    <div style={{ borderTop: `1px solid ${C.border}`, padding: '12px 14px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <div style={{ display: 'flex', gap: 10 }}>
+        {['CS2', 'EFT', 'R6S'].map(g => (
+          <span key={g} style={{ ...M(800), fontSize: 9, letterSpacing: '0.1em', color: 'rgba(255,255,255,0.25)' }}>{g}</span>
+        ))}
+        <span style={{ ...M(800), fontSize: 9, letterSpacing: '0.08em', color: 'rgba(206,97,223,0.3)' }}>×</span>
+        <span style={{ ...M(800), fontSize: 9, letterSpacing: '0.1em', color: 'rgba(255,255,255,0.25)' }}>FPS</span>
+      </div>
+      <span style={{ ...M(200), fontSize: 9, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(206,97,223,0.4)' }}>Female Play Style</span>
+    </div>
+  </div>
+);
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
