@@ -12,7 +12,7 @@
 2. **Inspect** — Claude reads relevant code, project instructions, and tests.
 3. **Implement** — Claude makes focused changes.
 4. **Verify** — Claude runs relevant tests and checks the diff.
-5. **Review** — Codex reviews current workspace changes using `CODEX.md` and `REVIEW.md`.
+5. **Review** — Codex reviews current workspace changes using `AGENTS.md` and `REVIEW.md`.
 6. **Resolve** — Claude fixes valid HIGH and MEDIUM findings. LOW findings are fixed or briefly explained.
 7. **Re-review** — Codex verifies the revised diff and checks for regressions introduced by fixes.
 8. **Final verification** — Claude runs the relevant checks again and reports results.
@@ -25,7 +25,7 @@
 
 ### Start review with Codex
 
-> Review the current workspace changes according to CODEX.md and REVIEW.md. Do not edit files. Report only actionable findings ordered by severity.
+> Review the current workspace changes according to AGENTS.md and REVIEW.md. Do not edit files. Report only actionable findings ordered by severity.
 
 ### Return findings to Claude
 
