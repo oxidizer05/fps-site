@@ -1,0 +1,41 @@
+name: Update world ranking
+
+# Собирает свежий world.json с FACEIT и коммитит в репозиторий сайта.
+on:
+  schedule:
+    - cron: "17 3 * * *" # ежедневно в 03:17 UTC (06:17 МСК)
+  workflow_dispatch: {} # кнопка "Run workflow" для ручного запуска
+
+permissions:
+  contents: write # чтобы коммитить world.json
+
+concurrency:
+  group: update-world
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Build world.json
+        env:
+          FACEIT_API_KEY: ${{ secrets.FACEIT_API_KEY }}
+        run: node scripts/build-world.mjs
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- world.json; then
+            echo "world.json без изменений — коммит не нужен"
+          else
+            git add world.json
+            git commit -m "chore: update world ranking data"
+            git push
+          fi
