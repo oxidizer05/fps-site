@@ -182,6 +182,48 @@ body::before {
 .pod-elo { font-weight: 900; font-size: 20px; color: var(--accent); margin-top: 6px; }
 .pod-sub { font-weight: 500; font-size: 10px; color: var(--gray1); margin-top: 3px; letter-spacing: 0.04em; }
 
+/* ── Самые стабильные ── */
+.stable-label {
+  display: flex; align-items: center; gap: 10px;
+  padding: 18px 24px 0;
+}
+.stable-label .line { flex: 1; height: 1px; background: rgba(206,97,223,0.2); }
+.stable-label span {
+  font-weight: 700; font-size: 9px; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--accent);
+}
+.stable-hint {
+  padding: 6px 24px 0; text-align: center;
+  font-weight: 400; font-size: 10px; line-height: 1.4; color: rgba(150,150,150,0.75);
+}
+.stable {
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  gap: 8px; padding: 10px 24px 0;
+}
+.s-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; padding: 10px 8px; text-align: center;
+  display: flex; flex-direction: column; gap: 3px; min-width: 0;
+}
+.s-card.first { border-color: var(--border-accent); box-shadow: 0 0 16px rgba(206,97,223,0.12); }
+.s-rank { font-weight: 800; font-size: 10px; color: var(--accent); letter-spacing: 0.1em; }
+.s-nick {
+  font-weight: 700; font-size: 12px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.s-nick a { color: var(--white); text-decoration: none; }
+.s-nick a:hover { color: var(--accent); }
+.s-meta { font-weight: 500; font-size: 9px; color: var(--gray1); line-height: 1.5; }
+.s-meta b { color: #D9D9D9; font-weight: 700; }
+
+/* ── Лучший показатель в столбце ── */
+.best {
+  color: var(--accent) !important;
+  font-weight: 800;
+  background: var(--accent-subtle);
+  border-radius: 4px;
+}
+
 /* ── Table ── */
 .board-wrap { padding: 14px 24px 4px; overflow-x: auto; }
 table.board { width: 100%; border-collapse: collapse; font-size: 13px; }
@@ -239,6 +281,8 @@ tr.hidden { display: none; }
   .board .col-matches, .board .col-wr { display: none; }
   .pod-name { font-size: 12px; }
   .pod-elo { font-size: 17px; }
+  .stable { grid-template-columns: repeat(2, 1fr); }
+  .stable .s-card:nth-child(5) { grid-column: 1 / -1; }
 }
 </style>
 </head>
@@ -292,7 +336,10 @@ const I18N = {
     error: 'Не удалось загрузить рейтинг. Попробуйте обновить страницу позже.',
     empty: 'Пока нет данных для этой игры.',
     colPlayer: 'Игрок', colElo: 'ELO', colLvl: 'Ур.', colWr: 'Винрейт', colKd: 'K/D', colMatches: 'Матчи',
-    players: 'игроков', updated: 'Обновлено', never: 'ещё не обновлялось'
+    players: 'игроков', updated: 'Обновлено', never: 'ещё не обновлялось',
+    stableTitle: 'Самые стабильные',
+    stableHint: 'Винрейт и K/D выше среднего на большой дистанции — от 500 матчей. Розовым в таблице отмечен лучший показатель в каждом столбце.',
+    matchesShort: 'матчей'
   },
   en: {
     title: 'Player ranking — FPS Girls', home: 'Home', tagline: 'Player ranking',
@@ -301,7 +348,10 @@ const I18N = {
     error: 'Could not load the ranking. Please try again later.',
     empty: 'No data for this game yet.',
     colPlayer: 'Player', colElo: 'ELO', colLvl: 'Lvl', colWr: 'Win rate', colKd: 'K/D', colMatches: 'Matches',
-    players: 'players', updated: 'Updated', never: 'not updated yet'
+    players: 'players', updated: 'Updated', never: 'not updated yet',
+    stableTitle: 'Most consistent',
+    stableHint: 'Win rate and K/D above average over a long run — 500+ matches. Pink marks the best value in each column of the table.',
+    matchesShort: 'matches'
   }
 };
 
@@ -323,11 +373,66 @@ function flag(cc) {
 function faceitUrl(nick) { return 'https://www.faceit.com/en/players/' + encodeURIComponent(nick); }
 function num(n) { return n == null ? '—' : Number(n).toLocaleString(lang === 'ru' ? 'ru-RU' : 'en-US'); }
 
+// «Стабильность» — не разовая удача, а результат на дистанции: винрейт и K/D
+// относительно среднего, с порогом по числу матчей и небольшой добавкой за
+// наигранность. Без порога наверх лезут игроки с 60% побед на 30 матчах.
+const STABLE_MIN_MATCHES = 500;
+const STABLE_MIN_POOL = 8; // меньше — статистика бессмысленна, блок не показываем
+
+function stableTop(rows, count = 5) {
+  const pool = rows.filter(r => r.matches >= STABLE_MIN_MATCHES && r.winRate != null && r.kd != null);
+  if (pool.length < STABLE_MIN_POOL) return [];
+  const stat = (vals) => {
+    const m = vals.reduce((s, x) => s + x, 0) / vals.length;
+    const sd = Math.sqrt(vals.reduce((s, x) => s + (x - m) ** 2, 0) / vals.length) || 1;
+    return { m, sd };
+  };
+  const W = stat(pool.map(r => r.winRate));
+  const K = stat(pool.map(r => r.kd));
+  const V = stat(pool.map(r => Math.log10(r.matches)));
+  return pool
+    .map(r => ({
+      ...r,
+      score: 0.45 * ((r.winRate - W.m) / W.sd)
+           + 0.45 * ((r.kd - K.m) / K.sd)
+           + 0.10 * ((Math.log10(r.matches) - V.m) / V.sd)
+    }))
+    .sort((a, b) => b.score - a.score)
+    .slice(0, count);
+}
+
+function stableBlock(rows) {
+  const top = stableTop(rows);
+  if (!top.length) return '';
+  const cards = top.map((r, i) =>
+    '<div class="s-card' + (i === 0 ? ' first' : '') + '">' +
+      '<div class="s-rank">#' + (i + 1) + '</div>' +
+      '<div class="s-nick">' + flag(r.country) + ' <a href="' + faceitUrl(r.nickname) + '" target="_blank" rel="noopener">' + esc(r.nickname) + '</a></div>' +
+      '<div class="s-meta"><b>' + r.winRate + '%</b> · K/D <b>' + r.kd + '</b><br>' + num(r.matches) + ' ' + t().matchesShort + '</div>' +
+    '</div>'
+  ).join('');
+  return '<div class="stable-label"><div class="line"></div><span>🎯 ' + t().stableTitle + '</span><div class="line"></div></div>' +
+         '<div class="stable">' + cards + '</div>' +
+         '<div class="stable-hint">' + t().stableHint + '</div>';
+}
+
+// Лучшее значение в каждом столбце — подсвечиваем розовым. Уровень не берём:
+// «десятка» у десятков игроков, подсветка была бы шумом.
+function columnBests(rows) {
+  const max = (key) => {
+    const vals = rows.map(r => r[key]).filter(v => v != null);
+    return vals.length ? Math.max(...vals) : null;
+  };
+  return { elo: max('elo'), winRate: max('winRate'), kd: max('kd'), matches: max('matches') };
+}
+
 function render() {
   const content = document.getElementById('content');
   if (!data) return;
   const rows = data.games[game] || [];
   if (!rows.length) { content.innerHTML = '<div class="state">' + t().empty + '</div>'; return; }
+  const best = columnBests(rows);
+  const mark = (val, key) => (val != null && val === best[key] ? ' best' : '');
 
   const top3 = rows.slice(0, 3);
   const medals = ['🥇', '🥈', '🥉'];
@@ -358,15 +463,16 @@ function render() {
       '<td class="rank">' + r.rank + '</td>' +
       '<td class="left"><div class="player"><span class="flag">' + flag(r.country) + '</span>' +
         '<span class="nick"><a href="' + faceitUrl(r.nickname) + '" target="_blank" rel="noopener">' + esc(r.nickname) + '</a></span></div></td>' +
-      '<td class="elo">' + num(r.elo) + '</td>' +
+      '<td class="elo' + mark(r.elo, 'elo') + '">' + num(r.elo) + '</td>' +
       '<td><span class="lvl" style="background:' + color + '">' + (r.level ?? '—') + '</span></td>' +
-      '<td class="col-wr dim">' + (r.winRate != null ? r.winRate + '%' : '—') + '</td>' +
-      '<td class="dim">' + (r.kd != null ? r.kd : '—') + '</td>' +
-      '<td class="col-matches dim">' + num(r.matches) + '</td>' +
+      '<td class="col-wr dim' + mark(r.winRate, 'winRate') + '">' + (r.winRate != null ? r.winRate + '%' : '—') + '</td>' +
+      '<td class="dim' + mark(r.kd, 'kd') + '">' + (r.kd != null ? r.kd : '—') + '</td>' +
+      '<td class="col-matches dim' + mark(r.matches, 'matches') + '">' + num(r.matches) + '</td>' +
     '</tr>';
   }).join('') + '</tbody>';
 
-  content.innerHTML = podium + '<div class="board-wrap"><table class="board">' + head + body + '</table></div>';
+  content.innerHTML = stableBlock(rows) + podium +
+    '<div class="board-wrap"><table class="board">' + head + body + '</table></div>';
   applySearch();
 }
 
