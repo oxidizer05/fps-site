@@ -1,7 +1,12 @@
 // Собирает мировой женский рейтинг с FACEIT и пишет world.json в корень сайта.
-// Источник — состав FACEIT-хаба FPS Girls (у FACEIT нет пола игрока, а клуб
-// знает своих). Запускается GitHub Action по расписанию; ключ берётся из
-// секрета FACEIT_API_KEY. Локально: FACEIT_API_KEY=... node scripts/build-world.mjs
+//
+// ВАЖНО: в хабе FPS Girls есть и парни — участниц-девушек администрация
+// отмечает ролями «FPS Girls CS / R6 / Valorant». Поэтому в рейтинг попадают
+// ТОЛЬКО обладатели такой роли (роль — свойство человека, поэтому годится
+// любая из них), а не все участники хаба.
+//
+// Запускается GitHub Action по расписанию; ключ берётся из секрета
+// FACEIT_API_KEY. Локально: FACEIT_API_KEY=... node scripts/build-world.mjs
 //
 // Формат совпадает с тем, что раньше отдавал бот по /api/world, — страница
 // leaderboard.html читает его без изменений.
@@ -47,12 +52,29 @@ async function faceitGet(p, tries = 4) {
   return null;
 }
 
+// Роли хаба, которыми администрация отмечает проверенных девушек
+async function fetchGirlRoleIds() {
+  const res = await faceitGet(`/hubs/${HUB_ID}/roles?offset=0&limit=50`);
+  const items = res?.items ?? [];
+  const girls = items.filter((r) => /^fps girls/i.test(r.name ?? ""));
+  if (!girls.length) {
+    // Лучше упасть, чем опубликовать рейтинг со всем хабом (там есть парни)
+    throw new Error(
+      `в хабе не найдено ни одной роли вида "FPS Girls …" (есть: ${items.map((r) => r.name).join(", ")})`,
+    );
+  }
+  console.log(`Роли проверенных девушек: ${girls.map((r) => r.name).join(", ")}`);
+  return new Set(girls.map((r) => r.role_id));
+}
+
 async function fetchHubMembers() {
   const members = [];
   for (let offset = 0; offset < 5000; offset += 50) {
     const page = await faceitGet(`/hubs/${HUB_ID}/members?offset=${offset}&limit=50`);
     const items = page?.items ?? [];
-    for (const it of items) members.push({ playerId: it.user_id, nickname: it.nickname });
+    for (const it of items) {
+      members.push({ playerId: it.user_id, nickname: it.nickname, roles: it.roles ?? [] });
+    }
     if (items.length < 50) break;
     await sleep(300);
   }
@@ -110,8 +132,13 @@ function rowsFor(players, game) {
 }
 
 async function main() {
-  const members = await fetchHubMembers();
-  console.log(`Участниц в хабе: ${members.length}`);
+  const girlRoleIds = await fetchGirlRoleIds();
+  const allMembers = await fetchHubMembers();
+  const members = allMembers.filter((m) => m.roles.some((id) => girlRoleIds.has(id)));
+  console.log(
+    `В хабе ${allMembers.length} участников, из них проверенных девушек: ${members.length} (остальные не учитываются).`,
+  );
+  if (!members.length) throw new Error("после фильтра по ролям не осталось игроков");
 
   const players = {};
   const queue = [...members];

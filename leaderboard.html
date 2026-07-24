@@ -269,7 +269,7 @@ tr.hidden { display: none; }
     <div class="state"><div class="spinner"></div><span data-i18n="loading">Загружаем рейтинг…</span></div>
   </div>
 
-  <p class="note" data-i18n="note">Рейтинг собран из участниц FACEIT-клуба FPS Girls и обновляется автоматически.</p>
+  <p class="note" data-i18n="note">В рейтинге — участницы FACEIT-клуба FPS Girls, подтверждённые администрацией клуба. Обновляется автоматически.</p>
 
   <footer class="foot">
     <div class="updated" id="updated"></div>
@@ -288,7 +288,7 @@ const I18N = {
   ru: {
     title: 'Рейтинг игроков — FPS Girls', home: 'На главную', tagline: 'Рейтинг игроков',
     search: 'Поиск по нику…', loading: 'Загружаем рейтинг…',
-    note: 'Рейтинг собран из участниц FACEIT-клуба FPS Girls и обновляется автоматически.',
+    note: 'В рейтинге — участницы FACEIT-клуба FPS Girls, подтверждённые администрацией клуба. Обновляется автоматически.',
     error: 'Не удалось загрузить рейтинг. Попробуйте обновить страницу позже.',
     empty: 'Пока нет данных для этой игры.',
     colPlayer: 'Игрок', colElo: 'ELO', colLvl: 'Ур.', colWr: 'Винрейт', colKd: 'K/D', colMatches: 'Матчи',
@@ -297,7 +297,7 @@ const I18N = {
   en: {
     title: 'Player ranking — FPS Girls', home: 'Home', tagline: 'Player ranking',
     search: 'Search by nickname…', loading: 'Loading ranking…',
-    note: 'Ranking is built from the FPS Girls FACEIT club members and updates automatically.',
+    note: 'The ranking lists FPS Girls FACEIT club members verified by the club admins. Updates automatically.',
     error: 'Could not load the ranking. Please try again later.',
     empty: 'No data for this game yet.',
     colPlayer: 'Player', colElo: 'ELO', colLvl: 'Lvl', colWr: 'Win rate', colKd: 'K/D', colMatches: 'Matches',
@@ -405,12 +405,28 @@ function setGame(g) {
   render();
 }
 
+// Вкладку игры показываем только когда по ней есть осмысленный рейтинг:
+// в R6 подтверждённых девушек пока единицы, пустая таблица выглядела бы поломкой.
+const MIN_ROWS_FOR_TAB = 5;
+
+function syncTabs() {
+  let visible = [];
+  document.querySelectorAll('.tab').forEach(b => {
+    const enough = (data?.games?.[b.dataset.game] || []).length >= MIN_ROWS_FOR_TAB;
+    b.style.display = enough ? '' : 'none';
+    if (enough) visible.push(b.dataset.game);
+  });
+  document.querySelector('.tabs').style.display = visible.length > 1 ? '' : 'none';
+  if (visible.length && !visible.includes(game)) setGame(visible[0]);
+}
+
 async function load() {
   try {
     const url = DATA_URL + (DATA_URL.includes('?') ? '&' : '?') + 't=' + Date.now();
     const res = await fetch(url, { cache: 'no-store' });
     if (!res.ok) throw new Error('HTTP ' + res.status);
     data = await res.json();
+    syncTabs();
     render();
     renderUpdated();
   } catch (e) {
