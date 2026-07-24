@@ -156,6 +156,33 @@ body::before {
 .search::placeholder { color: var(--gray1); }
 .search:focus { border-color: var(--border-accent); }
 
+/* ── Сортировка ── */
+.sort {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 4px;
+  background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+  border-radius: 8px; padding: 3px 8px 3px 3px;
+}
+.sort-label {
+  font-weight: 700; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--gray1); padding: 0 6px 0 8px;
+}
+.sort-btn {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-family: inherit; font-weight: 700; font-size: 10px;
+  letter-spacing: 0.06em; color: var(--gray1);
+  background: transparent; border: none; border-radius: 6px;
+  padding: 7px 10px; cursor: pointer;
+  transition: color 150ms, background 150ms;
+}
+.sort-btn:hover { color: var(--white); }
+.sort-btn.active { background: var(--accent); color: #fff; }
+.sort-btn .arrow { font-style: normal; font-size: 8px; opacity: 0.9; }
+
+.board thead th.sortable { cursor: pointer; user-select: none; }
+.board thead th.sortable:hover { color: var(--white); }
+.board thead th.sorted { color: var(--white); }
+.board thead th .arrow { font-style: normal; font-size: 8px; margin-left: 3px; }
+
 /* ── Podium ── */
 .podium {
   display: grid; grid-template-columns: repeat(3, 1fr);
@@ -279,6 +306,8 @@ tr.hidden { display: none; }
 
 @media (max-width: 560px) {
   .board .col-matches, .board .col-wr { display: none; }
+  /* столбец, по которому сортируем, показываем даже на узком экране */
+  .board.show-wr .col-wr, .board.show-matches .col-matches { display: table-cell; }
   .pod-name { font-size: 12px; }
   .pod-elo { font-size: 17px; }
   .stable { grid-template-columns: repeat(2, 1fr); }
@@ -305,6 +334,13 @@ tr.hidden { display: none; }
     <div class="tabs">
       <button class="tab active" type="button" data-game="cs2">CS2</button>
       <button class="tab" type="button" data-game="rainbow_6">R6 Siege</button>
+    </div>
+    <div class="sort" id="sort">
+      <span class="sort-label" data-i18n="sortLabel">Сортировка</span>
+      <button class="sort-btn active" type="button" data-sort="elo"><span data-i18n="colElo">ELO</span><i class="arrow"></i></button>
+      <button class="sort-btn" type="button" data-sort="winRate"><span data-i18n="colWr">Винрейт</span><i class="arrow"></i></button>
+      <button class="sort-btn" type="button" data-sort="kd"><span data-i18n="colKd">K/D</span><i class="arrow"></i></button>
+      <button class="sort-btn" type="button" data-sort="matches"><span data-i18n="colMatches">Матчи</span><i class="arrow"></i></button>
     </div>
     <input class="search" type="text" data-i18n-ph="search" placeholder="Поиск по нику…" id="search">
   </div>
@@ -337,6 +373,7 @@ const I18N = {
     empty: 'Пока нет данных для этой игры.',
     colPlayer: 'Игрок', colElo: 'ELO', colLvl: 'Ур.', colWr: 'Винрейт', colKd: 'K/D', colMatches: 'Матчи',
     players: 'игроков', updated: 'Обновлено', never: 'ещё не обновлялось',
+    sortLabel: 'Сортировка',
     stableTitle: 'Самые стабильные',
     stableHint: 'Винрейт и K/D выше среднего на большой дистанции — от 500 матчей. Розовым в таблице отмечен лучший показатель в каждом столбце.',
     matchesShort: 'матчей'
@@ -349,6 +386,7 @@ const I18N = {
     empty: 'No data for this game yet.',
     colPlayer: 'Player', colElo: 'ELO', colLvl: 'Lvl', colWr: 'Win rate', colKd: 'K/D', colMatches: 'Matches',
     players: 'players', updated: 'Updated', never: 'not updated yet',
+    sortLabel: 'Sort by',
     stableTitle: 'Most consistent',
     stableHint: 'Win rate and K/D above average over a long run — 500+ matches. Pink marks the best value in each column of the table.',
     matchesShort: 'matches'
@@ -362,7 +400,52 @@ const LEVEL_COLOR = {
 
 let lang = 'ru';
 let game = 'cs2';
+let sortKey = 'elo';   // elo | winRate | kd | matches
+let sortDir = 'desc';  // desc | asc
 let data = null; // { updatedAt, total, games: { cs2:[], rainbow_6:[] } }
+
+// Сортировка по выбранному показателю. Пустые значения всегда в конце,
+// независимо от направления, — иначе при возрастании сверху окажутся прочерки.
+function sortRows(rows) {
+  const dir = sortDir === 'asc' ? 1 : -1;
+  return [...rows].sort((a, b) => {
+    const av = a[sortKey], bv = b[sortKey];
+    if (av == null && bv == null) return a.rank - b.rank;
+    if (av == null) return 1;
+    if (bv == null) return -1;
+    if (av === bv) return a.rank - b.rank; // при равенстве — по месту в мире
+    return (av - bv) * dir;
+  });
+}
+
+const SORT_KEYS = ['elo', 'winRate', 'kd', 'matches'];
+const ARROW = () => (sortDir === 'desc' ? '▼' : '▲');
+
+// Показываем только те кнопки сортировки, по которым в этой игре есть данные
+// (в R6 нет карьерной статы, там сортировать можно лишь по ELO).
+function syncSort() {
+  const rows = data?.games?.[game] || [];
+  const usable = SORT_KEYS.filter(k => rows.some(r => r[k] != null));
+  if (!usable.includes(sortKey)) { sortKey = usable[0] || 'elo'; sortDir = 'desc'; }
+  document.querySelectorAll('.sort-btn').forEach(b => {
+    const on = b.dataset.sort === sortKey;
+    b.style.display = usable.includes(b.dataset.sort) ? '' : 'none';
+    b.classList.toggle('active', on);
+    b.querySelector('.arrow').textContent = on ? ARROW() : '';
+  });
+  document.getElementById('sort').style.display = usable.length > 1 ? '' : 'none';
+}
+
+function setSort(key) {
+  if (sortKey === key) {
+    sortDir = sortDir === 'desc' ? 'asc' : 'desc'; // повторный клик — обратный порядок
+  } else {
+    sortKey = key;
+    sortDir = 'desc';
+  }
+  syncSort();
+  render();
+}
 
 function t() { return I18N[lang]; }
 
@@ -426,14 +509,24 @@ function columnBests(rows) {
   return { elo: max('elo'), winRate: max('winRate'), kd: max('kd'), matches: max('matches') };
 }
 
+// Значение активного показателя — крупной цифрой на подиуме
+function metricValue(r, key) {
+  if (key === 'winRate') return r.winRate != null ? r.winRate + '%' : '—';
+  if (key === 'kd') return r.kd != null ? r.kd : '—';
+  return num(r[key]);
+}
+
 function render() {
   const content = document.getElementById('content');
   if (!data) return;
-  const rows = data.games[game] || [];
-  if (!rows.length) { content.innerHTML = '<div class="state">' + t().empty + '</div>'; return; }
-  const best = columnBests(rows);
+  const raw = data.games[game] || [];
+  if (!raw.length) { content.innerHTML = '<div class="state">' + t().empty + '</div>'; return; }
+  const rows = sortRows(raw);
+  const best = columnBests(raw);
   const mark = (val, key) => (val != null && val === best[key] ? ' best' : '');
 
+  // Подиум следует выбранной сортировке: сортируешь по K/D — на подиуме
+  // лидеры по K/D, а не по ELO.
   const top3 = rows.slice(0, 3);
   const medals = ['🥇', '🥈', '🥉'];
   const podium = '<div class="podium">' + top3.map((r, i) =>
@@ -441,26 +534,36 @@ function render() {
       '<div class="pod-medal">' + medals[i] + '</div>' +
       '<div class="pod-flag">' + flag(r.country) + '</div>' +
       '<div class="pod-name">' + esc(r.nickname) + '</div>' +
-      '<div class="pod-elo">' + num(r.elo) + '</div>' +
-      '<div class="pod-sub">' + (t().colLvl + ' ' + (r.level ?? '—')) + (r.kd != null ? ' · K/D ' + r.kd : '') + '</div>' +
+      '<div class="pod-elo">' + metricValue(r, sortKey) + '</div>' +
+      '<div class="pod-sub">' + (sortKey === 'elo'
+        ? t().colLvl + ' ' + (r.level ?? '—') + (r.kd != null ? ' · K/D ' + r.kd : '')
+        : t().colElo + ' ' + num(r.elo) + ' · ' + t().colLvl + ' ' + (r.level ?? '—')) + '</div>' +
     '</div>'
   ).join('') + '</div>';
+
+  const th = (label, key, cls = '') => {
+    const sortable = SORT_KEYS.includes(key) && raw.some(r => r[key] != null);
+    const on = sortable && sortKey === key;
+    return '<th class="' + cls + (sortable ? ' sortable' : '') + (on ? ' sorted' : '') + '"' +
+      (sortable ? ' data-sort="' + key + '"' : '') + '>' + label +
+      (on ? '<i class="arrow">' + ARROW() + '</i>' : '') + '</th>';
+  };
 
   const head =
     '<thead><tr>' +
       '<th>#</th>' +
       '<th class="left">' + t().colPlayer + '</th>' +
-      '<th>' + t().colElo + '</th>' +
+      th(t().colElo, 'elo') +
       '<th>' + t().colLvl + '</th>' +
-      '<th class="col-wr">' + t().colWr + '</th>' +
-      '<th>' + t().colKd + '</th>' +
-      '<th class="col-matches">' + t().colMatches + '</th>' +
+      th(t().colWr, 'winRate', 'col-wr') +
+      th(t().colKd, 'kd') +
+      th(t().colMatches, 'matches', 'col-matches') +
     '</tr></thead>';
 
-  const body = '<tbody>' + rows.map(r => {
+  const body = '<tbody>' + rows.map((r, i) => {
     const color = LEVEL_COLOR[r.level] || '#99aab5';
     return '<tr data-nick="' + esc((r.nickname || '').toLowerCase()) + '">' +
-      '<td class="rank">' + r.rank + '</td>' +
+      '<td class="rank">' + (i + 1) + '</td>' +
       '<td class="left"><div class="player"><span class="flag">' + flag(r.country) + '</span>' +
         '<span class="nick"><a href="' + faceitUrl(r.nickname) + '" target="_blank" rel="noopener">' + esc(r.nickname) + '</a></span></div></td>' +
       '<td class="elo' + mark(r.elo, 'elo') + '">' + num(r.elo) + '</td>' +
@@ -471,8 +574,13 @@ function render() {
     '</tr>';
   }).join('') + '</tbody>';
 
-  content.innerHTML = stableBlock(rows) + podium +
-    '<div class="board-wrap"><table class="board">' + head + body + '</table></div>';
+  content.innerHTML = stableBlock(raw) + podium +
+    '<div class="board-wrap"><table class="board' +
+      (sortKey === 'winRate' ? ' show-wr' : '') + (sortKey === 'matches' ? ' show-matches' : '') +
+    '">' + head + body + '</table></div>';
+  // заголовки пересоздаются при каждой отрисовке — навешиваем обработчик заново
+  content.querySelectorAll('th.sortable').forEach(h =>
+    h.addEventListener('click', () => setSort(h.dataset.sort)));
   applySearch();
 }
 
@@ -502,12 +610,13 @@ function setLang(l) {
   document.querySelectorAll('[data-i18n-ph]').forEach(el => { el.placeholder = tr[el.dataset.i18nPh]; });
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
   try { localStorage.setItem('fpsg-lang', lang); } catch (e) {}
-  if (data) { render(); renderUpdated(); }
+  if (data) { syncSort(); render(); renderUpdated(); }
 }
 
 function setGame(g) {
   game = g;
   document.querySelectorAll('.tab').forEach(b => b.classList.toggle('active', b.dataset.game === g));
+  syncSort(); // в разных играх доступны разные показатели
   render();
 }
 
@@ -533,6 +642,7 @@ async function load() {
     if (!res.ok) throw new Error('HTTP ' + res.status);
     data = await res.json();
     syncTabs();
+    syncSort();
     render();
     renderUpdated();
   } catch (e) {
@@ -542,6 +652,7 @@ async function load() {
 
 document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
 document.querySelectorAll('.tab').forEach(b => b.addEventListener('click', () => setGame(b.dataset.game)));
+document.querySelectorAll('.sort-btn').forEach(b => b.addEventListener('click', () => setSort(b.dataset.sort)));
 document.getElementById('search').addEventListener('input', applySearch);
 
 let saved = null;
