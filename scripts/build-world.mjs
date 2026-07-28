@@ -109,6 +109,11 @@ async function fetchPlayer(playerId) {
         const rounds = Number(lt["Total Rounds with extended stats"]) || 0;
         const clutches = (Number(lt["Total 1v1 Count"]) || 0) + (Number(lt["Total 1v2 Count"]) || 0);
         games.cs2.clutch = rounds ? clutches / rounds : null;
+        // «Мастера»: urон гранатами/раунд, доля килов снайперкой, % в голову.
+        // Ножа и убийств гранатами в API нет — это ближайшие доступные.
+        games.cs2.util = lt["Utility Damage per Round"] != null ? Number(lt["Utility Damage per Round"]) : null;
+        games.cs2.sniper = lt["Sniper Kill Rate"] != null ? Number(lt["Sniper Kill Rate"]) : null;
+        games.cs2.hs = lt["Average Headshots %"] != null ? Number(lt["Average Headshots %"]) : null;
       }
     } catch {
       // стата опциональна
@@ -133,6 +138,9 @@ function rowsFor(players, game) {
         wins: g.wins ?? null,
         entry: g.entry ?? null,
         clutch: g.clutch ?? null,
+        util: g.util ?? null,
+        sniper: g.sniper ?? null,
+        hs: g.hs ?? null,
       };
     })
     .filter(Boolean)

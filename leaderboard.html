@@ -64,6 +64,9 @@ body::before {
   overflow: hidden;
   box-shadow: 0 12px 60px rgba(0,0,0,0.8);
 }
+/* Таблица данных широкая — на больших экранах даём странице больше места,
+   чтобы все столбцы-показатели помещались без горизонтальной прокрутки. */
+@media (min-width: 1024px) { .page { max-width: 1200px; } }
 
 /* ── Header ── */
 .header {
@@ -256,13 +259,13 @@ body::before {
 .board-wrap { padding: 14px 24px 4px; overflow-x: auto; }
 table.board { width: 100%; border-collapse: collapse; font-size: 13px; }
 .board thead th {
-  font-weight: 700; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--accent); text-align: right; padding: 8px 10px;
+  font-weight: 700; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--accent); text-align: right; padding: 8px 7px;
   border-bottom: 1px solid rgba(206,97,223,0.2); white-space: nowrap;
 }
 .board thead th.left { text-align: left; }
 .board tbody td {
-  padding: 9px 10px; text-align: right; white-space: nowrap;
+  padding: 9px 7px; text-align: right; white-space: nowrap;
   border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 .board tbody td.left { text-align: left; }
@@ -306,10 +309,12 @@ tr.hidden { display: none; }
 }
 
 @media (max-width: 560px) {
-  .board .col-matches, .board .col-wr, .board .col-stab, .board .col-act, .board .col-cau { display: none; }
+  .board .col-matches, .board .col-wr, .board .col-stab, .board .col-act, .board .col-cau,
+  .board .col-gren, .board .col-awp, .board .col-hs { display: none; }
   /* столбец, по которому сортируем, показываем даже на узком экране */
   .board.show-wr .col-wr, .board.show-matches .col-matches, .board.show-stab .col-stab,
-  .board.show-act .col-act, .board.show-cau .col-cau { display: table-cell; }
+  .board.show-act .col-act, .board.show-cau .col-cau,
+  .board.show-gren .col-gren, .board.show-awp .col-awp, .board.show-hs .col-hs { display: table-cell; }
   .pod-name { font-size: 12px; }
   .pod-elo { font-size: 17px; }
   .stable { grid-template-columns: repeat(2, 1fr); }
@@ -346,6 +351,9 @@ tr.hidden { display: none; }
       <button class="sort-btn" type="button" data-sort="stability"><span data-i18n="sortStab">Стабильность</span><i class="arrow"></i></button>
       <button class="sort-btn" type="button" data-sort="activity"><span data-i18n="sortAct">Активность</span><i class="arrow"></i></button>
       <button class="sort-btn" type="button" data-sort="caution"><span data-i18n="sortCau">Осторожность</span><i class="arrow"></i></button>
+      <button class="sort-btn" type="button" data-sort="grenade"><span data-i18n="sortGren">Мастер гранат</span><i class="arrow"></i></button>
+      <button class="sort-btn" type="button" data-sort="awp"><span data-i18n="sortAwp">Мастер AWP</span><i class="arrow"></i></button>
+      <button class="sort-btn" type="button" data-sort="headshot"><span data-i18n="sortHs">Хедшотер</span><i class="arrow"></i></button>
     </div>
     <input class="search" type="text" data-i18n-ph="search" placeholder="Поиск по нику…" id="search">
   </div>
@@ -376,11 +384,11 @@ const I18N = {
     note: 'В рейтинге — участницы FACEIT-клуба FPS Girls, подтверждённые администрацией клуба. Обновляется автоматически.',
     error: 'Не удалось загрузить рейтинг. Попробуйте обновить страницу позже.',
     empty: 'Пока нет данных для этой игры.',
-    colPlayer: 'Игрок', colElo: 'ELO', colLvl: 'Ур.', colWr: 'Винрейт', colKd: 'K/D', colMatches: 'Матчи', colStab: 'Стаб.', colAct: 'Актив.', colCau: 'Остор.',
+    colPlayer: 'Игрок', colElo: 'ELO', colLvl: 'Ур.', colWr: 'Винрейт', colKd: 'K/D', colMatches: 'Матчи', colStab: 'Стаб.', colAct: 'Актив.', colCau: 'Остор.', colGren: 'Гран.', colAwp: 'AWP', colHs: 'Хедш.',
     players: 'игроков', updated: 'Обновлено', never: 'ещё не обновлялось',
-    sortLabel: 'Сортировка', sortStab: 'Стабильность', sortAct: 'Активность', sortCau: 'Осторожность',
+    sortLabel: 'Сортировка', sortStab: 'Стабильность', sortAct: 'Активность', sortCau: 'Осторожность', sortGren: 'Мастер гранат', sortAwp: 'Мастер AWP', sortHs: 'Хедшотер',
     stableTitle: 'Самые стабильные',
-    stableHint: 'Все показатели-индексы (Стаб., Актив., Остор.) — это 0–100, где 50 — средний уровень сцены; считаются по игрокам от 500 матчей, по ним можно сортировать. Стабильность — винрейт и K/D выше среднего. Активность — как часто вступает в первую дуэль раунда. Осторожность — как часто остаётся последней живой (клатч-ситуации). Розовым отмечен лучший показатель в каждом столбце.',
+    stableHint: 'Все показатели-индексы (Стаб., Актив., Остор., Гран., AWP, Хедш.) — это 0–100, где 50 — средний уровень сцены; считаются по игрокам от 500 матчей, по ним можно сортировать. Стабильность — винрейт и K/D выше среднего. Активность — как часто вступает в первую дуэль. Осторожность — как часто остаётся последней живой (клатчи). Гран. — урон гранатами за раунд. AWP — доля убийств снайперкой. Хедш. — % убийств в голову. (Ножа и убийств гранатами в API FACEIT нет.) Розовым отмечен лучший показатель в каждом столбце.',
     matchesShort: 'матчей'
   },
   en: {
@@ -389,11 +397,11 @@ const I18N = {
     note: 'The ranking lists FPS Girls FACEIT club members verified by the club admins. Updates automatically.',
     error: 'Could not load the ranking. Please try again later.',
     empty: 'No data for this game yet.',
-    colPlayer: 'Player', colElo: 'ELO', colLvl: 'Lvl', colWr: 'Win rate', colKd: 'K/D', colMatches: 'Matches', colStab: 'Stab.', colAct: 'Aggr.', colCau: 'Surv.',
+    colPlayer: 'Player', colElo: 'ELO', colLvl: 'Lvl', colWr: 'Win rate', colKd: 'K/D', colMatches: 'Matches', colStab: 'Stab.', colAct: 'Aggr.', colCau: 'Surv.', colGren: 'Nade', colAwp: 'AWP', colHs: 'HS',
     players: 'players', updated: 'Updated', never: 'not updated yet',
-    sortLabel: 'Sort by', sortStab: 'Stability', sortAct: 'Aggression', sortCau: 'Survival',
+    sortLabel: 'Sort by', sortStab: 'Stability', sortAct: 'Aggression', sortCau: 'Survival', sortGren: 'Nade master', sortAwp: 'AWP master', sortHs: 'Headshot',
     stableTitle: 'Most consistent',
-    stableHint: 'The index columns (Stab., Aggr., Surv.) are 0–100 where 50 is the scene average; computed for players with 500+ matches, and sortable. Stability — win rate and K/D above average. Aggression — how often she takes the opening duel. Survival — how often she is the last one alive (clutch situations). Pink marks the best value in each column.',
+    stableHint: 'The index columns (Stab., Aggr., Surv., Nade, AWP, HS) are 0–100 where 50 is the scene average; computed for players with 500+ matches, and sortable. Stability — win rate and K/D above average. Aggression — how often she takes the opening duel. Survival — how often she is the last one alive (clutches). Nade — utility damage per round. AWP — share of kills with the sniper. HS — headshot %. (Knife and grenade kills are not in the FACEIT API.) Pink marks the best value in each column.',
     matchesShort: 'matches'
   }
 };
@@ -414,7 +422,7 @@ let data = null; // { updatedAt, total, games: { cs2:[], rainbow_6:[] } }
 function sortRows(rows) {
   const dir = sortDir === 'asc' ? 1 : -1;
   // индексы сортируем по сырому баллу — точнее, чем по округлённому 0–100
-  const rawOf = { stability: '_stab', activity: '_act', caution: '_cau' };
+  const rawOf = { stability: '_stab', activity: '_act', caution: '_cau', grenade: '_gren', awp: '_awp', headshot: '_hs' };
   const val = (r) => (rawOf[sortKey] ? r[rawOf[sortKey]] : r[sortKey]);
   return [...rows].sort((a, b) => {
     const av = val(a), bv = val(b);
@@ -426,7 +434,7 @@ function sortRows(rows) {
   });
 }
 
-const SORT_KEYS = ['elo', 'winRate', 'kd', 'matches', 'stability', 'activity', 'caution'];
+const SORT_KEYS = ['elo', 'winRate', 'kd', 'matches', 'stability', 'activity', 'caution', 'grenade', 'awp', 'headshot'];
 const ARROW = () => (sortDir === 'desc' ? '▼' : '▲');
 
 // Показываем только те кнопки сортировки, по которым в этой игре есть данные
@@ -514,6 +522,9 @@ function annotateIndices(rows) {
   annotateStability(rows);
   annotateIndex(rows, 'entry', '_act', 'activity');   // активность — вход в первую дуэль
   annotateIndex(rows, 'clutch', '_cau', 'caution');   // осторожность — клатч-ситуации
+  annotateIndex(rows, 'util', '_gren', 'grenade');    // мастер гранат — урон утилитой/раунд
+  annotateIndex(rows, 'sniper', '_awp', 'awp');       // мастер AWP — доля килов снайперкой
+  annotateIndex(rows, 'hs', '_hs', 'headshot');       // хедшотер — % убийств в голову
 }
 
 function stableTop(rows, count = 5) {
@@ -546,6 +557,7 @@ function columnBests(rows) {
   return {
     elo: max('elo'), winRate: max('winRate'), kd: max('kd'), matches: max('matches'),
     stability: max('stability'), activity: max('activity'), caution: max('caution'),
+    grenade: max('grenade'), awp: max('awp'), headshot: max('headshot'),
   };
 }
 
@@ -601,6 +613,9 @@ function render() {
       th(t().colStab, 'stability', 'col-stab') +
       th(t().colAct, 'activity', 'col-act') +
       th(t().colCau, 'caution', 'col-cau') +
+      th(t().colGren, 'grenade', 'col-gren') +
+      th(t().colAwp, 'awp', 'col-awp') +
+      th(t().colHs, 'headshot', 'col-hs') +
     '</tr></thead>';
 
   const body = '<tbody>' + rows.map((r, i) => {
@@ -617,6 +632,9 @@ function render() {
       '<td class="col-stab' + (r.stability != null ? '' : ' dim') + mark(r.stability, 'stability') + '">' + (r.stability != null ? r.stability : '—') + '</td>' +
       '<td class="col-act' + (r.activity != null ? '' : ' dim') + mark(r.activity, 'activity') + '">' + (r.activity != null ? r.activity : '—') + '</td>' +
       '<td class="col-cau' + (r.caution != null ? '' : ' dim') + mark(r.caution, 'caution') + '">' + (r.caution != null ? r.caution : '—') + '</td>' +
+      '<td class="col-gren' + (r.grenade != null ? '' : ' dim') + mark(r.grenade, 'grenade') + '">' + (r.grenade != null ? r.grenade : '—') + '</td>' +
+      '<td class="col-awp' + (r.awp != null ? '' : ' dim') + mark(r.awp, 'awp') + '">' + (r.awp != null ? r.awp : '—') + '</td>' +
+      '<td class="col-hs' + (r.headshot != null ? '' : ' dim') + mark(r.headshot, 'headshot') + '">' + (r.headshot != null ? r.headshot : '—') + '</td>' +
     '</tr>';
   }).join('') + '</tbody>';
 
@@ -625,6 +643,7 @@ function render() {
       (sortKey === 'winRate' ? ' show-wr' : '') + (sortKey === 'matches' ? ' show-matches' : '') +
       (sortKey === 'stability' ? ' show-stab' : '') +
       (sortKey === 'activity' ? ' show-act' : '') + (sortKey === 'caution' ? ' show-cau' : '') +
+      (sortKey === 'grenade' ? ' show-gren' : '') + (sortKey === 'awp' ? ' show-awp' : '') + (sortKey === 'headshot' ? ' show-hs' : '') +
     '">' + head + body + '</table></div>';
   // заголовки пересоздаются при каждой отрисовке — навешиваем обработчик заново
   content.querySelectorAll('th.sortable').forEach(h =>
