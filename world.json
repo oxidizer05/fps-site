@@ -1,5 +1,5 @@
 {
-  "updatedAt": 1785218592364,
+  "updatedAt": 1785267798688,
   "total": 127,
   "games": {
     "cs2": [
@@ -12,7 +12,9 @@
         "winRate": 55,
         "kd": 1.1,
         "matches": 3188,
-        "wins": 1750
+        "wins": 1750,
+        "entry": 0.15,
+        "clutch": 0.05887612172588496
       },
       {
         "rank": 2,
@@ -23,7 +25,9 @@
         "winRate": 52,
         "kd": 0.95,
         "matches": 9687,
-        "wins": 5024
+        "wins": 5024,
+        "entry": 0.17,
+        "clutch": 0.05644778246155673
       },
       {
         "rank": 3,
@@ -33,8 +37,10 @@
         "level": 10,
         "winRate": 52,
         "kd": 1.08,
-        "matches": 3724,
-        "wins": 1934
+        "matches": 3730,
+        "wins": 1937,
+        "entry": 0.18,
+        "clutch": 0.05997838163947613
       },
       {
         "rank": 4,
@@ -45,29 +51,35 @@
         "winRate": 59,
         "kd": 1.53,
         "matches": 3052,
-        "wins": 1792
+        "wins": 1792,
+        "entry": 0.18,
+        "clutch": 0.07213955358938266
       },
       {
         "rank": 5,
+        "nickname": "mjdaqueen",
+        "country": "kz",
+        "elo": 2806,
+        "level": 10,
+        "winRate": 51,
+        "kd": 0.97,
+        "matches": 6121,
+        "wins": 3125,
+        "entry": 0.23,
+        "clutch": 0.0556523759730452
+      },
+      {
+        "rank": 6,
         "nickname": "Stormyo-",
         "country": "ru",
         "elo": 2748,
         "level": 10,
         "winRate": 51,
         "kd": 0.98,
-        "matches": 7895,
-        "wins": 3997
-      },
-      {
-        "rank": 6,
-        "nickname": "mjdaqueen",
-        "country": "kz",
-        "elo": 2734,
-        "level": 10,
-        "winRate": 51,
-        "kd": 0.97,
-        "matches": 6118,
-        "wins": 3122
+        "matches": 7897,
+        "wins": 3998,
+        "entry": 0.16,
+        "clutch": 0.055218944304802224
       },
       {
         "rank": 7,
@@ -78,7 +90,9 @@
         "winRate": 52,
         "kd": 1,
         "matches": 6839,
-        "wins": 3537
+        "wins": 3537,
+        "entry": 0.18,
+        "clutch": 0.05342793410196458
       },
       {
         "rank": 8,
@@ -89,7 +103,9 @@
         "winRate": 52,
         "kd": 1.15,
         "matches": 3600,
-        "wins": 1854
+        "wins": 1854,
+        "entry": 0.21,
+        "clutch": 0.05613846978632151
       },
       {
         "rank": 9,
@@ -100,7 +116,9 @@
         "winRate": 52,
         "kd": 1.04,
         "matches": 6446,
-        "wins": 3324
+        "wins": 3324,
+        "entry": 0.2,
+        "clutch": 0.052380283668024157
       },
       {
         "rank": 10,
@@ -111,7 +129,9 @@
         "winRate": 54,
         "kd": 1.02,
         "matches": 705,
-        "wins": 380
+        "wins": 380,
+        "entry": 0.16,
+        "clutch": 0.06694501450711203
       },
       {
         "rank": 11,
@@ -122,7 +142,9 @@
         "winRate": 48,
         "kd": 0.92,
         "matches": 2620,
-        "wins": 1257
+        "wins": 1257,
+        "entry": 0.11,
+        "clutch": 0.0738429410907678
       },
       {
         "rank": 12,
@@ -133,7 +155,9 @@
         "winRate": 54,
         "kd": 1,
         "matches": 1224,
-        "wins": 666
+        "wins": 666,
+        "entry": 0.17,
+        "clutch": 0.05216755373176776
       },
       {
         "rank": 13,
@@ -144,7 +168,9 @@
         "winRate": 52,
         "kd": 1,
         "matches": 2972,
-        "wins": 1549
+        "wins": 1549,
+        "entry": 0.16,
+        "clutch": 0.05765802824626354
       },
       {
         "rank": 14,
@@ -155,21 +181,12 @@
         "winRate": 50,
         "kd": 1.11,
         "matches": 3338,
-        "wins": 1679
+        "wins": 1679,
+        "entry": 0.16,
+        "clutch": 0.06539944571635137
       },
       {
         "rank": 15,
-        "nickname": "k1ttystar",
-        "country": "vn",
-        "elo": 2521,
-        "level": 10,
-        "winRate": 52,
-        "kd": 0.97,
-        "matches": 1551,
-        "wins": 804
-      },
-      {
-        "rank": 16,
         "nickname": "akaya",
         "country": "ee",
         "elo": 2506,
@@ -177,10 +194,12 @@
         "winRate": 53,
         "kd": 1.33,
         "matches": 833,
-        "wins": 439
+        "wins": 439,
+        "entry": 0.19,
+        "clutch": 0.0760306608659623
       },
       {
-        "rank": 17,
+        "rank": 16,
         "nickname": "-lucidreams",
         "country": "cn",
         "elo": 2501,
@@ -188,29 +207,48 @@
         "winRate": 55,
         "kd": 0.98,
         "matches": 766,
-        "wins": 421
+        "wins": 421,
+        "entry": 0.12,
+        "clutch": 0.0724388848009157
       },
       {
-        "rank": 18,
+        "rank": 17,
         "nickname": "show",
         "country": "fi",
-        "elo": 2435,
+        "elo": 2458,
         "level": 10,
         "winRate": 50,
         "kd": 0.98,
-        "matches": 6579,
-        "wins": 3291
+        "matches": 6580,
+        "wins": 3292,
+        "entry": 0.29,
+        "clutch": 0.03341060086150252
+      },
+      {
+        "rank": 18,
+        "nickname": "-sou1",
+        "country": "ru",
+        "elo": 2438,
+        "level": 10,
+        "winRate": 50,
+        "kd": 1.01,
+        "matches": 6503,
+        "wins": 3256,
+        "entry": 0.17,
+        "clutch": 0.06305237730172276
       },
       {
         "rank": 19,
-        "nickname": "kkery",
-        "country": "ee",
-        "elo": 2433,
+        "nickname": "k1ttystar",
+        "country": "vn",
+        "elo": 2417,
         "level": 10,
-        "winRate": 51,
-        "kd": 1.21,
-        "matches": 3819,
-        "wins": 1929
+        "winRate": 52,
+        "kd": 0.97,
+        "matches": 1557,
+        "wins": 805,
+        "entry": 0.15,
+        "clutch": 0.06586335985025737
       },
       {
         "rank": 20,
@@ -221,18 +259,22 @@
         "winRate": 51,
         "kd": 1.08,
         "matches": 2453,
-        "wins": 1244
+        "wins": 1244,
+        "entry": 0.1,
+        "clutch": 0.08093270187927966
       },
       {
         "rank": 21,
-        "nickname": "Milqka",
-        "country": "ru",
+        "nickname": "kkery",
+        "country": "ee",
         "elo": 2406,
         "level": 10,
         "winRate": 50,
-        "kd": 1.07,
-        "matches": 6730,
-        "wins": 3398
+        "kd": 1.21,
+        "matches": 3821,
+        "wins": 1929,
+        "entry": 0.2,
+        "clutch": 0.05920421325121064
       },
       {
         "rank": 22,
@@ -243,21 +285,38 @@
         "winRate": 55,
         "kd": 0.94,
         "matches": 1257,
-        "wins": 692
+        "wins": 692,
+        "entry": 0.19,
+        "clutch": 0.061508508797231035
       },
       {
         "rank": 23,
-        "nickname": "babaevsky-",
-        "country": "ru",
-        "elo": 2363,
+        "nickname": "chyna-",
+        "country": "lu",
+        "elo": 2362,
         "level": 10,
         "winRate": 50,
-        "kd": 1.05,
-        "matches": 5038,
-        "wins": 2531
+        "kd": 1.11,
+        "matches": 4087,
+        "wins": 2042,
+        "entry": 0.19,
+        "clutch": 0.0552343954739552
       },
       {
         "rank": 24,
+        "nickname": "Milqka",
+        "country": "ru",
+        "elo": 2347,
+        "level": 10,
+        "winRate": 50,
+        "kd": 1.07,
+        "matches": 6736,
+        "wins": 3400,
+        "entry": 0.19,
+        "clutch": 0.060379712986897226
+      },
+      {
+        "rank": 25,
         "nickname": "oou",
         "country": "cn",
         "elo": 2343,
@@ -265,65 +324,51 @@
         "winRate": 51,
         "kd": 1.1,
         "matches": 3871,
-        "wins": 1979
-      },
-      {
-        "rank": 25,
-        "nickname": "chyna-",
-        "country": "lu",
-        "elo": 2332,
-        "level": 10,
-        "winRate": 50,
-        "kd": 1.11,
-        "matches": 4084,
-        "wins": 2040
+        "wins": 1979,
+        "entry": 0.17,
+        "clutch": 0.066910094125284
       },
       {
         "rank": 26,
-        "nickname": "scrlet",
-        "country": "gb",
-        "elo": 2324,
+        "nickname": "babaevsky-",
+        "country": "ru",
+        "elo": 2304,
         "level": 10,
-        "winRate": 49,
-        "kd": 0.94,
-        "matches": 3816,
-        "wins": 1876
+        "winRate": 50,
+        "kd": 1.05,
+        "matches": 5044,
+        "wins": 2533,
+        "entry": 0.19,
+        "clutch": 0.062251423565484014
       },
       {
         "rank": 27,
-        "nickname": "-sou1",
-        "country": "ru",
-        "elo": 2303,
-        "level": 10,
-        "winRate": 50,
-        "kd": 1.01,
-        "matches": 6498,
-        "wins": 3251
-      },
-      {
-        "rank": 28,
         "nickname": "Manrihana",
         "country": "ru",
         "elo": 2297,
         "level": 10,
         "winRate": 51,
         "kd": 1.04,
-        "matches": 2984,
-        "wins": 1508
+        "matches": 2986,
+        "wins": 1509,
+        "entry": 0.15,
+        "clutch": 0.0619590695997115
       },
       {
-        "rank": 29,
+        "rank": 28,
         "nickname": "K0P0JlEBA",
         "country": "lt",
         "elo": 2275,
         "level": 10,
         "winRate": 51,
         "kd": 1.06,
-        "matches": 6483,
-        "wins": 3286
+        "matches": 6486,
+        "wins": 3286,
+        "entry": 0.28,
+        "clutch": 0.04446251422995609
       },
       {
-        "rank": 30,
+        "rank": 29,
         "nickname": "shizuka-",
         "country": "jp",
         "elo": 2268,
@@ -331,18 +376,35 @@
         "winRate": 52,
         "kd": 1.08,
         "matches": 1775,
-        "wins": 926
+        "wins": 926,
+        "entry": 0.13,
+        "clutch": 0.07764243876464323
       },
       {
-        "rank": 31,
+        "rank": 30,
         "nickname": "1nsomnia09",
         "country": "kz",
         "elo": 2265,
         "level": 10,
         "winRate": 50,
         "kd": 1,
-        "matches": 5634,
-        "wins": 2805
+        "matches": 5636,
+        "wins": 2806,
+        "entry": 0.23,
+        "clutch": 0.04745557992435078
+      },
+      {
+        "rank": 31,
+        "nickname": "scrlet",
+        "country": "gb",
+        "elo": 2265,
+        "level": 10,
+        "winRate": 49,
+        "kd": 0.94,
+        "matches": 3818,
+        "wins": 1876,
+        "entry": 0.2,
+        "clutch": 0.03780711579248385
       },
       {
         "rank": 32,
@@ -353,7 +415,9 @@
         "winRate": 54,
         "kd": 1.01,
         "matches": 606,
-        "wins": 329
+        "wins": 329,
+        "entry": 0.2,
+        "clutch": 0.047566976489885185
       },
       {
         "rank": 33,
@@ -364,7 +428,9 @@
         "winRate": 51,
         "kd": 1.22,
         "matches": 1579,
-        "wins": 802
+        "wins": 802,
+        "entry": 0.16,
+        "clutch": 0.06876659646552513
       },
       {
         "rank": 34,
@@ -375,7 +441,9 @@
         "winRate": 49,
         "kd": 1.02,
         "matches": 4442,
-        "wins": 2192
+        "wins": 2192,
+        "entry": 0.17,
+        "clutch": 0.06027048216385731
       },
       {
         "rank": 35,
@@ -386,7 +454,9 @@
         "winRate": 50,
         "kd": 1.05,
         "matches": 2256,
-        "wins": 1129
+        "wins": 1129,
+        "entry": 0.16,
+        "clutch": 0.054627696590118305
       },
       {
         "rank": 36,
@@ -397,21 +467,12 @@
         "winRate": 50,
         "kd": 1.06,
         "matches": 2551,
-        "wins": 1284
+        "wins": 1284,
+        "entry": 0.26,
+        "clutch": 0.04680400150864778
       },
       {
         "rank": 37,
-        "nickname": "emochkagang",
-        "country": "cn",
-        "elo": 2190,
-        "level": 10,
-        "winRate": 53,
-        "kd": 1.06,
-        "matches": 1288,
-        "wins": 677
-      },
-      {
-        "rank": 38,
         "nickname": "rogueUwU",
         "country": "ua",
         "elo": 2189,
@@ -419,10 +480,12 @@
         "winRate": 52,
         "kd": 1.08,
         "matches": 1358,
-        "wins": 700
+        "wins": 700,
+        "entry": 0.16,
+        "clutch": 0.06620616365568543
       },
       {
-        "rank": 39,
+        "rank": 38,
         "nickname": "Siren1ka",
         "country": "kz",
         "elo": 2182,
@@ -430,21 +493,12 @@
         "winRate": 56,
         "kd": 1.03,
         "matches": 636,
-        "wins": 358
+        "wins": 358,
+        "entry": 0.22,
+        "clutch": 0.039928486293206195
       },
       {
-        "rank": 40,
-        "nickname": "makarelya",
-        "country": "ru",
-        "elo": 2153,
-        "level": 10,
-        "winRate": 50,
-        "kd": 1.11,
-        "matches": 2421,
-        "wins": 1201
-      },
-      {
-        "rank": 41,
+        "rank": 39,
         "nickname": "tomiliska",
         "country": "kz",
         "elo": 2147,
@@ -452,21 +506,12 @@
         "winRate": 51,
         "kd": 1.07,
         "matches": 2909,
-        "wins": 1472
+        "wins": 1472,
+        "entry": 0.21,
+        "clutch": 0.052917787393287334
       },
       {
-        "rank": 42,
-        "nickname": "DAhASIXSEVEN",
-        "country": "ru",
-        "elo": 2144,
-        "level": 10,
-        "winRate": 51,
-        "kd": 1,
-        "matches": 3558,
-        "wins": 1809
-      },
-      {
-        "rank": 43,
+        "rank": 40,
         "nickname": "blueishy",
         "country": "jp",
         "elo": 2138,
@@ -474,10 +519,12 @@
         "winRate": 51,
         "kd": 1.03,
         "matches": 2364,
-        "wins": 1196
+        "wins": 1196,
+        "entry": 0.21,
+        "clutch": 0.05065933023432312
       },
       {
-        "rank": 44,
+        "rank": 41,
         "nickname": "yungmxxn",
         "country": "nl",
         "elo": 2130,
@@ -485,10 +532,12 @@
         "winRate": 54,
         "kd": 1.09,
         "matches": 851,
-        "wins": 461
+        "wins": 461,
+        "entry": 0.11,
+        "clutch": 0.06443298969072164
       },
       {
-        "rank": 45,
+        "rank": 42,
         "nickname": "-nesmi",
         "country": "cn",
         "elo": 2127,
@@ -496,10 +545,25 @@
         "winRate": 50,
         "kd": 1.06,
         "matches": 3078,
-        "wins": 1545
+        "wins": 1545,
+        "entry": 0.16,
+        "clutch": 0.06752163940464431
       },
       {
-        "rank": 46,
+        "rank": 43,
+        "nickname": "DAhASIXSEVEN",
+        "country": "ru",
+        "elo": 2120,
+        "level": 10,
+        "winRate": 51,
+        "kd": 1,
+        "matches": 3561,
+        "wins": 1810,
+        "entry": 0.14,
+        "clutch": 0.07938509089430233
+      },
+      {
+        "rank": 44,
         "nickname": "Piper",
         "country": "ru",
         "elo": 2113,
@@ -507,10 +571,25 @@
         "winRate": 50,
         "kd": 1,
         "matches": 1053,
-        "wins": 528
+        "wins": 528,
+        "entry": 0.19,
+        "clutch": 0.056399225639922564
       },
       {
-        "rank": 47,
+        "rank": 45,
+        "nickname": "auresy",
+        "country": "ru",
+        "elo": 2112,
+        "level": 10,
+        "winRate": 51,
+        "kd": 1.01,
+        "matches": 2088,
+        "wins": 1072,
+        "entry": 0.16,
+        "clutch": 0.056102893160330486
+      },
+      {
+        "rank": 46,
         "nickname": "rinAHAHA",
         "country": "ee",
         "elo": 2104,
@@ -518,10 +597,64 @@
         "winRate": 49,
         "kd": 1.04,
         "matches": 1650,
-        "wins": 808
+        "wins": 808,
+        "entry": 0.23,
+        "clutch": 0.05415453785629881
+      },
+      {
+        "rank": 47,
+        "nickname": "makarelya",
+        "country": "ru",
+        "elo": 2102,
+        "level": 10,
+        "winRate": 50,
+        "kd": 1.11,
+        "matches": 2427,
+        "wins": 1203,
+        "entry": 0.15,
+        "clutch": 0.0771898129261612
       },
       {
         "rank": 48,
+        "nickname": "biatrisse",
+        "country": "ru",
+        "elo": 2095,
+        "level": 10,
+        "winRate": 50,
+        "kd": 0.9,
+        "matches": 3129,
+        "wins": 1571,
+        "entry": 0.21,
+        "clutch": 0.045912752564159
+      },
+      {
+        "rank": 49,
+        "nickname": "leafori",
+        "country": "ru",
+        "elo": 2091,
+        "level": 10,
+        "winRate": 51,
+        "kd": 0.95,
+        "matches": 6987,
+        "wins": 3580,
+        "entry": 0.16,
+        "clutch": 0.057506887052341596
+      },
+      {
+        "rank": 50,
+        "nickname": "emochkagang",
+        "country": "cn",
+        "elo": 2091,
+        "level": 10,
+        "winRate": 52,
+        "kd": 1.06,
+        "matches": 1294,
+        "wins": 678,
+        "entry": 0.18,
+        "clutch": 0.056200185356811865
+      },
+      {
+        "rank": 51,
         "nickname": "angelsinsins",
         "country": "jp",
         "elo": 2087,
@@ -529,32 +662,25 @@
         "winRate": 53,
         "kd": 0.9,
         "matches": 1038,
-        "wins": 545
+        "wins": 545,
+        "entry": 0.2,
+        "clutch": 0.04919087444944821
       },
       {
-        "rank": 49,
-        "nickname": "auresy",
-        "country": "ru",
-        "elo": 2082,
+        "rank": 52,
+        "nickname": "addalensee",
+        "country": "sg",
+        "elo": 2070,
         "level": 10,
-        "winRate": 51,
-        "kd": 1.01,
-        "matches": 2087,
-        "wins": 1071
+        "winRate": 50,
+        "kd": 0.91,
+        "matches": 2223,
+        "wins": 1121,
+        "entry": 0.21,
+        "clutch": 0.048485721932840585
       },
       {
-        "rank": 50,
-        "nickname": "alymia69",
-        "country": "ru",
-        "elo": 2071,
-        "level": 10,
-        "winRate": 49,
-        "kd": 1.06,
-        "matches": 1159,
-        "wins": 572
-      },
-      {
-        "rank": 51,
+        "rank": 53,
         "nickname": "daisyqq",
         "country": "ru",
         "elo": 2068,
@@ -562,10 +688,12 @@
         "winRate": 52,
         "kd": 0.9,
         "matches": 3714,
-        "wins": 1933
+        "wins": 1933,
+        "entry": 0.19,
+        "clutch": 0.044973253791797826
       },
       {
-        "rank": 52,
+        "rank": 54,
         "nickname": "grrechka",
         "country": "no",
         "elo": 2064,
@@ -573,21 +701,12 @@
         "winRate": 49,
         "kd": 1.03,
         "matches": 3309,
-        "wins": 1616
+        "wins": 1616,
+        "entry": 0.22,
+        "clutch": 0.05934570437909336
       },
       {
-        "rank": 53,
-        "nickname": "leafori",
-        "country": "ru",
-        "elo": 2047,
-        "level": 10,
-        "winRate": 51,
-        "kd": 0.95,
-        "matches": 6985,
-        "wins": 3578
-      },
-      {
-        "rank": 54,
+        "rank": 55,
         "nickname": "Cocopyma",
         "country": "ru",
         "elo": 2047,
@@ -595,10 +714,12 @@
         "winRate": 53,
         "kd": 0.87,
         "matches": 927,
-        "wins": 488
+        "wins": 488,
+        "entry": 0.12,
+        "clutch": 0.06954238194815932
       },
       {
-        "rank": 55,
+        "rank": 56,
         "nickname": "-m1a",
         "country": "ru",
         "elo": 2047,
@@ -606,10 +727,12 @@
         "winRate": 52,
         "kd": 1.07,
         "matches": 1584,
-        "wins": 821
+        "wins": 821,
+        "entry": 0.16,
+        "clutch": 0.06892571522796603
       },
       {
-        "rank": 56,
+        "rank": 57,
         "nickname": "MariyKiss",
         "country": "by",
         "elo": 2038,
@@ -617,21 +740,25 @@
         "winRate": 49,
         "kd": 0.92,
         "matches": 3639,
-        "wins": 1785
-      },
-      {
-        "rank": 57,
-        "nickname": "biatrisse",
-        "country": "ru",
-        "elo": 2024,
-        "level": 10,
-        "winRate": 50,
-        "kd": 0.9,
-        "matches": 3122,
-        "wins": 1566
+        "wins": 1785,
+        "entry": 0.19,
+        "clutch": 0.04579732660128815
       },
       {
         "rank": 58,
+        "nickname": "ALRSKA",
+        "country": "rs",
+        "elo": 2026,
+        "level": 10,
+        "winRate": 50,
+        "kd": 1.08,
+        "matches": 3183,
+        "wins": 1606,
+        "entry": 0.17,
+        "clutch": 0.061370549293254605
+      },
+      {
+        "rank": 59,
         "nickname": "redzi",
         "country": "ee",
         "elo": 2024,
@@ -639,21 +766,25 @@
         "winRate": 51,
         "kd": 1.15,
         "matches": 1699,
-        "wins": 858
-      },
-      {
-        "rank": 59,
-        "nickname": "addalensee",
-        "country": "sg",
-        "elo": 2019,
-        "level": 10,
-        "winRate": 50,
-        "kd": 0.91,
-        "matches": 2219,
-        "wins": 1118
+        "wins": 858,
+        "entry": 0.17,
+        "clutch": 0.055843408175014396
       },
       {
         "rank": 60,
+        "nickname": "aufina",
+        "country": "tm",
+        "elo": 2024,
+        "level": 10,
+        "winRate": 50,
+        "kd": 1,
+        "matches": 3695,
+        "wins": 1849,
+        "entry": 0.21,
+        "clutch": 0.05406066835529778
+      },
+      {
+        "rank": 61,
         "nickname": "madam-",
         "country": "fr",
         "elo": 2018,
@@ -661,10 +792,25 @@
         "winRate": 51,
         "kd": 0.95,
         "matches": 822,
-        "wins": 417
+        "wins": 417,
+        "entry": 0.23,
+        "clutch": 0.05139684813753582
       },
       {
-        "rank": 61,
+        "rank": 62,
+        "nickname": "-heav",
+        "country": "ru",
+        "elo": 2015,
+        "level": 10,
+        "winRate": 49,
+        "kd": 1.07,
+        "matches": 1916,
+        "wins": 941,
+        "entry": 0.16,
+        "clutch": 0.06482334869431644
+      },
+      {
+        "rank": 63,
         "nickname": "vaynereas",
         "country": "jp",
         "elo": 2009,
@@ -672,29 +818,9 @@
         "winRate": 50,
         "kd": 0.97,
         "matches": 3532,
-        "wins": 1762
-      },
-      {
-        "rank": 62,
-        "nickname": "ALRSKA",
-        "country": "rs",
-        "elo": 2002,
-        "level": 10,
-        "winRate": 50,
-        "kd": 1.08,
-        "matches": 3182,
-        "wins": 1605
-      },
-      {
-        "rank": 63,
-        "nickname": "aufina",
-        "country": "tm",
-        "elo": 1998,
-        "level": 9,
-        "winRate": 50,
-        "kd": 1,
-        "matches": 3690,
-        "wins": 1846
+        "wins": 1762,
+        "entry": 0.21,
+        "clutch": 0.049525486742980136
       },
       {
         "rank": 64,
@@ -705,21 +831,12 @@
         "winRate": 50,
         "kd": 1.03,
         "matches": 1704,
-        "wins": 847
+        "wins": 847,
+        "entry": 0.19,
+        "clutch": 0.04825371336812525
       },
       {
         "rank": 65,
-        "nickname": "-heav",
-        "country": "ru",
-        "elo": 1991,
-        "level": 9,
-        "winRate": 49,
-        "kd": 1.07,
-        "matches": 1913,
-        "wins": 939
-      },
-      {
-        "rank": 66,
         "nickname": "katerina",
         "country": "ru",
         "elo": 1980,
@@ -727,7 +844,22 @@
         "winRate": 50,
         "kd": 1.08,
         "matches": 1468,
-        "wins": 738
+        "wins": 738,
+        "entry": 0.21,
+        "clutch": 0.0490334438281532
+      },
+      {
+        "rank": 66,
+        "nickname": "alymia69",
+        "country": "ru",
+        "elo": 1978,
+        "level": 9,
+        "winRate": 49,
+        "kd": 1.06,
+        "matches": 1163,
+        "wins": 572,
+        "entry": 0.17,
+        "clutch": 0.0647265625
       },
       {
         "rank": 67,
@@ -738,7 +870,9 @@
         "winRate": 49,
         "kd": 0.94,
         "matches": 11147,
-        "wins": 5517
+        "wins": 5517,
+        "entry": 0.22,
+        "clutch": 0.049530260702613495
       },
       {
         "rank": 68,
@@ -749,7 +883,9 @@
         "winRate": 52,
         "kd": 0.91,
         "matches": 2791,
-        "wins": 1443
+        "wins": 1443,
+        "entry": 0.13,
+        "clutch": 0.0660131584757363
       },
       {
         "rank": 69,
@@ -760,7 +896,9 @@
         "winRate": 50,
         "kd": 0.94,
         "matches": 2903,
-        "wins": 1464
+        "wins": 1464,
+        "entry": 0.17,
+        "clutch": 0.054893407078497054
       },
       {
         "rank": 70,
@@ -771,7 +909,9 @@
         "winRate": 49,
         "kd": 1.07,
         "matches": 2019,
-        "wins": 992
+        "wins": 992,
+        "entry": 0.15,
+        "clutch": 0.07005046724458504
       },
       {
         "rank": 71,
@@ -782,7 +922,9 @@
         "winRate": 54,
         "kd": 1.26,
         "matches": 569,
-        "wins": 309
+        "wins": 309,
+        "entry": 0.13,
+        "clutch": 0.08891411275066213
       },
       {
         "rank": 72,
@@ -793,7 +935,9 @@
         "winRate": 50,
         "kd": 1.01,
         "matches": 1540,
-        "wins": 763
+        "wins": 763,
+        "entry": 0.14,
+        "clutch": 0.06675355353724596
       },
       {
         "rank": 73,
@@ -804,7 +948,9 @@
         "winRate": 53,
         "kd": 0.91,
         "matches": 2041,
-        "wins": 1081
+        "wins": 1081,
+        "entry": 0.23,
+        "clutch": 0.03594895830997286
       },
       {
         "rank": 74,
@@ -815,7 +961,9 @@
         "winRate": 55,
         "kd": 1.03,
         "matches": 677,
-        "wins": 370
+        "wins": 370,
+        "entry": 0.2,
+        "clutch": 0.05618786918311482
       },
       {
         "rank": 75,
@@ -826,7 +974,9 @@
         "winRate": 51,
         "kd": 0.93,
         "matches": 3845,
-        "wins": 1974
+        "wins": 1974,
+        "entry": 0.17,
+        "clutch": 0.05263441439500054
       },
       {
         "rank": 76,
@@ -837,7 +987,9 @@
         "winRate": 49,
         "kd": 1.05,
         "matches": 7276,
-        "wins": 3590
+        "wins": 3590,
+        "entry": 0.22,
+        "clutch": 0.05862850570046348
       },
       {
         "rank": 77,
@@ -848,10 +1000,25 @@
         "winRate": 51,
         "kd": 1.01,
         "matches": 1008,
-        "wins": 517
+        "wins": 517,
+        "entry": 0.18,
+        "clutch": 0.05504298595093311
       },
       {
         "rank": 78,
+        "nickname": "tallentlless",
+        "country": "de",
+        "elo": 1849,
+        "level": 9,
+        "winRate": 50,
+        "kd": 0.94,
+        "matches": 3799,
+        "wins": 1899,
+        "entry": 0.17,
+        "clutch": 0.054867459850452806
+      },
+      {
+        "rank": 79,
         "nickname": "k3kew",
         "country": "kz",
         "elo": 1849,
@@ -859,10 +1026,12 @@
         "winRate": 50,
         "kd": 1.08,
         "matches": 1728,
-        "wins": 856
+        "wins": 856,
+        "entry": 0.15,
+        "clutch": 0.07447359896339488
       },
       {
-        "rank": 79,
+        "rank": 80,
         "nickname": "lilmommy-",
         "country": "ee",
         "elo": 1841,
@@ -870,54 +1039,25 @@
         "winRate": 49,
         "kd": 0.99,
         "matches": 1287,
-        "wins": 628
-      },
-      {
-        "rank": 80,
-        "nickname": "tallentlless",
-        "country": "de",
-        "elo": 1820,
-        "level": 9,
-        "winRate": 50,
-        "kd": 0.94,
-        "matches": 3798,
-        "wins": 1898
+        "wins": 628,
+        "entry": 0.17,
+        "clutch": 0.059089633889746106
       },
       {
         "rank": 81,
-        "nickname": "victoriia",
+        "nickname": "dreamtvix",
         "country": "ru",
-        "elo": 1814,
+        "elo": 1807,
         "level": 9,
-        "winRate": 48,
-        "kd": 1.01,
-        "matches": 3241,
-        "wins": 1566
+        "winRate": 50,
+        "kd": 0.96,
+        "matches": 2401,
+        "wins": 1194,
+        "entry": 0.17,
+        "clutch": 0.0625522263340098
       },
       {
         "rank": 82,
-        "nickname": "1_Cherry_",
-        "country": "es",
-        "elo": 1814,
-        "level": 9,
-        "winRate": 50,
-        "kd": 0.96,
-        "matches": 4201,
-        "wins": 2084
-      },
-      {
-        "rank": 83,
-        "nickname": "dreamtvix",
-        "country": "ru",
-        "elo": 1793,
-        "level": 9,
-        "winRate": 50,
-        "kd": 0.96,
-        "matches": 2398,
-        "wins": 1192
-      },
-      {
-        "rank": 84,
         "nickname": "ixwee",
         "country": "ru",
         "elo": 1791,
@@ -925,21 +1065,25 @@
         "winRate": 53,
         "kd": 1.18,
         "matches": 401,
-        "wins": 212
+        "wins": 212,
+        "entry": 0.2,
+        "clutch": 0.04815730601671965
       },
       {
-        "rank": 85,
-        "nickname": "4482",
-        "country": "hk",
-        "elo": 1772,
+        "rank": 83,
+        "nickname": "victoriia",
+        "country": "ru",
+        "elo": 1787,
         "level": 9,
-        "winRate": 50,
-        "kd": 0.95,
-        "matches": 6021,
-        "wins": 3029
+        "winRate": 48,
+        "kd": 1.01,
+        "matches": 3242,
+        "wins": 1566,
+        "entry": 0.23,
+        "clutch": 0.0577151007452942
       },
       {
-        "rank": 86,
+        "rank": 84,
         "nickname": "hushteerr",
         "country": "se",
         "elo": 1771,
@@ -947,10 +1091,12 @@
         "winRate": 61,
         "kd": 1.03,
         "matches": 219,
-        "wins": 133
+        "wins": 133,
+        "entry": 0.16,
+        "clutch": 0.06082097571459274
       },
       {
-        "rank": 87,
+        "rank": 85,
         "nickname": "xanaxce",
         "country": "kz",
         "elo": 1749,
@@ -958,10 +1104,12 @@
         "winRate": 52,
         "kd": 1.05,
         "matches": 453,
-        "wins": 236
+        "wins": 236,
+        "entry": 0.2,
+        "clutch": 0.05794802976698792
       },
       {
-        "rank": 88,
+        "rank": 86,
         "nickname": "kerrllgan",
         "country": "ru",
         "elo": 1736,
@@ -969,10 +1117,12 @@
         "winRate": 56,
         "kd": 1.09,
         "matches": 185,
-        "wins": 104
+        "wins": 104,
+        "entry": 0.16,
+        "clutch": 0.05775638652350981
       },
       {
-        "rank": 89,
+        "rank": 87,
         "nickname": "Adelechka",
         "country": "ru",
         "elo": 1734,
@@ -980,7 +1130,35 @@
         "winRate": 52,
         "kd": 0.93,
         "matches": 1199,
-        "wins": 618
+        "wins": 618,
+        "entry": 0.21,
+        "clutch": 0.04127897140923702
+      },
+      {
+        "rank": 88,
+        "nickname": "4482",
+        "country": "hk",
+        "elo": 1717,
+        "level": 8,
+        "winRate": 50,
+        "kd": 0.95,
+        "matches": 6025,
+        "wins": 3030,
+        "entry": 0.23,
+        "clutch": 0.04854465851884599
+      },
+      {
+        "rank": 89,
+        "nickname": "1_Cherry_",
+        "country": "es",
+        "elo": 1710,
+        "level": 8,
+        "winRate": 50,
+        "kd": 0.96,
+        "matches": 4205,
+        "wins": 2084,
+        "entry": 0.23,
+        "clutch": 0.04650506605104528
       },
       {
         "rank": 90,
@@ -991,7 +1169,9 @@
         "winRate": 50,
         "kd": 0.9,
         "matches": 1596,
-        "wins": 798
+        "wins": 798,
+        "entry": 0.18,
+        "clutch": 0.04951442376692341
       },
       {
         "rank": 91,
@@ -1002,7 +1182,9 @@
         "winRate": 50,
         "kd": 1.28,
         "matches": 365,
-        "wins": 184
+        "wins": 184,
+        "entry": 0.07,
+        "clutch": 0.09144971587154752
       },
       {
         "rank": 92,
@@ -1013,7 +1195,9 @@
         "winRate": 51,
         "kd": 1.02,
         "matches": 648,
-        "wins": 333
+        "wins": 333,
+        "entry": 0.15,
+        "clutch": 0.0450596736218235
       },
       {
         "rank": 93,
@@ -1024,7 +1208,9 @@
         "winRate": 52,
         "kd": 1.11,
         "matches": 392,
-        "wins": 202
+        "wins": 202,
+        "entry": 0.14,
+        "clutch": 0.07792836398838335
       },
       {
         "rank": 94,
@@ -1035,10 +1221,25 @@
         "winRate": 52,
         "kd": 1.08,
         "matches": 304,
-        "wins": 158
+        "wins": 158,
+        "entry": 0.21,
+        "clutch": 0.05377906976744186
       },
       {
         "rank": 95,
+        "nickname": "sal1fetka",
+        "country": "by",
+        "elo": 1589,
+        "level": 8,
+        "winRate": 49,
+        "kd": 1.07,
+        "matches": 2684,
+        "wins": 1310,
+        "entry": 0.2,
+        "clutch": 0.05930310776267994
+      },
+      {
+        "rank": 96,
         "nickname": "lerkissao",
         "country": "by",
         "elo": 1557,
@@ -1046,10 +1247,12 @@
         "winRate": 49,
         "kd": 0.96,
         "matches": 2537,
-        "wins": 1241
+        "wins": 1241,
+        "entry": 0.19,
+        "clutch": 0.06272827204709053
       },
       {
-        "rank": 96,
+        "rank": 97,
         "nickname": "-MblSH-",
         "country": "ru",
         "elo": 1522,
@@ -1057,10 +1260,12 @@
         "winRate": 49,
         "kd": 1.18,
         "matches": 1291,
-        "wins": 629
+        "wins": 629,
+        "entry": 0.13,
+        "clutch": 0.07328173152727012
       },
       {
-        "rank": 97,
+        "rank": 98,
         "nickname": "kloynessa",
         "country": "ru",
         "elo": 1505,
@@ -1068,10 +1273,12 @@
         "winRate": 48,
         "kd": 0.85,
         "matches": 3499,
-        "wins": 1679
+        "wins": 1679,
+        "entry": 0.23,
+        "clutch": 0.05026777894238087
       },
       {
-        "rank": 98,
+        "rank": 99,
         "nickname": "gofixurself",
         "country": "rs",
         "elo": 1491,
@@ -1079,18 +1286,9 @@
         "winRate": 52,
         "kd": 0.82,
         "matches": 3020,
-        "wins": 1567
-      },
-      {
-        "rank": 99,
-        "nickname": "sal1fetka",
-        "country": "by",
-        "elo": 1483,
-        "level": 7,
-        "winRate": 49,
-        "kd": 1.07,
-        "matches": 2676,
-        "wins": 1304
+        "wins": 1567,
+        "entry": 0.14,
+        "clutch": 0.049544366715758466
       },
       {
         "rank": 100,
@@ -1101,7 +1299,9 @@
         "winRate": 50,
         "kd": 1.05,
         "matches": 1729,
-        "wins": 864
+        "wins": 864,
+        "entry": 0.15,
+        "clutch": 0.05186864917618692
       },
       {
         "rank": 101,
@@ -1112,7 +1312,9 @@
         "winRate": 48,
         "kd": 1,
         "matches": 1252,
-        "wins": 604
+        "wins": 604,
+        "entry": 0.22,
+        "clutch": 0.0489363246932404
       },
       {
         "rank": 102,
@@ -1123,7 +1325,9 @@
         "winRate": 49,
         "kd": 0.88,
         "matches": 3110,
-        "wins": 1514
+        "wins": 1514,
+        "entry": 0.24,
+        "clutch": 0.04436014858782602
       },
       {
         "rank": 103,
@@ -1134,18 +1338,22 @@
         "winRate": 49,
         "kd": 1,
         "matches": 1797,
-        "wins": 883
+        "wins": 883,
+        "entry": 0.17,
+        "clutch": 0.0600510320086906
       },
       {
         "rank": 104,
         "nickname": "siyoka_",
         "country": "qa",
-        "elo": 1376,
+        "elo": 1405,
         "level": 7,
         "winRate": 49,
         "kd": 1.02,
-        "matches": 3018,
-        "wins": 1474
+        "matches": 3021,
+        "wins": 1476,
+        "entry": 0.27,
+        "clutch": 0.051323584551931006
       },
       {
         "rank": 105,
@@ -1156,7 +1364,9 @@
         "winRate": 50,
         "kd": 0.94,
         "matches": 3017,
-        "wins": 1499
+        "wins": 1499,
+        "entry": 0.16,
+        "clutch": 0.0641499534972456
       },
       {
         "rank": 106,
@@ -1167,7 +1377,9 @@
         "winRate": 48,
         "kd": 0.99,
         "matches": 1273,
-        "wins": 611
+        "wins": 611,
+        "entry": 0.19,
+        "clutch": 0.054461637422720935
       },
       {
         "rank": 107,
@@ -1178,7 +1390,9 @@
         "winRate": 52,
         "kd": 0.9,
         "matches": 689,
-        "wins": 361
+        "wins": 361,
+        "entry": 0.18,
+        "clutch": 0.04782975136957438
       },
       {
         "rank": 108,
@@ -1189,7 +1403,9 @@
         "winRate": 55,
         "kd": 0.94,
         "matches": 149,
-        "wins": 82
+        "wins": 82,
+        "entry": 0.13,
+        "clutch": 0.04707792207792208
       },
       {
         "rank": 109,
@@ -1200,7 +1416,9 @@
         "winRate": 51,
         "kd": 0.93,
         "matches": 443,
-        "wins": 224
+        "wins": 224,
+        "entry": 0.24,
+        "clutch": 0.04081632653061224
       },
       {
         "rank": 110,
@@ -1211,7 +1429,9 @@
         "winRate": 49,
         "kd": 0.91,
         "matches": 3290,
-        "wins": 1624
+        "wins": 1624,
+        "entry": 0.18,
+        "clutch": 0.05967213114754098
       },
       {
         "rank": 111,
@@ -1222,7 +1442,9 @@
         "winRate": 51,
         "kd": 1.05,
         "matches": 332,
-        "wins": 169
+        "wins": 169,
+        "entry": 0.16,
+        "clutch": 0.06598161168199027
       },
       {
         "rank": 112,
@@ -1233,7 +1455,9 @@
         "winRate": 52,
         "kd": 1,
         "matches": 372,
-        "wins": 193
+        "wins": 193,
+        "entry": 0.2,
+        "clutch": 0.05057471264367816
       },
       {
         "rank": 113,
@@ -1244,7 +1468,9 @@
         "winRate": 51,
         "kd": 1.09,
         "matches": 218,
-        "wins": 111
+        "wins": 111,
+        "entry": 0.17,
+        "clutch": 0.06034115138592751
       },
       {
         "rank": 114,
@@ -1255,7 +1481,9 @@
         "winRate": 52,
         "kd": 0.99,
         "matches": 195,
-        "wins": 101
+        "wins": 101,
+        "entry": 0.16,
+        "clutch": 0.04988290398126464
       },
       {
         "rank": 115,
@@ -1266,7 +1494,9 @@
         "winRate": 49,
         "kd": 0.93,
         "matches": 256,
-        "wins": 126
+        "wins": 126,
+        "entry": 0.13,
+        "clutch": 0.06094022054556007
       },
       {
         "rank": 116,
@@ -1277,7 +1507,9 @@
         "winRate": 50,
         "kd": 0.83,
         "matches": 2274,
-        "wins": 1127
+        "wins": 1127,
+        "entry": 0.16,
+        "clutch": 0.050768989328311365
       },
       {
         "rank": 117,
@@ -1288,7 +1520,9 @@
         "winRate": 50,
         "kd": 0.64,
         "matches": 4,
-        "wins": 2
+        "wins": 2,
+        "entry": 0.02,
+        "clutch": 0.0875
       },
       {
         "rank": 118,
@@ -1299,7 +1533,9 @@
         "winRate": 49,
         "kd": 0.8,
         "matches": 275,
-        "wins": 136
+        "wins": 136,
+        "entry": 0.2,
+        "clutch": 0.04084670084339342
       },
       {
         "rank": 119,
@@ -1310,7 +1546,9 @@
         "winRate": 33,
         "kd": 1.07,
         "matches": 3,
-        "wins": 1
+        "wins": 1,
+        "entry": null,
+        "clutch": null
       },
       {
         "rank": 120,
@@ -1321,7 +1559,9 @@
         "winRate": 49,
         "kd": 0.88,
         "matches": 1821,
-        "wins": 898
+        "wins": 898,
+        "entry": 0.21,
+        "clutch": 0.04908587257617728
       },
       {
         "rank": 121,
@@ -1332,7 +1572,9 @@
         "winRate": 49,
         "kd": 0.92,
         "matches": 644,
-        "wins": 314
+        "wins": 314,
+        "entry": 0.19,
+        "clutch": 0.05387899308111291
       },
       {
         "rank": 122,
@@ -1343,7 +1585,9 @@
         "winRate": 45,
         "kd": 1.19,
         "matches": 126,
-        "wins": 57
+        "wins": 57,
+        "entry": 0.16,
+        "clutch": 0.07044864664441973
       },
       {
         "rank": 123,
@@ -1354,7 +1598,9 @@
         "winRate": 46,
         "kd": 1.04,
         "matches": 498,
-        "wins": 231
+        "wins": 231,
+        "entry": 0.12,
+        "clutch": 0.07928623988226637
       },
       {
         "rank": 124,
@@ -1365,7 +1611,9 @@
         "winRate": 49,
         "kd": 0.91,
         "matches": 617,
-        "wins": 302
+        "wins": 302,
+        "entry": 0.16,
+        "clutch": 0.05431707593074573
       },
       {
         "rank": 125,
@@ -1376,7 +1624,9 @@
         "winRate": 48,
         "kd": 0.9,
         "matches": 113,
-        "wins": 54
+        "wins": 54,
+        "entry": 0.14,
+        "clutch": 0.0688497061293031
       },
       {
         "rank": 126,
@@ -1387,7 +1637,9 @@
         "winRate": 47,
         "kd": 0.97,
         "matches": 395,
-        "wins": 186
+        "wins": 186,
+        "entry": 0.15,
+        "clutch": 0.07172434191067731
       },
       {
         "rank": 127,
@@ -1398,7 +1650,9 @@
         "winRate": 49,
         "kd": 1.05,
         "matches": 5421,
-        "wins": 2669
+        "wins": 2669,
+        "entry": 0.22,
+        "clutch": 0.049237460216881
       }
     ],
     "rainbow_6": [
@@ -1411,7 +1665,9 @@
         "winRate": null,
         "kd": null,
         "matches": null,
-        "wins": null
+        "wins": null,
+        "entry": null,
+        "clutch": null
       },
       {
         "rank": 2,
@@ -1422,7 +1678,9 @@
         "winRate": null,
         "kd": null,
         "matches": null,
-        "wins": null
+        "wins": null,
+        "entry": null,
+        "clutch": null
       },
       {
         "rank": 3,
@@ -1433,7 +1691,9 @@
         "winRate": null,
         "kd": null,
         "matches": null,
-        "wins": null
+        "wins": null,
+        "entry": null,
+        "clutch": null
       }
     ]
   }

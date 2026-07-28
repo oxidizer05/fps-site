@@ -306,9 +306,10 @@ tr.hidden { display: none; }
 }
 
 @media (max-width: 560px) {
-  .board .col-matches, .board .col-wr, .board .col-stab { display: none; }
+  .board .col-matches, .board .col-wr, .board .col-stab, .board .col-act, .board .col-cau { display: none; }
   /* столбец, по которому сортируем, показываем даже на узком экране */
-  .board.show-wr .col-wr, .board.show-matches .col-matches, .board.show-stab .col-stab { display: table-cell; }
+  .board.show-wr .col-wr, .board.show-matches .col-matches, .board.show-stab .col-stab,
+  .board.show-act .col-act, .board.show-cau .col-cau { display: table-cell; }
   .pod-name { font-size: 12px; }
   .pod-elo { font-size: 17px; }
   .stable { grid-template-columns: repeat(2, 1fr); }
@@ -343,6 +344,8 @@ tr.hidden { display: none; }
       <button class="sort-btn" type="button" data-sort="kd"><span data-i18n="colKd">K/D</span><i class="arrow"></i></button>
       <button class="sort-btn" type="button" data-sort="matches"><span data-i18n="colMatches">Матчи</span><i class="arrow"></i></button>
       <button class="sort-btn" type="button" data-sort="stability"><span data-i18n="sortStab">Стабильность</span><i class="arrow"></i></button>
+      <button class="sort-btn" type="button" data-sort="activity"><span data-i18n="sortAct">Активность</span><i class="arrow"></i></button>
+      <button class="sort-btn" type="button" data-sort="caution"><span data-i18n="sortCau">Осторожность</span><i class="arrow"></i></button>
     </div>
     <input class="search" type="text" data-i18n-ph="search" placeholder="Поиск по нику…" id="search">
   </div>
@@ -373,11 +376,11 @@ const I18N = {
     note: 'В рейтинге — участницы FACEIT-клуба FPS Girls, подтверждённые администрацией клуба. Обновляется автоматически.',
     error: 'Не удалось загрузить рейтинг. Попробуйте обновить страницу позже.',
     empty: 'Пока нет данных для этой игры.',
-    colPlayer: 'Игрок', colElo: 'ELO', colLvl: 'Ур.', colWr: 'Винрейт', colKd: 'K/D', colMatches: 'Матчи', colStab: 'Стаб.',
+    colPlayer: 'Игрок', colElo: 'ELO', colLvl: 'Ур.', colWr: 'Винрейт', colKd: 'K/D', colMatches: 'Матчи', colStab: 'Стаб.', colAct: 'Актив.', colCau: 'Остор.',
     players: 'игроков', updated: 'Обновлено', never: 'ещё не обновлялось',
-    sortLabel: 'Сортировка', sortStab: 'Стабильность',
+    sortLabel: 'Сортировка', sortStab: 'Стабильность', sortAct: 'Активность', sortCau: 'Осторожность',
     stableTitle: 'Самые стабильные',
-    stableHint: 'Стабильность — винрейт и K/D выше среднего на большой дистанции (от 500 матчей). В столбце «Стаб.» это индекс 0–100, где 50 — средний уровень; по нему тоже можно сортировать. Розовым отмечен лучший показатель в каждом столбце.',
+    stableHint: 'Все показатели-индексы (Стаб., Актив., Остор.) — это 0–100, где 50 — средний уровень сцены; считаются по игрокам от 500 матчей, по ним можно сортировать. Стабильность — винрейт и K/D выше среднего. Активность — как часто вступает в первую дуэль раунда. Осторожность — как часто остаётся последней живой (клатч-ситуации). Розовым отмечен лучший показатель в каждом столбце.',
     matchesShort: 'матчей'
   },
   en: {
@@ -386,11 +389,11 @@ const I18N = {
     note: 'The ranking lists FPS Girls FACEIT club members verified by the club admins. Updates automatically.',
     error: 'Could not load the ranking. Please try again later.',
     empty: 'No data for this game yet.',
-    colPlayer: 'Player', colElo: 'ELO', colLvl: 'Lvl', colWr: 'Win rate', colKd: 'K/D', colMatches: 'Matches', colStab: 'Stab.',
+    colPlayer: 'Player', colElo: 'ELO', colLvl: 'Lvl', colWr: 'Win rate', colKd: 'K/D', colMatches: 'Matches', colStab: 'Stab.', colAct: 'Aggr.', colCau: 'Surv.',
     players: 'players', updated: 'Updated', never: 'not updated yet',
-    sortLabel: 'Sort by', sortStab: 'Stability',
+    sortLabel: 'Sort by', sortStab: 'Stability', sortAct: 'Aggression', sortCau: 'Survival',
     stableTitle: 'Most consistent',
-    stableHint: 'Consistency — win rate and K/D above average over a long run (500+ matches). The "Stab." column shows it as a 0–100 index where 50 is average; you can sort by it too. Pink marks the best value in each column.',
+    stableHint: 'The index columns (Stab., Aggr., Surv.) are 0–100 where 50 is the scene average; computed for players with 500+ matches, and sortable. Stability — win rate and K/D above average. Aggression — how often she takes the opening duel. Survival — how often she is the last one alive (clutch situations). Pink marks the best value in each column.',
     matchesShort: 'matches'
   }
 };
@@ -410,8 +413,9 @@ let data = null; // { updatedAt, total, games: { cs2:[], rainbow_6:[] } }
 // независимо от направления, — иначе при возрастании сверху окажутся прочерки.
 function sortRows(rows) {
   const dir = sortDir === 'asc' ? 1 : -1;
-  // по стабильности сортируем по сырому баллу — точнее, чем по округлённому индексу
-  const val = (r) => (sortKey === 'stability' ? r._stab : r[sortKey]);
+  // индексы сортируем по сырому баллу — точнее, чем по округлённому 0–100
+  const rawOf = { stability: '_stab', activity: '_act', caution: '_cau' };
+  const val = (r) => (rawOf[sortKey] ? r[rawOf[sortKey]] : r[sortKey]);
   return [...rows].sort((a, b) => {
     const av = val(a), bv = val(b);
     if (av == null && bv == null) return a.rank - b.rank;
@@ -422,7 +426,7 @@ function sortRows(rows) {
   });
 }
 
-const SORT_KEYS = ['elo', 'winRate', 'kd', 'matches', 'stability'];
+const SORT_KEYS = ['elo', 'winRate', 'kd', 'matches', 'stability', 'activity', 'caution'];
 const ARROW = () => (sortDir === 'desc' ? '▼' : '▲');
 
 // Показываем только те кнопки сортировки, по которым в этой игре есть данные
@@ -469,25 +473,47 @@ function num(n) { return n == null ? '—' : Number(n).toLocaleString(lang === '
 const STABLE_MIN_MATCHES = 500;
 const STABLE_MIN_POOL = 8; // меньше — статистика бессмысленна, показатель не считаем
 
+// z-оценки набора значений (среднее 0, разброс 1)
+function zScores(vals) {
+  const m = vals.reduce((s, x) => s + x, 0) / vals.length;
+  const sd = Math.sqrt(vals.reduce((s, x) => s + (x - m) ** 2, 0) / vals.length) || 1;
+  return vals.map(x => (x - m) / sd);
+}
+// сырой балл z -> индекс 0–100 (логистика, 50 = средний уровень сцены)
+const toIndex = (z) => Math.round(100 / (1 + Math.exp(-z)));
+
+// Считает индекс 0–100 по одному игровому показателю среди «наигранных»
+// (>=500 матчей): rawKey — исходное поле, scoreKey/idxKey — куда положить
+// сырой балл и индекс. transform — при желании преобразует значение (для
+// стабильности матчи берём в log-шкале).
+function annotateIndex(rows, rawKey, scoreKey, idxKey) {
+  rows.forEach(r => { r[scoreKey] = null; r[idxKey] = null; });
+  const pool = rows.filter(r => r.matches >= STABLE_MIN_MATCHES && r[rawKey] != null);
+  if (pool.length < STABLE_MIN_POOL) return;
+  const z = zScores(pool.map(r => r[rawKey]));
+  pool.forEach((r, i) => { r[scoreKey] = z[i]; r[idxKey] = toIndex(z[i]); });
+}
+
+// Стабильность — композит: винрейт + K/D + наигранность (log матчей).
 function annotateStability(rows) {
   rows.forEach(r => { r._stab = null; r.stability = null; });
   const pool = rows.filter(r => r.matches >= STABLE_MIN_MATCHES && r.winRate != null && r.kd != null);
   if (pool.length < STABLE_MIN_POOL) return;
-  const stat = (vals) => {
-    const m = vals.reduce((s, x) => s + x, 0) / vals.length;
-    const sd = Math.sqrt(vals.reduce((s, x) => s + (x - m) ** 2, 0) / vals.length) || 1;
-    return { m, sd };
-  };
-  const W = stat(pool.map(r => r.winRate));
-  const K = stat(pool.map(r => r.kd));
-  const V = stat(pool.map(r => Math.log10(r.matches)));
-  pool.forEach(r => {
-    const z = 0.45 * ((r.winRate - W.m) / W.sd)
-            + 0.45 * ((r.kd - K.m) / K.sd)
-            + 0.10 * ((Math.log10(r.matches) - V.m) / V.sd);
+  const zw = zScores(pool.map(r => r.winRate));
+  const zk = zScores(pool.map(r => r.kd));
+  const zv = zScores(pool.map(r => Math.log10(r.matches)));
+  pool.forEach((r, i) => {
+    const z = 0.45 * zw[i] + 0.45 * zk[i] + 0.10 * zv[i];
     r._stab = z;
-    r.stability = Math.round(100 / (1 + Math.exp(-z)));
+    r.stability = toIndex(z);
   });
+}
+
+// Все производные индексы игрока считаем разом
+function annotateIndices(rows) {
+  annotateStability(rows);
+  annotateIndex(rows, 'entry', '_act', 'activity');   // активность — вход в первую дуэль
+  annotateIndex(rows, 'clutch', '_cau', 'caution');   // осторожность — клатч-ситуации
 }
 
 function stableTop(rows, count = 5) {
@@ -517,7 +543,10 @@ function columnBests(rows) {
     const vals = rows.map(r => r[key]).filter(v => v != null);
     return vals.length ? Math.max(...vals) : null;
   };
-  return { elo: max('elo'), winRate: max('winRate'), kd: max('kd'), matches: max('matches'), stability: max('stability') };
+  return {
+    elo: max('elo'), winRate: max('winRate'), kd: max('kd'), matches: max('matches'),
+    stability: max('stability'), activity: max('activity'), caution: max('caution'),
+  };
 }
 
 // Значение активного показателя — крупной цифрой на подиуме
@@ -570,6 +599,8 @@ function render() {
       th(t().colKd, 'kd') +
       th(t().colMatches, 'matches', 'col-matches') +
       th(t().colStab, 'stability', 'col-stab') +
+      th(t().colAct, 'activity', 'col-act') +
+      th(t().colCau, 'caution', 'col-cau') +
     '</tr></thead>';
 
   const body = '<tbody>' + rows.map((r, i) => {
@@ -584,6 +615,8 @@ function render() {
       '<td class="dim' + mark(r.kd, 'kd') + '">' + (r.kd != null ? r.kd : '—') + '</td>' +
       '<td class="col-matches dim' + mark(r.matches, 'matches') + '">' + num(r.matches) + '</td>' +
       '<td class="col-stab' + (r.stability != null ? '' : ' dim') + mark(r.stability, 'stability') + '">' + (r.stability != null ? r.stability : '—') + '</td>' +
+      '<td class="col-act' + (r.activity != null ? '' : ' dim') + mark(r.activity, 'activity') + '">' + (r.activity != null ? r.activity : '—') + '</td>' +
+      '<td class="col-cau' + (r.caution != null ? '' : ' dim') + mark(r.caution, 'caution') + '">' + (r.caution != null ? r.caution : '—') + '</td>' +
     '</tr>';
   }).join('') + '</tbody>';
 
@@ -591,6 +624,7 @@ function render() {
     '<div class="board-wrap"><table class="board' +
       (sortKey === 'winRate' ? ' show-wr' : '') + (sortKey === 'matches' ? ' show-matches' : '') +
       (sortKey === 'stability' ? ' show-stab' : '') +
+      (sortKey === 'activity' ? ' show-act' : '') + (sortKey === 'caution' ? ' show-cau' : '') +
     '">' + head + body + '</table></div>';
   // заголовки пересоздаются при каждой отрисовке — навешиваем обработчик заново
   content.querySelectorAll('th.sortable').forEach(h =>
@@ -655,7 +689,7 @@ async function load() {
     const res = await fetch(url, { cache: 'no-store' });
     if (!res.ok) throw new Error('HTTP ' + res.status);
     data = await res.json();
-    for (const g of Object.keys(data.games || {})) annotateStability(data.games[g]);
+    for (const g of Object.keys(data.games || {})) annotateIndices(data.games[g]);
     syncTabs();
     syncSort();
     render();

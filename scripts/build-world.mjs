@@ -102,6 +102,13 @@ async function fetchPlayer(playerId) {
         games.cs2.winRate = lt["Win Rate %"] != null ? Number(lt["Win Rate %"]) : null;
         games.cs2.kd = lt["Average K/D Ratio"] != null ? Number(lt["Average K/D Ratio"]) : null;
         games.cs2.wins = lt["Wins"] != null ? Number(lt["Wins"]) : null;
+        // Стиль игры: entry = доля раундов с входом в первую дуэль (активность);
+        // clutch = клатч-ситуации (1v1+1v2) на раунд — как часто остаётся
+        // последней живой (осторожность/выживаемость).
+        games.cs2.entry = lt["Entry Rate"] != null ? Number(lt["Entry Rate"]) : null;
+        const rounds = Number(lt["Total Rounds with extended stats"]) || 0;
+        const clutches = (Number(lt["Total 1v1 Count"]) || 0) + (Number(lt["Total 1v2 Count"]) || 0);
+        games.cs2.clutch = rounds ? clutches / rounds : null;
       }
     } catch {
       // стата опциональна
@@ -124,6 +131,8 @@ function rowsFor(players, game) {
         kd: g.kd ?? null,
         matches: g.matches ?? null,
         wins: g.wins ?? null,
+        entry: g.entry ?? null,
+        clutch: g.clutch ?? null,
       };
     })
     .filter(Boolean)
