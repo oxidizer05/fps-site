@@ -313,6 +313,38 @@ tr.hidden { display: none; }
   font-weight: 400; font-size: 10px; line-height: 1.5; color: rgba(150,150,150,0.7); text-align: center;
 }
 
+/* ── Блок «как сюда попасть» под таблицей ── */
+.join {
+  margin: 18px 24px 0;
+  background: linear-gradient(150deg, rgba(206,97,223,0.12) 0%, var(--surface2) 65%);
+  border: 1px solid var(--border-accent);
+  border-radius: 12px;
+  padding: 18px 20px;
+  text-align: center;
+}
+.join-title { font-weight: 800; font-size: 14px; letter-spacing: 0.02em; }
+.join-text {
+  font-weight: 400; font-size: 11.5px; line-height: 1.6;
+  color: var(--gray1); margin-top: 7px;
+  max-width: 520px; margin-left: auto; margin-right: auto;
+}
+.join-btns {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 14px;
+}
+.jbtn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+  background: var(--accent); color: #fff; text-decoration: none;
+  font-weight: 800; font-size: 10.5px; letter-spacing: 0.11em; text-transform: uppercase;
+  padding: 12px 18px; border-radius: 8px;
+  transition: box-shadow 150ms, transform 150ms, background 150ms;
+}
+.jbtn:hover { box-shadow: 0 0 22px var(--accent-glow); transform: translateY(-1px); }
+.jbtn.ghost {
+  background: transparent; color: var(--accent); border: 1px solid var(--border-accent);
+}
+.jbtn.ghost:hover { background: var(--accent-subtle); box-shadow: 0 0 18px rgba(206,97,223,0.12); }
+.jbtn svg { flex-shrink: 0; }
+
 @media (max-width: 560px) {
   .board .col-matches, .board .col-wr, .board .col-stab, .board .col-act, .board .col-cau,
   .board .col-gren, .board .col-awp, .board .col-hs { display: none; }
@@ -320,6 +352,9 @@ tr.hidden { display: none; }
   .board.show-wr .col-wr, .board.show-matches .col-matches, .board.show-stab .col-stab,
   .board.show-act .col-act, .board.show-cau .col-cau,
   .board.show-gren .col-gren, .board.show-awp .col-awp, .board.show-hs .col-hs { display: table-cell; }
+  /* на узком экране кнопки в столбик и во всю ширину — иначе «лесенка» */
+  .join-btns { flex-direction: column; }
+  .jbtn { width: 100%; }
   .pod-name { font-size: 12px; }
   .pod-elo { font-size: 17px; }
   .stable { grid-template-columns: repeat(2, 1fr); }
@@ -369,6 +404,20 @@ tr.hidden { display: none; }
 
   <p class="note" data-i18n="note">В рейтинге — участницы FACEIT-клуба FPS Girls, подтверждённые администрацией клуба. Обновляется автоматически.</p>
 
+  <section class="join">
+    <div class="join-title" data-i18n="joinTitle">Хочешь в этот рейтинг?</div>
+    <div class="join-text" data-i18n="joinText">Путь короткий: Discord → верификация → хаб на FACEIT. Тренерам и капитанам — отдельная инструкция, как найти игроков.</div>
+    <div class="join-btns">
+      <a class="jbtn" href="join.html#player" data-i18n="joinPlayer">Хочу в рейтинг</a>
+      <a class="jbtn ghost" href="join.html#coach" data-i18n="joinCoach">Ищу игроков</a>
+      <!-- Постоянный инвайт в Discord. Встречается ещё в index.html и join.html. -->
+      <a class="jbtn ghost" href="https://discord.gg/jMmutFF" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
+        <span>Discord</span>
+      </a>
+    </div>
+  </section>
+
   <footer class="foot">
     <div class="updated" id="updated"></div>
     <div class="brand">Female Play Style</div>
@@ -394,6 +443,9 @@ const I18N = {
     colPlayer: 'Игрок', colElo: 'ELO', colLvl: 'Ур.', colWr: 'Винрейт', colKd: 'K/D', colMatches: 'Матчи', colStab: 'Стаб.', colAct: 'Актив.', colCau: 'Остор.', colGren: 'Гран.', colAwp: 'AWP', colHs: 'Хедш.',
     players: 'игроков', updated: 'Обновлено', never: 'ещё не обновлялось',
     sortLabel: 'Сортировка', sortStab: 'Стабильность', sortAct: 'Активность', sortCau: 'Осторожность', sortGren: 'Мастер гранат', sortAwp: 'Мастер AWP', sortHs: 'Хедшотер',
+    joinTitle: 'Хочешь в этот рейтинг?',
+    joinText: 'Путь короткий: Discord → верификация → хаб на FACEIT. Тренерам и капитанам — отдельная инструкция, как найти игроков.',
+    joinPlayer: 'Хочу в рейтинг', joinCoach: 'Ищу игроков',
     stableTitle: 'Самые стабильные',
     stableHint: 'Все показатели-индексы (Стаб., Актив., Остор., Гран., AWP, Хедш.) — это 0–100, где 50 — средний уровень сцены; считаются по игрокам от 500 матчей, по ним можно сортировать. Стабильность — винрейт и K/D выше среднего. Активность — как часто вступает в первую дуэль. Осторожность — как часто остаётся последней живой (клатчи). Гран. — урон гранатами за раунд. AWP — доля убийств снайперкой. Хедш. — % убийств в голову. (Ножа и убийств гранатами в API FACEIT нет.) Розовым отмечен лучший показатель в каждом столбце.',
     matchesShort: 'матчей'
@@ -407,6 +459,9 @@ const I18N = {
     colPlayer: 'Player', colElo: 'ELO', colLvl: 'Lvl', colWr: 'Win rate', colKd: 'K/D', colMatches: 'Matches', colStab: 'Stab.', colAct: 'Aggr.', colCau: 'Surv.', colGren: 'Nade', colAwp: 'AWP', colHs: 'HS',
     players: 'players', updated: 'Updated', never: 'not updated yet',
     sortLabel: 'Sort by', sortStab: 'Stability', sortAct: 'Aggression', sortCau: 'Survival', sortGren: 'Nade master', sortAwp: 'AWP master', sortHs: 'Headshot',
+    joinTitle: 'Want to be in this ranking?',
+    joinText: "It's a short path: Discord → verification → the FACEIT hub. Coaches and captains get their own guide on finding players.",
+    joinPlayer: 'I want in', joinCoach: 'I need players',
     stableTitle: 'Most consistent',
     stableHint: 'The index columns (Stab., Aggr., Surv., Nade, AWP, HS) are 0–100 where 50 is the scene average; computed for players with 500+ matches, and sortable. Stability — win rate and K/D above average. Aggression — how often she takes the opening duel. Survival — how often she is the last one alive (clutches). Nade — utility damage per round. AWP — share of kills with the sniper. HS — headshot %. (Knife and grenade kills are not in the FACEIT API.) Pink marks the best value in each column.',
     matchesShort: 'matches'

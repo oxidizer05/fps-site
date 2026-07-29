@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to join — FPS Girls</title>
+<meta name="description" content="How to join FPS Girls: Discord roles, girl verification, and the women's FACEIT hub that feeds the world ranking.">
+
+<style>
+@font-face { font-family: 'Montserrat'; src: url('fonts/Montserrat-Black.ttf') format('truetype');      font-weight: 900; font-display: swap; }
+@font-face { font-family: 'Montserrat'; src: url('fonts/Montserrat-ExtraBold.ttf') format('truetype');  font-weight: 800; font-display: swap; }
+@font-face { font-family: 'Montserrat'; src: url('fonts/Montserrat-Bold.ttf') format('truetype');       font-weight: 700; font-display: swap; }
+@font-face { font-family: 'Montserrat'; src: url('fonts/Montserrat-SemiBold.ttf') format('truetype');   font-weight: 600; font-display: swap; }
+@font-face { font-family: 'Montserrat'; src: url('fonts/Montserrat-Medium.ttf') format('truetype');     font-weight: 500; font-display: swap; }
+@font-face { font-family: 'Montserrat'; src: url('fonts/Montserrat-Regular.ttf') format('truetype');    font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Montserrat'; src: url('fonts/Montserrat-Light.ttf') format('truetype');      font-weight: 300; font-display: swap; }
+@font-face { font-family: 'Montserrat'; src: url('fonts/Montserrat-ExtraLight.ttf') format('truetype'); font-weight: 200; font-display: swap; }
+
+:root {
+  --accent:        #CE61DF;
+  --accent-glow:   rgba(206,97,223,0.30);
+  --accent-subtle: rgba(206,97,223,0.12);
+  --bg:            #0D0D0D;
+  --surface:       #111111;
+  --surface2:      #161318;
+  --border:        rgba(255,255,255,0.08);
+  --border-accent: rgba(206,97,223,0.40);
+  --white:         #FFFFFF;
+  --gray1:         #969696;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #080808;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  font-family: 'Montserrat', sans-serif;
+  padding: 32px 16px 56px;
+  color: var(--white);
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.35;
+}
+
+.page {
+  width: 100%;
+  max-width: 760px;
+  position: relative;
+  z-index: 1;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 12px 60px rgba(0,0,0,0.8);
+}
+
+/* ── Header (тот же, что на рейтинге) ── */
+.header {
+  padding: 26px 24px 22px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(160deg, #180d20 0%, #0d0d14 60%, #0d0d0d 100%);
+  border-bottom: 1px solid var(--border);
+}
+.header::after {
+  content: '';
+  position: absolute;
+  top: -80px; left: 50%;
+  transform: translateX(-50%);
+  width: 320px; height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(206,97,223,0.16) 0%, transparent 70%);
+  pointer-events: none;
+}
+.avatar {
+  width: 66px; height: 66px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 20px var(--accent-glow);
+  position: relative; z-index: 1;
+}
+.wordmark {
+  font-weight: 900; font-size: 22px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  margin-top: 12px; line-height: 1;
+  position: relative; z-index: 1;
+}
+.tagline {
+  font-weight: 200; font-size: 10px;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--accent); margin-top: 6px;
+  position: relative; z-index: 1;
+}
+.home-link {
+  position: absolute; top: 16px; left: 16px; z-index: 2;
+  display: inline-flex; align-items: center; gap: 5px;
+  font-weight: 700; font-size: 10px; letter-spacing: 0.08em;
+  color: var(--gray1); text-decoration: none;
+  border: 1px solid var(--border); border-radius: 6px;
+  padding: 6px 10px; transition: color 150ms, border-color 150ms;
+}
+.home-link:hover { color: var(--white); border-color: var(--border-accent); }
+
+.lang-switch {
+  position: absolute; top: 16px; right: 16px; z-index: 2;
+  display: flex; gap: 2px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 6px; padding: 2px;
+}
+.lang-btn {
+  font-family: inherit; font-weight: 700; font-size: 10px; letter-spacing: 0.08em;
+  color: var(--gray1); background: transparent; border: none; border-radius: 4px;
+  padding: 5px 9px; cursor: pointer; transition: color 150ms, background 150ms;
+}
+.lang-btn:hover { color: var(--white); }
+.lang-btn.active { background: var(--accent); color: #fff; }
+
+/* ── Интро ── */
+.intro { padding: 24px 24px 0; text-align: center; }
+.intro h1 { font-weight: 800; font-size: 18px; line-height: 1.4; letter-spacing: 0.02em; }
+.intro p {
+  font-weight: 400; font-size: 12px; line-height: 1.6;
+  color: var(--gray1); margin-top: 8px;
+  max-width: 480px; margin-left: auto; margin-right: auto;
+}
+
+/* ── Выбор ветки ── */
+.tracks {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+  padding: 20px 24px 0;
+}
+.track {
+  font-family: inherit; text-align: left; cursor: pointer;
+  display: flex; align-items: center; gap: 12px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; padding: 14px 14px;
+  transition: border-color 150ms, background 150ms, box-shadow 150ms;
+}
+.track:hover { border-color: var(--border-accent); }
+.track.active {
+  border-color: var(--border-accent);
+  background: linear-gradient(150deg, rgba(206,97,223,0.14) 0%, var(--surface2) 70%);
+  box-shadow: 0 0 20px rgba(206,97,223,0.12);
+}
+.track-ico {
+  width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0;
+  background: linear-gradient(135deg, rgba(206,97,223,0.2) 0%, rgba(206,97,223,0.05) 100%);
+  border: 1px solid rgba(206,97,223,0.3);
+  display: flex; align-items: center; justify-content: center; color: var(--accent);
+}
+.track-body { display: block; min-width: 0; }
+.track-title {
+  display: block;
+  font-weight: 700; font-size: 12px; letter-spacing: 0.04em;
+  text-transform: uppercase; color: var(--white);
+}
+.track.active .track-title { color: var(--accent); }
+.track-sub {
+  display: block;
+  font-weight: 400; font-size: 10.5px; line-height: 1.45; color: var(--gray1); margin-top: 3px;
+}
+
+/* ── Шаги ── */
+.steps { list-style: none; padding: 8px 24px 0; }
+.step {
+  display: flex; gap: 14px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.step:last-child { border-bottom: none; }
+.step-num {
+  width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+  background: var(--accent-subtle); border: 1px solid rgba(206,97,223,0.35);
+  color: var(--accent); font-weight: 800; font-size: 12px;
+  display: flex; align-items: center; justify-content: center;
+}
+.step-body { flex: 1; min-width: 0; }
+.step-title { font-weight: 700; font-size: 13px; letter-spacing: 0.01em; line-height: 1.4; }
+.step-text {
+  font-weight: 400; font-size: 12px; line-height: 1.65;
+  color: #B9B9B9; margin-top: 6px;
+}
+.step-text b { font-weight: 700; color: #E4E4E4; }
+.step-text .ch {
+  font-family: inherit; font-weight: 600; font-size: 11.5px;
+  color: var(--accent); background: var(--accent-subtle);
+  border: 1px solid rgba(206,97,223,0.22);
+  border-radius: 4px; padding: 1px 5px; white-space: nowrap;
+}
+.step-btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  margin-top: 10px;
+  background: var(--accent); color: #fff; text-decoration: none;
+  font-weight: 800; font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 9px 14px; border-radius: 7px;
+  transition: box-shadow 150ms, transform 150ms;
+}
+.step-btn:hover { box-shadow: 0 0 20px var(--accent-glow); transform: translateY(-1px); }
+.step-btn.ghost {
+  background: transparent; color: var(--accent);
+  border: 1px solid var(--border-accent);
+}
+.step-btn.ghost:hover { background: var(--accent-subtle); box-shadow: 0 0 16px rgba(206,97,223,0.12); }
+
+.hint {
+  margin: 4px 24px 0;
+  background: var(--surface2); border: 1px solid var(--border);
+  border-left: 2px solid var(--accent);
+  border-radius: 8px; padding: 12px 14px;
+  font-weight: 400; font-size: 11.5px; line-height: 1.65; color: #B9B9B9;
+}
+.hint b { font-weight: 700; color: #E4E4E4; }
+.hint .ch {
+  font-weight: 600; font-size: 11px; color: var(--accent);
+  background: var(--accent-subtle); border: 1px solid rgba(206,97,223,0.22);
+  border-radius: 4px; padding: 1px 5px; white-space: nowrap;
+}
+
+/* ── Кнопки внизу ── */
+.cta-row {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+  padding: 22px 24px 0;
+}
+.cta {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  background: var(--accent); color: #fff; text-decoration: none;
+  font-weight: 800; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 14px 12px; border-radius: 8px; text-align: center;
+  transition: box-shadow 150ms, transform 150ms;
+}
+.cta:hover { box-shadow: 0 0 24px var(--accent-glow); transform: translateY(-1px); }
+.cta svg { flex-shrink: 0; }
+.cta.ghost {
+  background: transparent; color: var(--accent);
+  border: 1px solid var(--border-accent);
+}
+.cta.ghost:hover { background: var(--accent-subtle); box-shadow: 0 0 20px rgba(206,97,223,0.12); }
+
+/* ── Разделитель ── */
+.section-label { display: flex; align-items: center; gap: 10px; padding: 24px 24px 12px; }
+.section-label .line { flex: 1; height: 1px; background: rgba(206,97,223,0.2); }
+.section-label span {
+  font-weight: 700; font-size: 9px; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--accent);
+}
+
+/* ── FAQ ── */
+.faq { padding: 0 24px; }
+.faq details {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 8px; margin-bottom: 8px;
+  transition: border-color 150ms;
+}
+.faq details[open] { border-color: var(--border-accent); }
+.faq summary {
+  list-style: none; cursor: pointer;
+  padding: 13px 16px;
+  font-weight: 600; font-size: 12px; line-height: 1.45; color: #E4E4E4;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: '+'; color: var(--accent); font-weight: 700; font-size: 15px; flex-shrink: 0;
+}
+.faq details[open] summary::after { content: '−'; }
+.faq summary:hover { color: var(--white); }
+.faq .a {
+  padding: 0 16px 14px;
+  font-weight: 400; font-size: 11.5px; line-height: 1.7; color: var(--gray1);
+}
+.faq .a b { font-weight: 700; color: #C9C9C9; }
+.faq .a a { color: var(--accent); }
+
+/* ── Подвал ── */
+.foot {
+  border-top: 1px solid var(--border); margin-top: 26px;
+  padding: 14px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 8px;
+}
+.foot-games { display: flex; gap: 10px; align-items: center; }
+.foot-games span { font-weight: 800; font-size: 9px; letter-spacing: 0.1em; color: rgba(255,255,255,0.25); }
+.foot-games .x { color: rgba(206,97,223,0.3); }
+.foot .brand {
+  font-weight: 200; font-size: 9px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: rgba(206,97,223,0.4);
+}
+.visitors {
+  padding: 4px 24px 14px; text-align: center;
+  font-weight: 500; font-size: 10px; letter-spacing: 0.06em; color: rgba(150,150,150,0.85);
+}
+
+@media (max-width: 560px) {
+  .tracks { grid-template-columns: 1fr; }
+  .cta-row { grid-template-columns: 1fr; }
+  .intro h1 { font-size: 16px; }
+}
+</style>
+</head>
+
+<body>
+<div class="page">
+
+  <header class="header">
+    <a class="home-link" href="index.html">← <span data-i18n="home">Home</span></a>
+    <div class="lang-switch">
+      <button class="lang-btn active" type="button" data-lang="en">EN</button>
+      <button class="lang-btn" type="button" data-lang="ru">RU</button>
+    </div>
+    <img class="avatar" src="assets/logo.jpg" alt="FPS Girls">
+    <div class="wordmark">FPS Girls</div>
+    <div class="tagline" data-i18n="tagline">How to join</div>
+  </header>
+
+  <section class="intro">
+    <h1 data-i18n="h1">Join FPS Girls</h1>
+    <p data-i18n="sub">Pick why you are here — and get the short path: Discord, roles, and the women's FACEIT hub.</p>
+  </section>
+
+  <div class="tracks">
+    <button class="track active" type="button" data-track="player">
+      <span class="track-ico">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 4h10v5a5 5 0 0 1-10 0V4Z"/>
+          <path d="M17 5h3v2a3 3 0 0 1-3 3"/><path d="M7 5H4v2a3 3 0 0 0 3 3"/>
+        </svg>
+      </span>
+      <span class="track-body">
+        <span class="track-title" data-i18n="trackPlayerT">I want in the ranking</span>
+        <span class="track-sub" data-i18n="trackPlayerS">I play and want to be listed in the women's world ranking</span>
+      </span>
+    </button>
+    <button class="track" type="button" data-track="coach">
+      <span class="track-ico">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+      </span>
+      <span class="track-body">
+        <span class="track-title" data-i18n="trackCoachT">I'm looking for players</span>
+        <span class="track-sub" data-i18n="trackCoachS">I'm a coach, captain or organizer building a roster</span>
+      </span>
+    </button>
+  </div>
+
+  <ol class="steps" id="steps"></ol>
+  <p class="hint" id="hint"></p>
+
+  <div class="cta-row">
+    <!-- Постоянный инвайт в Discord. Встречается ещё в index.html и leaderboard.html. -->
+    <a class="cta" href="https://discord.gg/jMmutFF" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
+      <span data-i18n="ctaDiscord">Discord</span>
+    </a>
+    <a class="cta ghost" href="https://www.faceit.com/en/club/cd91474f-b1d0-412e-b210-6332dd7833fa" target="_blank" rel="noopener">
+      <span data-i18n="ctaHub">Faceit hub</span>
+    </a>
+    <a class="cta ghost" href="leaderboard.html">
+      <span data-i18n="ctaBoard">Ranking</span>
+    </a>
+  </div>
+
+  <div class="section-label">
+    <div class="line"></div><span data-i18n="faqLabel">Questions</span><div class="line"></div>
+  </div>
+  <div class="faq" id="faq"></div>
+
+  <footer class="foot">
+    <div class="foot-games">
+      <span>CS2</span><span>R6S</span><span>EFT</span><span>VAL</span><span>APEX</span>
+      <span class="x">×</span><span>FPS</span>
+    </div>
+    <div class="brand">Female Play Style</div>
+  </footer>
+
+  <div class="visitors" id="visitor-counter" style="display:none"></div>
+
+</div>
+
+<script>
+// Ссылки, которые ведут людей дальше. Инвайт продублирован в разметке выше
+// (чтобы кнопка работала даже без JS) и в index.html / leaderboard.html.
+const LINKS = {
+  discord: 'https://discord.gg/jMmutFF',
+  hub: 'https://www.faceit.com/en/club/cd91474f-b1d0-412e-b210-6332dd7833fa',
+  board: 'leaderboard.html'
+};
+
+// Статические подписи страницы (шапка, кнопки, заголовки).
+const I18N = {
+  en: {
+    title: 'How to join — FPS Girls',
+    home: 'Home',
+    tagline: 'How to join',
+    h1: 'Join FPS Girls',
+    sub: "Pick why you are here — and get the short path: Discord, roles, and the women's FACEIT hub.",
+    trackPlayerT: 'I want in the ranking',
+    trackPlayerS: "I play and want to be listed in the women's world ranking",
+    trackCoachT: "I'm looking for players",
+    trackCoachS: "I'm a coach, captain or organizer building a roster",
+    ctaDiscord: 'Discord',
+    ctaHub: 'Faceit hub',
+    ctaBoard: 'Ranking',
+    faqLabel: 'Questions',
+    open: 'Open'
+  },
+  ru: {
+    title: 'Как вступить — FPS Girls',
+    home: 'На главную',
+    tagline: 'Как вступить',
+    h1: 'Вступай в FPS Girls',
+    sub: 'Выбери, зачем ты здесь, — покажем короткий путь: Discord, роли и женский хаб на FACEIT.',
+    trackPlayerT: 'Хочу в рейтинг',
+    trackPlayerS: 'Я играю и хочу попасть в мировой рейтинг девушек',
+    trackCoachT: 'Ищу игроков',
+    trackCoachS: 'Я тренер, капитан или организатор — собираю состав',
+    ctaDiscord: 'Discord',
+    ctaHub: 'Faceit хаб',
+    ctaBoard: 'Рейтинг',
+    faqLabel: 'Вопросы',
+    open: 'Открыть'
+  }
+};
+
+// Шаги и вопросы. Порядок шагов = реальный порядок в комьюнити:
+// Discord → правила → роли → верификация → хаб → роль хаба → рейтинг.
+const CONTENT = {
+  en: {
+    player: [
+      {
+        t: 'Join our Discord',
+        d: 'Discord is the main door to the community: roles, team search, tournaments and verification all live there. You will land in the <span class="ch">#rules-server</span> channel.',
+        b: { label: 'Open Discord', href: LINKS.discord, ext: true }
+      },
+      {
+        t: 'Accept the rules',
+        d: 'Pick your language (7 available) and press <b>Accept</b>. You get the <b>Member</b> role and the rest of the server opens up.'
+      },
+      {
+        t: 'Grab your roles in <span class="ch">#start-here</span>',
+        d: 'One click = one role: games (CS2, R6, Tarkov Arena, Valorant, Apex), platform, region, and what you are looking for — <b>LFT</b> (looking for team), <b>LFP</b> (looking for player), <b>LFC</b> (looking for coach), <b>LFS</b> (looking for scrim). Game roles unlock the chats and voice channels for that game.'
+      },
+      {
+        t: 'Get verified — the <b>Girl role</b> button',
+        d: 'Same message, purple button: attach a photo following the instructions in the form plus a link to your social profile. A moderator reviews it and the bot replies in your DMs. Once approved you hold the <b>FPS Girls</b> role — without it you cannot get into the ranking.'
+      },
+      {
+        t: 'Join the FPS Girls hub on FACEIT',
+        d: 'The hub is our roster of women players worldwide — the site ranking is built from it.',
+        b: { label: 'Open the hub', href: LINKS.hub, ext: true, ghost: true }
+      },
+      {
+        t: 'Get your hub role',
+        d: 'After your Discord verification a club admin marks you with the <b>FPS Girls CS</b> (or R6 / Valorant) role inside the hub. The ranking is collected by exactly that role — the hub has men in it too, so without the role you will not appear in the table.'
+      }
+    ],
+    playerHint: 'That is it. The ranking rebuilds automatically once a day, so you show up in the table the next day. Bonus: press <b>Link FACEIT</b> in <span class="ch">#start-here</span> — the bot gives you your level role and posts your matches to the match feed.',
+    coach: [
+      {
+        t: 'Join our Discord',
+        d: 'This is where the community lives: roster-search channels, tournaments, per-game chats and voice.',
+        b: { label: 'Open Discord', href: LINKS.discord, ext: true }
+      },
+      {
+        t: 'Accept the rules',
+        d: 'Pick your language and press <b>Accept</b> — you get the <b>Member</b> role and the channels open up.'
+      },
+      {
+        t: 'Take the search roles in <span class="ch">#start-here</span>',
+        d: 'Pick your game and region, then <b>LFP</b> (looking for player) or <b>LFC</b> (looking for coach) — these unlock the search channels. Men are welcome: the <b>Boy role</b> button gives access in one click, no verification needed.'
+      },
+      {
+        t: 'Scout from the ranking',
+        d: 'The table shows ELO, level, win rate, K/D, matches and play style — aggression, clutches, utility damage, AWP and headshots. Every nickname links straight to the FACEIT profile.',
+        b: { label: 'Open the ranking', href: LINKS.board, ghost: true }
+      },
+      {
+        t: 'Watch them play in the hub',
+        d: 'The FPS Girls hub is open — join it to play alongside the community and see players in action.',
+        b: { label: 'Open the hub', href: LINKS.hub, ext: true, ghost: true }
+      },
+      {
+        t: 'Reach out directly',
+        d: 'Found someone who fits? Message her in Discord or post in the search channels — that is where rosters come together.'
+      }
+    ],
+    coachHint: 'Running a tournament or a tryout for women\'s teams? Say hi in Discord — we help spread the word to the community.',
+    faq: [
+      {
+        q: 'Why am I not in the ranking?',
+        a: 'The table only lists FPS Girls hub members holding the <b>FPS Girls CS / R6 / Valorant</b> hub role, which club admins assign after your Discord verification. Check that you joined the hub and passed verification, then give it a day — the data refreshes once every 24 hours.'
+      },
+      {
+        q: 'I changed my FACEIT nickname — will I disappear?',
+        a: 'No. Players are tracked by account ID, not by nickname, so the new one is picked up automatically.'
+      },
+      {
+        q: 'Can men join?',
+        a: 'Yes. Discord has a <b>Boy role</b> button — one click, no verification — and the hub is open too. The ranking itself only lists verified women.'
+      },
+      {
+        q: 'What do the index columns mean?',
+        a: 'Stability, aggression, survival, nade, AWP and headshot are 0–100 indices built from FACEIT lifetime stats, where 50 is the scene average. The full explanation sits under the ranking table.'
+      },
+      {
+        q: 'How long does verification take?',
+        a: 'Moderators review every request by hand, so it is not instant. The bot sends you the decision in DMs.'
+      }
+    ]
+  },
+  ru: {
+    player: [
+      {
+        t: 'Вступи в наш Discord',
+        d: 'Discord — главный вход в комьюнити: там роли, поиск команды, турниры и верификация. После входа ты попадёшь в канал <span class="ch">#rules-server</span>.',
+        b: { label: 'Открыть Discord', href: LINKS.discord, ext: true }
+      },
+      {
+        t: 'Прими правила',
+        d: 'Выбери язык (их 7) и нажми <b>«Принимаю»</b>. Получишь роль <b>Member</b> — откроются остальные каналы сервера.'
+      },
+      {
+        t: 'Собери роли в <span class="ch">#start-here</span>',
+        d: 'Один клик = роль: игры (CS2, R6, Tarkov Arena, Valorant, Apex), платформа, регион и поиск — <b>LFT</b> (ищу команду), <b>LFP</b> (ищу игрока), <b>LFC</b> (ищу тренера), <b>LFS</b> (ищу скрим). Игровые роли открывают чаты и голосовые по каждой игре.'
+      },
+      {
+        t: 'Пройди верификацию — кнопка <b>«Роль девушки»</b>',
+        d: 'В том же сообщении: приложи фото по инструкции из формы и ссылку на соцсеть. Заявку смотрит модератор, ответ придёт в личные сообщения. После одобрения у тебя роль <b>FPS Girls</b> — без неё в рейтинг не попасть.'
+      },
+      {
+        t: 'Вступи в хаб FPS Girls на FACEIT',
+        d: 'Хаб — наш реестр женских аккаунтов со всего мира, именно из него собирается рейтинг на сайте.',
+        b: { label: 'Открыть хаб', href: LINKS.hub, ext: true, ghost: true }
+      },
+      {
+        t: 'Получи роль в хабе',
+        d: 'После верификации в Discord админ клуба отметит тебя ролью <b>FPS Girls CS</b> (или R6 / Valorant) прямо в хабе. Рейтинг собирается именно по этой роли: в хабе есть и парни, поэтому без роли в таблицу не попасть.'
+      }
+    ],
+    playerHint: 'Готово. Рейтинг пересобирается автоматически раз в сутки — на следующий день ты уже в таблице. Заодно нажми <b>«Привязать FACEIT»</b> в <span class="ch">#start-here</span>: бот выдаст роль твоего уровня и будет постить твои матчи в ленту.',
+    coach: [
+      {
+        t: 'Вступи в наш Discord',
+        d: 'Здесь живёт комьюнити: каналы поиска состава, турниры, чаты и голосовые по играм.',
+        b: { label: 'Открыть Discord', href: LINKS.discord, ext: true }
+      },
+      {
+        t: 'Прими правила',
+        d: 'Выбери язык и нажми <b>«Принимаю»</b> — получишь роль <b>Member</b>, откроются каналы.'
+      },
+      {
+        t: 'Возьми роли поиска в <span class="ch">#start-here</span>',
+        d: 'Отметь игру и регион, затем <b>LFP</b> (ищу игрока) или <b>LFC</b> (ищу тренера) — они открывают каналы поиска. Парни тоже заходят: кнопка <b>«Роль Boy»</b> выдаёт доступ одним нажатием, без верификации.'
+      },
+      {
+        t: 'Смотри рейтинг',
+        d: 'В таблице: ELO, уровень, винрейт, K/D, матчи и стиль игры — агрессия, клатчи, урон гранатами, AWP и хедшоты. Ник ведёт прямо на профиль FACEIT.',
+        b: { label: 'Открыть рейтинг', href: LINKS.board, ghost: true }
+      },
+      {
+        t: 'Посмотри игроков в деле',
+        d: 'Хаб FPS Girls открыт — заходи, играй вместе с комьюнити и смотри, кто как играет.',
+        b: { label: 'Открыть хаб', href: LINKS.hub, ext: true, ghost: true }
+      },
+      {
+        t: 'Напиши напрямую',
+        d: 'Понравилась игрок — пиши ей в Discord или в каналах поиска состава. Команды собираются именно там.'
+      }
+    ],
+    coachHint: 'Проводишь турнир или отбор для женских команд? Напиши нам в Discord — поможем рассказать о нём комьюнити.',
+    faq: [
+      {
+        q: 'Почему меня нет в рейтинге?',
+        a: 'В таблицу попадают только участницы хаба FPS Girls с ролью хаба <b>FPS Girls CS / R6 / Valorant</b> — её выдают админы клуба после верификации в Discord. Проверь, что вступила в хаб и прошла верификацию, и подожди сутки: данные обновляются раз в день.'
+      },
+      {
+        q: 'Я сменила ник на FACEIT — пропаду из рейтинга?',
+        a: 'Нет. Игроки отслеживаются по ID аккаунта, а не по нику, — новый ник подтянется сам.'
+      },
+      {
+        q: 'Парни могут вступить?',
+        a: 'Да. В Discord есть кнопка <b>«Роль Boy»</b> — одно нажатие, без верификации; хаб тоже открыт. Но в самом рейтинге только проверенные девушки.'
+      },
+      {
+        q: 'Что значат столбцы-индексы?',
+        a: 'Стабильность, агрессия, осторожность, гранаты, AWP и хедшоты — это индексы 0–100 по карьерной статистике FACEIT, где 50 — средний уровень сцены. Подробное описание — под таблицей рейтинга.'
+      },
+      {
+        q: 'Сколько ждать верификацию?',
+        a: 'Заявки модераторы смотрят вручную, поэтому не мгновенно. Решение бот пришлёт тебе в личные сообщения.'
+      }
+    ]
+  }
+};
+
+let lang = 'en';
+let track = 'player';
+
+const t = () => I18N[lang] || I18N.en;
+const c = () => CONTENT[lang] || CONTENT.en;
+
+const EXT_ARROW = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>';
+
+function renderSteps() {
+  const steps = c()[track] || [];
+  document.getElementById('steps').innerHTML = steps.map((s, i) => {
+    const btn = s.b
+      ? '<a class="step-btn' + (s.b.ghost ? ' ghost' : '') + '" href="' + s.b.href + '"' +
+        (s.b.ext ? ' target="_blank" rel="noopener"' : '') + '>' + s.b.label + (s.b.ext ? EXT_ARROW : '') + '</a>'
+      : '';
+    return '<li class="step">' +
+      '<span class="step-num">' + (i + 1) + '</span>' +
+      '<div class="step-body">' +
+        '<div class="step-title">' + s.t + '</div>' +
+        '<div class="step-text">' + s.d + '</div>' + btn +
+      '</div></li>';
+  }).join('');
+  document.getElementById('hint').innerHTML = c()[track === 'player' ? 'playerHint' : 'coachHint'];
+}
+
+function renderFaq() {
+  document.getElementById('faq').innerHTML = (c().faq || []).map(f =>
+    '<details><summary>' + f.q + '</summary><div class="a">' + f.a + '</div></details>'
+  ).join('');
+}
+
+function setTrack(nextTrack, updateHash = true) {
+  track = CONTENT.en[nextTrack] ? nextTrack : 'player';
+  document.querySelectorAll('.track').forEach(b => b.classList.toggle('active', b.dataset.track === track));
+  renderSteps();
+  if (updateHash) history.replaceState(null, '', '#' + track);
+}
+
+function setLang(l) {
+  lang = I18N[l] ? l : 'en';
+  const tr = t();
+  document.documentElement.lang = lang;
+  document.title = tr.title;
+  document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = tr[el.dataset.i18n]; });
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+  try { localStorage.setItem('fpsg-lang', lang); } catch (e) {}
+  renderSteps();
+  renderFaq();
+}
+
+document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+document.querySelectorAll('.track').forEach(b => b.addEventListener('click', () => setTrack(b.dataset.track)));
+
+// Ветку можно открыть ссылкой: join.html#coach или ?track=coach — так на неё
+// можно вести с рейтинга и из постов.
+const wanted = (location.hash.replace('#', '') || new URLSearchParams(location.search).get('track') || 'player');
+setTrack(wanted, false);
+
+let saved = null;
+try { saved = localStorage.getItem('fpsg-lang'); } catch (e) {}
+setLang(saved || 'en');
+
+// Счётчик посетителей (Cloudflare Worker на /api/counter). Визит — не чаще
+// раза в день на браузер. Если воркер недоступен, блок просто не показываем.
+(function () {
+  const el = document.getElementById('visitor-counter');
+  if (!el) return;
+  const API = '/api/counter';
+  const L = {
+    ru: (total, freq) => '👥 ' + total + ' всего · ' + freq + ' часто заходят',
+    en: (total, freq) => '👥 ' + total + ' total · ' + freq + ' regulars',
+  };
+  let counts = null;
+  const fmt = (n) => Number(n).toLocaleString(document.documentElement.lang === 'ru' ? 'ru-RU' : 'en-US');
+  const draw = () => {
+    if (!counts) return;
+    const l = document.documentElement.lang === 'ru' ? 'ru' : 'en';
+    el.textContent = L[l](fmt(counts.total), fmt(counts.frequent));
+    el.style.display = '';
+  };
+  let vid = null;
+  try { vid = localStorage.getItem('fpsg_vid'); } catch (e) {}
+  if (!vid) {
+    vid = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : String(Date.now()) + Math.random().toString(16).slice(2);
+    try { localStorage.setItem('fpsg_vid', vid); } catch (e) {}
+  }
+  const today = new Date().toISOString().slice(0, 10);
+  let newDay = true;
+  try { newDay = localStorage.getItem('fpsg_lastday') !== today; if (newDay) localStorage.setItem('fpsg_lastday', today); } catch (e) {}
+  const url = newDay ? (API + '/hit?vid=' + encodeURIComponent(vid)) : API;
+  fetch(url, { cache: 'no-store' })
+    .then(r => (r.ok ? r.json() : null))
+    .then(d => { if (d && typeof d.total === 'number') { counts = d; draw(); } })
+    .catch(() => {});
+  document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => setTimeout(draw, 0)));
+})();
+</script>
+</body>
+</html>
