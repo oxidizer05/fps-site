@@ -8,6 +8,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Static site for **FPS Girls** — a women's esports community covering CS2, R6S, Tarkov Arena, Valorant, and Apex Legends. No build step.
 
+## FPS Girls ecosystem (managed together)
+
+This site is one of three linked FPS Girls projects; the owner runs them together.
+- **This site** — `fps-site` (this repo) → fpsgirls.com (GitHub Pages + Cloudflare).
+- **Discord bot** — `../fps-girls-discord-bot` (repo `oxidizer05/fps-girls-discord-bot`, Node, Railway): moderation, onboarding, FACEIT `/world`, feeds. Its `/world` uses the **same FACEIT hub + "FPS Girls" role filter** as this site's leaderboard (`scripts/build-world.mjs`).
+- **Telegram news bot** — `../fps-girls-bot` (repo `oxidizer05/fps-girls-bot`, Python, Railway) — unrelated code, same community/brand.
+
+Shared brand: `#CE61DF`, Montserrat, dark theme. Owner is a coding beginner — explain simply, commit `fix/feat/chore`, never commit secrets.
+
 - `index.html` — the production landing page (plain HTML/CSS + small vanilla-JS i18n): header with avatar and EN/RU language switcher (English default, choice saved to localStorage, translations in the inline `I18N` object), hero banner image, game badges, feature list, Faceit hub CTA, social links. Responsive: mobile card layout below 900px, wide (~1080px) grid layout above.
 - `leaderboard.html` — women's FACEIT ranking (plain HTML/CSS + vanilla JS, same design tokens/i18n pattern as index). Fetches **same-origin `world.json`** (relative URL) and renders a top-3 podium + full table (ELO, level, winrate, K/D, matches) with CS2/R6 tabs, nickname search, EN/RU. Screenshot-friendly for Telegram posts; linked from `index.html` via a secondary CTA. `?data=` query overrides the source for testing. No external API / no Railway / no CORS. (An earlier attempt fetched the bot's Railway `/api/world`, but Railway public networking would not route — switched to a static file refreshed on GitHub. The bot still keeps its own `/world` data internally for Discord commands.)
 - `world.json` — the ranking data the page reads. Committed to the repo so the page works immediately; refreshed daily by a GitHub Action. Currently ~127 players (CS2), R6 has only ~3 so its tab auto-hides.
