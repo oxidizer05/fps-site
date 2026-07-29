@@ -358,6 +358,15 @@ body::before {
   color: rgba(206,97,223,0.4);
 }
 
+.visitors {
+  padding: 4px 24px 14px;
+  text-align: center;
+  font-weight: 500;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: rgba(150,150,150,0.85);
+}
+
 @media (max-width: 380px) {
   .socials { grid-template-columns: 1fr; }
 }
@@ -540,6 +549,8 @@ body::before {
     <div class="footer-brand">Female Play Style</div>
   </footer>
 
+  <div class="visitors" id="visitor-counter" style="display:none"></div>
+
 </div>
 
 <script>
@@ -589,6 +600,41 @@ document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', 
 let savedLang = null;
 try { savedLang = localStorage.getItem('fpsg-lang'); } catch (e) {}
 if (savedLang && savedLang !== 'en') setLang(savedLang);
+
+// Счётчик посетителей (Cloudflare Worker на /api/counter). Визит — не чаще
+// раза в день на браузер. Если воркер недоступен, блок просто не показываем.
+(function () {
+  const el = document.getElementById('visitor-counter');
+  if (!el) return;
+  const API = '/api/counter';
+  const L = {
+    ru: (t, f) => '👥 ' + t + ' всего · ' + f + ' часто заходят',
+    en: (t, f) => '👥 ' + t + ' total · ' + f + ' regulars',
+  };
+  let counts = null;
+  const fmt = (n) => Number(n).toLocaleString(document.documentElement.lang === 'ru' ? 'ru-RU' : 'en-US');
+  const draw = () => {
+    if (!counts) return;
+    const l = document.documentElement.lang === 'ru' ? 'ru' : 'en';
+    el.textContent = L[l](fmt(counts.total), fmt(counts.frequent));
+    el.style.display = '';
+  };
+  let vid = null;
+  try { vid = localStorage.getItem('fpsg_vid'); } catch (e) {}
+  if (!vid) {
+    vid = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : String(Date.now()) + Math.random().toString(16).slice(2);
+    try { localStorage.setItem('fpsg_vid', vid); } catch (e) {}
+  }
+  const today = new Date().toISOString().slice(0, 10);
+  let newDay = true;
+  try { newDay = localStorage.getItem('fpsg_lastday') !== today; if (newDay) localStorage.setItem('fpsg_lastday', today); } catch (e) {}
+  const url = newDay ? (API + '/hit?vid=' + encodeURIComponent(vid)) : API;
+  fetch(url, { cache: 'no-store' })
+    .then(r => (r.ok ? r.json() : null))
+    .then(d => { if (d && typeof d.total === 'number') { counts = d; draw(); } })
+    .catch(() => {});
+  document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => setTimeout(draw, 0)));
+})();
 </script>
 </body>
 </html>
