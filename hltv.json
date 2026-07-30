@@ -7,6 +7,8 @@
     "Страница рейтинга читает этот файл сама, пересобирать world.json не нужно."
   ],
   "players": {
+    "85c6f3df-60a1-485e-83c9-9ba721f68bb1": { "id": 24006, "slug": "sosya" },
+    "4157d4db-c4d8-4760-b974-b417902d45fb": { "id": 18774, "slug": "stormy" },
     "99501aa8-11f7-4cac-aec1-ed0cadedf568": { "id": 25102, "slug": "nem1za" },
     "673c558a-7228-4226-810c-f26630334174": { "id": 24792, "slug": "neosoznala" },
     "df68c981-bc3d-403d-b753-de4923d22ca7": { "id": 24616, "slug": "mjdaqueen" },
