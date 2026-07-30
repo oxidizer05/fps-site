@@ -308,6 +308,19 @@ tr.hidden { display: none; }
   font-weight: 500; font-size: 10px; letter-spacing: 0.06em; color: rgba(150,150,150,0.85);
 }
 
+/* Столбец HLTV: узкий, ссылка только у тех, у кого профиль есть */
+.board .col-hltv { width: 54px; }
+.board a.hltv {
+  display: inline-block;
+  font-weight: 800; font-size: 9px; letter-spacing: 0.06em;
+  color: #d9d9d9; text-decoration: none;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 4px; padding: 3px 6px;
+  transition: color 150ms, border-color 150ms, background 150ms;
+}
+.board a.hltv:hover { color: #fff; border-color: var(--border-accent); background: var(--accent-subtle); }
+
 .note {
   padding: 0 24px; margin-top: 4px;
   font-weight: 400; font-size: 10px; line-height: 1.5; color: rgba(150,150,150,0.7); text-align: center;
@@ -347,7 +360,7 @@ tr.hidden { display: none; }
 
 @media (max-width: 560px) {
   .board .col-matches, .board .col-wr, .board .col-stab, .board .col-act, .board .col-cau,
-  .board .col-gren, .board .col-awp, .board .col-hs { display: none; }
+  .board .col-gren, .board .col-awp, .board .col-hs, .board .col-hltv { display: none; }
   /* столбец, по которому сортируем, показываем даже на узком экране */
   .board.show-wr .col-wr, .board.show-matches .col-matches, .board.show-stab .col-stab,
   .board.show-act .col-act, .board.show-cau .col-cau,
@@ -532,6 +545,18 @@ function flag(cc) {
   return String.fromCodePoint(...[...cc.toUpperCase()].map(c => 0x1F1E6 + c.charCodeAt(0) - 65));
 }
 function faceitUrl(nick) { return 'https://www.faceit.com/en/players/' + encodeURIComponent(nick); }
+
+// Ссылки на HLTV ведём вручную в hltv.json: у HLTV нет открытого API, а на
+// Liquipedia id профилей для CS не хранятся — проверено. Ключ — player_id
+// FACEIT, чтобы смена ника не рвала связь. Файл читается отдельно от world.json,
+// поэтому новую ссылку видно сразу после правки, без пересборки рейтинга.
+let hltvMap = {};
+function hltvCell(r) {
+  const rec = r.playerId ? hltvMap[r.playerId] : null;
+  if (!rec || !rec.id) return '<span class="dim">—</span>';
+  const url = 'https://www.hltv.org/player/' + encodeURIComponent(rec.id) + '/' + encodeURIComponent(rec.slug || '');
+  return '<a class="hltv" href="' + url + '" target="_blank" rel="noopener" title="Профиль на HLTV">HLTV</a>';
+}
 function num(n) { return n == null ? '—' : Number(n).toLocaleString(lang === 'ru' ? 'ru-RU' : 'en-US'); }
 
 // «Стабильность» — не разовая удача, а результат на дистанции: винрейт и K/D
@@ -667,6 +692,7 @@ function render() {
     '<thead><tr>' +
       '<th>#</th>' +
       '<th class="left">' + t().colPlayer + '</th>' +
+      '<th class="col-hltv">HLTV</th>' +
       th(t().colElo, 'elo') +
       '<th>' + t().colLvl + '</th>' +
       th(t().colWr, 'winRate', 'col-wr') +
@@ -686,6 +712,7 @@ function render() {
       '<td class="rank">' + (i + 1) + '</td>' +
       '<td class="left"><div class="player"><span class="flag">' + flag(r.country) + '</span>' +
         '<span class="nick"><a href="' + faceitUrl(r.nickname) + '" target="_blank" rel="noopener">' + esc(r.nickname) + '</a></span></div></td>' +
+      '<td class="col-hltv">' + hltvCell(r) + '</td>' +
       '<td class="elo' + mark(r.elo, 'elo') + '">' + num(r.elo) + '</td>' +
       '<td><span class="lvl" style="background:' + color + '">' + (r.level ?? '—') + '</span></td>' +
       '<td class="col-wr dim' + mark(r.winRate, 'winRate') + '">' + (r.winRate != null ? r.winRate + '%' : '—') + '</td>' +
@@ -765,6 +792,12 @@ function syncTabs() {
 }
 
 async function load() {
+  // Ссылки на HLTV — необязательные: не загрузились, просто нет столбца-ссылок
+  fetch('hltv.json?t=' + Date.now(), { cache: 'no-store' })
+    .then(r => (r.ok ? r.json() : null))
+    .then(d => { if (d && d.players) { hltvMap = d.players; if (data) render(); } })
+    .catch(() => {});
+
   try {
     const url = DATA_URL + (DATA_URL.includes('?') ? '&' : '?') + 't=' + Date.now();
     const res = await fetch(url, { cache: 'no-store' });

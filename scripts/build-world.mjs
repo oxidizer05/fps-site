@@ -119,7 +119,9 @@ async function fetchPlayer(playerId) {
       // стата опциональна
     }
   }
-  return { nickname: p.nickname, country: p.country ?? null, games };
+  // playerId кладём в снимок: ники на FACEIT меняются, id — нет. По нему
+  // страница подтягивает ссылки на HLTV из hltv.json.
+  return { playerId, nickname: p.nickname, country: p.country ?? null, games };
 }
 
 function rowsFor(players, game) {
@@ -128,6 +130,7 @@ function rowsFor(players, game) {
       const g = p.games?.[game];
       if (!g?.elo) return null;
       return {
+        playerId: p.playerId ?? null,
         nickname: p.nickname,
         country: p.country,
         elo: g.elo,

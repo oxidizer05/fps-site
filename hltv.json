@@ -1,0 +1,15 @@
+{
+  "_readme": [
+    "Ссылки на профили HLTV. Ключ — player_id на FACEIT (он не меняется, в отличие от ника).",
+    "Как добавить игрока: открой её профиль на HLTV, скопируй число и имя из адреса —",
+    "https://www.hltv.org/player/22029/averona → id 22029, slug averona.",
+    "player_id можно взять из world.json (поле playerId рядом с ником).",
+    "Страница рейтинга читает этот файл сама, пересобирать world.json не нужно."
+  ],
+  "players": {
+    "99501aa8-11f7-4cac-aec1-ed0cadedf568": { "id": 25102, "slug": "nem1za" },
+    "673c558a-7228-4226-810c-f26630334174": { "id": 24792, "slug": "neosoznala" },
+    "df68c981-bc3d-403d-b753-de4923d22ca7": { "id": 24616, "slug": "mjdaqueen" },
+    "abc2d46f-695f-41d3-b47b-bc551e792df4": { "id": 22029, "slug": "averona" }
+  }
+}
