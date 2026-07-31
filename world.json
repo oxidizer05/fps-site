@@ -1,6 +1,6 @@
 {
-  "updatedAt": 1785478980568,
-  "total": 127,
+  "updatedAt": 1785499350048,
+  "total": 128,
   "games": {
     "cs2": [
       {
@@ -165,10 +165,10 @@
         "level": 10,
         "winRate": 52,
         "kd": 1,
-        "matches": 6852,
-        "wins": 3542,
+        "matches": 6854,
+        "wins": 3543,
         "entry": 0.18,
-        "clutch": 0.05338349891545939,
+        "clutch": 0.05336402076754269,
         "util": 2.41,
         "sniper": 0.04,
         "hs": 47
@@ -246,14 +246,14 @@
         "playerId": "ace2efd1-2896-44ca-93eb-1944833ed413",
         "nickname": "rur",
         "country": "jp",
-        "elo": 2559,
+        "elo": 2529,
         "level": 10,
         "winRate": 52,
         "kd": 1,
-        "matches": 2974,
+        "matches": 2975,
         "wins": 1550,
         "entry": 0.16,
-        "clutch": 0.05764883195177091,
+        "clutch": 0.05764325212716783,
         "util": 3.02,
         "sniper": 0.06,
         "hs": 55
@@ -277,6 +277,23 @@
       },
       {
         "rank": 17,
+        "playerId": "11a429fb-5338-4702-a16f-d25c7b5a0de7",
+        "nickname": "Fen1but",
+        "country": "by",
+        "elo": 2470,
+        "level": 10,
+        "winRate": 51,
+        "kd": 0.96,
+        "matches": 3682,
+        "wins": 1889,
+        "entry": 0.14,
+        "clutch": 0.05685826519159853,
+        "util": 2.15,
+        "sniper": 0.02,
+        "hs": 51
+      },
+      {
+        "rank": 18,
         "playerId": "8a9b036e-ee81-4b8d-8e8f-5e9526f84ef3",
         "nickname": "-sou1",
         "country": "ru",
@@ -293,7 +310,7 @@
         "hs": 41
       },
       {
-        "rank": 18,
+        "rank": 19,
         "playerId": "f094c866-bb39-4fe7-bf81-4e0d42aa0fe8",
         "nickname": "yuliamvp",
         "country": "ag",
@@ -310,41 +327,7 @@
         "hs": 40
       },
       {
-        "rank": 19,
-        "playerId": "e3a0e45b-21d7-4a08-bd83-2417d1bd5bb1",
-        "nickname": "k1ttystar",
-        "country": "vn",
-        "elo": 2403,
-        "level": 10,
-        "winRate": 52,
-        "kd": 0.97,
-        "matches": 1566,
-        "wins": 809,
-        "entry": 0.15,
-        "clutch": 0.06607750225297247,
-        "util": 5.44,
-        "sniper": 0.04,
-        "hs": 48
-      },
-      {
         "rank": 20,
-        "playerId": "3b4fff27-6822-4052-bc3b-32c2eef1b971",
-        "nickname": "show",
-        "country": "fi",
-        "elo": 2388,
-        "level": 10,
-        "winRate": 50,
-        "kd": 0.98,
-        "matches": 6592,
-        "wins": 3297,
-        "entry": 0.29,
-        "clutch": 0.0334073696475386,
-        "util": 2.82,
-        "sniper": 0.04,
-        "hs": 50
-      },
-      {
-        "rank": 21,
         "playerId": "02712962-3759-4835-83b3-49db47145e17",
         "nickname": "twodes",
         "country": "se",
@@ -361,7 +344,7 @@
         "hs": 44
       },
       {
-        "rank": 22,
+        "rank": 21,
         "playerId": "9f13dd6a-14d9-4148-b57b-1655d4d82c35",
         "nickname": "kkery",
         "country": "ee",
@@ -378,7 +361,7 @@
         "hs": 43
       },
       {
-        "rank": 23,
+        "rank": 22,
         "playerId": "d45c4263-e3d8-4832-8fd6-14f14db1dbb6",
         "nickname": "oou",
         "country": "cn",
@@ -395,21 +378,38 @@
         "hs": 44
       },
       {
+        "rank": 23,
+        "playerId": "e3a0e45b-21d7-4a08-bd83-2417d1bd5bb1",
+        "nickname": "k1ttystar",
+        "country": "vn",
+        "elo": 2328,
+        "level": 10,
+        "winRate": 52,
+        "kd": 0.97,
+        "matches": 1569,
+        "wins": 809,
+        "entry": 0.15,
+        "clutch": 0.0660265150416292,
+        "util": 5.44,
+        "sniper": 0.04,
+        "hs": 48
+      },
+      {
         "rank": 24,
-        "playerId": "83d8a9e7-b8f9-4398-aeb8-32aba9d70834",
-        "nickname": "Milqka",
-        "country": "ru",
-        "elo": 2318,
+        "playerId": "3b4fff27-6822-4052-bc3b-32c2eef1b971",
+        "nickname": "show",
+        "country": "fi",
+        "elo": 2298,
         "level": 10,
         "winRate": 50,
-        "kd": 1.07,
-        "matches": 6753,
-        "wins": 3408,
-        "entry": 0.19,
-        "clutch": 0.06039246245395296,
-        "util": 3.53,
-        "sniper": 0.09,
-        "hs": 39
+        "kd": 0.98,
+        "matches": 6595,
+        "wins": 3297,
+        "entry": 0.29,
+        "clutch": 0.03339640836229326,
+        "util": 2.82,
+        "sniper": 0.04,
+        "hs": 50
       },
       {
         "rank": 25,
@@ -430,6 +430,23 @@
       },
       {
         "rank": 26,
+        "playerId": "83d8a9e7-b8f9-4398-aeb8-32aba9d70834",
+        "nickname": "Milqka",
+        "country": "ru",
+        "elo": 2288,
+        "level": 10,
+        "winRate": 50,
+        "kd": 1.07,
+        "matches": 6754,
+        "wins": 3408,
+        "entry": 0.19,
+        "clutch": 0.06037428515784069,
+        "util": 3.53,
+        "sniper": 0.09,
+        "hs": 39
+      },
+      {
+        "rank": 27,
         "playerId": "8e1007da-9677-45e8-b2fa-605f099c72f5",
         "nickname": "katy-_-",
         "country": "kr",
@@ -446,7 +463,7 @@
         "hs": 51
       },
       {
-        "rank": 27,
+        "rank": 28,
         "playerId": "2f2825ca-52e0-43a4-afd7-fab4cb06d5a3",
         "nickname": "K0P0JlEBA",
         "country": "lt",
@@ -463,7 +480,7 @@
         "hs": 39
       },
       {
-        "rank": 28,
+        "rank": 29,
         "playerId": "13d2a236-a682-467b-9db2-169135312a22",
         "nickname": "chyna-",
         "country": "lu",
@@ -480,7 +497,7 @@
         "hs": 46
       },
       {
-        "rank": 29,
+        "rank": 30,
         "playerId": "951e916b-2b7d-4a74-953a-8671f521a3cc",
         "nickname": "shizuka-",
         "country": "jp",
@@ -497,7 +514,7 @@
         "hs": 49
       },
       {
-        "rank": 30,
+        "rank": 31,
         "playerId": "03af3014-c783-4143-a91f-59a57b003aae",
         "nickname": "neblay0",
         "country": "ru",
@@ -512,23 +529,6 @@
         "util": 4.42,
         "sniper": 0.06,
         "hs": 46
-      },
-      {
-        "rank": 31,
-        "playerId": "c214fac4-8dbe-43ae-9055-c661ebc0b0b4",
-        "nickname": "babaevsky-",
-        "country": "ru",
-        "elo": 2257,
-        "level": 10,
-        "winRate": 50,
-        "kd": 1.05,
-        "matches": 5062,
-        "wins": 2541,
-        "entry": 0.19,
-        "clutch": 0.062256403118040086,
-        "util": 6.09,
-        "sniper": 0.06,
-        "hs": 45
       },
       {
         "rank": 32,
@@ -566,6 +566,23 @@
       },
       {
         "rank": 34,
+        "playerId": "c214fac4-8dbe-43ae-9055-c661ebc0b0b4",
+        "nickname": "babaevsky-",
+        "country": "ru",
+        "elo": 2227,
+        "level": 10,
+        "winRate": 50,
+        "kd": 1.05,
+        "matches": 5063,
+        "wins": 2541,
+        "entry": 0.19,
+        "clutch": 0.06225538798726713,
+        "util": 6.09,
+        "sniper": 0.06,
+        "hs": 45
+      },
+      {
+        "rank": 35,
         "playerId": "39992830-dad9-43b4-a60f-79ce5593485b",
         "nickname": "scrlet",
         "country": "gb",
@@ -582,7 +599,7 @@
         "hs": 51
       },
       {
-        "rank": 35,
+        "rank": 36,
         "playerId": "ca343f47-be0a-44bf-9d87-e9fd4f099fd7",
         "nickname": "m0ntana666",
         "country": "ru",
@@ -599,7 +616,7 @@
         "hs": 63
       },
       {
-        "rank": 36,
+        "rank": 37,
         "playerId": "85eec7e5-8cb2-4d34-8592-c3ab6d41adc4",
         "nickname": "dilsyy",
         "country": "ru",
@@ -616,7 +633,7 @@
         "hs": 46
       },
       {
-        "rank": 37,
+        "rank": 38,
         "playerId": "ba070344-5de3-457b-a989-1be9dd8a3667",
         "nickname": "Siren1ka",
         "country": "kz",
@@ -633,7 +650,7 @@
         "hs": 44
       },
       {
-        "rank": 38,
+        "rank": 39,
         "playerId": "14594456-4ad2-422f-945b-576d304ad22c",
         "nickname": "rogueUwU",
         "country": "ua",
@@ -650,7 +667,7 @@
         "hs": 46
       },
       {
-        "rank": 39,
+        "rank": 40,
         "playerId": "c8bbf6c0-ab66-46c4-a8b5-36a03fcf8293",
         "nickname": "tomiliska",
         "country": "kz",
@@ -667,7 +684,7 @@
         "hs": 34
       },
       {
-        "rank": 40,
+        "rank": 41,
         "playerId": "70bb520e-e29a-42d9-adfb-da87128b01fe",
         "nickname": "blueishy",
         "country": "jp",
@@ -684,7 +701,7 @@
         "hs": 45
       },
       {
-        "rank": 41,
+        "rank": 42,
         "playerId": "fbf041ad-32c0-4f96-9fdb-92389c154bf2",
         "nickname": "yungmxxn",
         "country": "nl",
@@ -701,7 +718,7 @@
         "hs": 45
       },
       {
-        "rank": 42,
+        "rank": 43,
         "playerId": "71f37bbd-7607-4d0f-94b0-c1df0a876ddb",
         "nickname": "Piper",
         "country": "ru",
@@ -718,7 +735,7 @@
         "hs": 43
       },
       {
-        "rank": 43,
+        "rank": 44,
         "playerId": "a7adf795-f445-429e-abf7-b5ba5fff4b5d",
         "nickname": "auresy",
         "country": "ru",
@@ -735,7 +752,7 @@
         "hs": 53
       },
       {
-        "rank": 44,
+        "rank": 45,
         "playerId": "e042c539-e802-45ee-abb6-e423616afa37",
         "nickname": "vaynereas",
         "country": "jp",
@@ -750,23 +767,6 @@
         "util": 2.74,
         "sniper": 0.05,
         "hs": 52
-      },
-      {
-        "rank": 45,
-        "playerId": "73c59ea6-2b59-41ca-bf9d-9a5b5f61a6e6",
-        "nickname": "-nesmi",
-        "country": "cn",
-        "elo": 2102,
-        "level": 10,
-        "winRate": 50,
-        "kd": 1.06,
-        "matches": 3081,
-        "wins": 1546,
-        "entry": 0.16,
-        "clutch": 0.06749954007994247,
-        "util": 4.16,
-        "sniper": 0.05,
-        "hs": 46
       },
       {
         "rank": 46,
@@ -821,6 +821,23 @@
       },
       {
         "rank": 49,
+        "playerId": "cb8c8aed-a720-4972-88c0-9daff9c154e8",
+        "nickname": "Cocopyma",
+        "country": "ru",
+        "elo": 2087,
+        "level": 10,
+        "winRate": 53,
+        "kd": 0.87,
+        "matches": 931,
+        "wins": 491,
+        "entry": 0.12,
+        "clutch": 0.06965366916929039,
+        "util": 3.91,
+        "sniper": 0,
+        "hs": 49
+      },
+      {
+        "rank": 50,
         "playerId": "486905ef-4aa0-4fc5-b002-3c48ecbf5e98",
         "nickname": "DAhASIXSEVEN",
         "country": "ru",
@@ -837,7 +854,7 @@
         "hs": 44
       },
       {
-        "rank": 50,
+        "rank": 51,
         "playerId": "ded04424-09d0-4845-942b-95f6b296004a",
         "nickname": "daisyqq",
         "country": "ru",
@@ -854,7 +871,7 @@
         "hs": 51
       },
       {
-        "rank": 51,
+        "rank": 52,
         "playerId": "0491a2c5-edb3-4048-b3b5-2a30cec1fd36",
         "nickname": "addalensee",
         "country": "sg",
@@ -871,7 +888,7 @@
         "hs": 40
       },
       {
-        "rank": 52,
+        "rank": 53,
         "playerId": "e7e62ec5-acf1-438d-ba18-6f624c71df15",
         "nickname": "alymia69",
         "country": "ru",
@@ -888,7 +905,24 @@
         "hs": 52
       },
       {
-        "rank": 53,
+        "rank": 54,
+        "playerId": "73c59ea6-2b59-41ca-bf9d-9a5b5f61a6e6",
+        "nickname": "-nesmi",
+        "country": "cn",
+        "elo": 2057,
+        "level": 10,
+        "winRate": 50,
+        "kd": 1.06,
+        "matches": 3085,
+        "wins": 1547,
+        "entry": 0.16,
+        "clutch": 0.06744143331830553,
+        "util": 4.16,
+        "sniper": 0.05,
+        "hs": 46
+      },
+      {
+        "rank": 55,
         "playerId": "4c045c7c-e96a-4c2f-9dad-1054d29f4a09",
         "nickname": "makarelya",
         "country": "ru",
@@ -905,7 +939,7 @@
         "hs": 39
       },
       {
-        "rank": 54,
+        "rank": 56,
         "playerId": "fea0b6da-6657-471c-83db-45d3eb648ebb",
         "nickname": "-m1a",
         "country": "ru",
@@ -922,24 +956,7 @@
         "hs": 40
       },
       {
-        "rank": 55,
-        "playerId": "cb8c8aed-a720-4972-88c0-9daff9c154e8",
-        "nickname": "Cocopyma",
-        "country": "ru",
-        "elo": 2043,
-        "level": 10,
-        "winRate": 53,
-        "kd": 0.87,
-        "matches": 929,
-        "wins": 489,
-        "entry": 0.12,
-        "clutch": 0.06954285159662234,
-        "util": 3.91,
-        "sniper": 0,
-        "hs": 49
-      },
-      {
-        "rank": 56,
+        "rank": 57,
         "playerId": "41889fbc-127f-4130-b32a-fda1284ac26d",
         "nickname": "rinAHAHA",
         "country": "ee",
@@ -956,7 +973,7 @@
         "hs": 59
       },
       {
-        "rank": 57,
+        "rank": 58,
         "playerId": "3b456fd0-406f-4d3f-b6a0-6c215423271c",
         "nickname": "leafori",
         "country": "ru",
@@ -973,7 +990,24 @@
         "hs": 51
       },
       {
-        "rank": 58,
+        "rank": 59,
+        "playerId": "f8b9f893-1ea9-4937-9c88-a7115d73dcfc",
+        "nickname": "Marymay",
+        "country": "ua",
+        "elo": 2028,
+        "level": 10,
+        "winRate": 49,
+        "kd": 1.05,
+        "matches": 7295,
+        "wins": 3602,
+        "entry": 0.22,
+        "clutch": 0.05848401948355241,
+        "util": 4.73,
+        "sniper": 0.05,
+        "hs": 49
+      },
+      {
+        "rank": 60,
         "playerId": "6af183f7-070b-4dca-b2b4-43d38cd433a0",
         "nickname": "ALRSKA",
         "country": "rs",
@@ -990,7 +1024,7 @@
         "hs": 36
       },
       {
-        "rank": 59,
+        "rank": 61,
         "playerId": "9e6beba6-75a6-42c4-bb6d-8601a730c884",
         "nickname": "redzi",
         "country": "ee",
@@ -1007,7 +1041,7 @@
         "hs": 53
       },
       {
-        "rank": 60,
+        "rank": 62,
         "playerId": "f91300aa-fc54-4ad2-adc2-2e57db7c1d8c",
         "nickname": "madam-",
         "country": "fr",
@@ -1022,40 +1056,6 @@
         "util": 2.12,
         "sniper": 0.2,
         "hs": 37
-      },
-      {
-        "rank": 61,
-        "playerId": "4da2aae2-4943-4642-8b8f-58aa1520f4bf",
-        "nickname": "7ether",
-        "country": "cn",
-        "elo": 2016,
-        "level": 10,
-        "winRate": 52,
-        "kd": 1.05,
-        "matches": 1309,
-        "wins": 684,
-        "entry": 0.18,
-        "clutch": 0.056162075029308325,
-        "util": 4.06,
-        "sniper": 0.09,
-        "hs": 50
-      },
-      {
-        "rank": 62,
-        "playerId": "f8b9f893-1ea9-4937-9c88-a7115d73dcfc",
-        "nickname": "Marymay",
-        "country": "ua",
-        "elo": 2003,
-        "level": 10,
-        "winRate": 49,
-        "kd": 1.05,
-        "matches": 7290,
-        "wins": 3599,
-        "entry": 0.22,
-        "clutch": 0.05862068965517241,
-        "util": 4.74,
-        "sniper": 0.05,
-        "hs": 49
       },
       {
         "rank": 63,
@@ -1076,6 +1076,23 @@
       },
       {
         "rank": 64,
+        "playerId": "4da2aae2-4943-4642-8b8f-58aa1520f4bf",
+        "nickname": "7ether",
+        "country": "cn",
+        "elo": 1991,
+        "level": 9,
+        "winRate": 52,
+        "kd": 1.05,
+        "matches": 1310,
+        "wins": 684,
+        "entry": 0.18,
+        "clutch": 0.05612711895434409,
+        "util": 4.06,
+        "sniper": 0.09,
+        "hs": 50
+      },
+      {
+        "rank": 65,
         "playerId": "0c5d4cc9-43a8-456a-a52c-8860089b2dd2",
         "nickname": "wadawswa",
         "country": "kr",
@@ -1092,7 +1109,7 @@
         "hs": 49
       },
       {
-        "rank": 65,
+        "rank": 66,
         "playerId": "c864db5e-d758-4aba-b9fe-dff00eedf6a1",
         "nickname": "katerina",
         "country": "ru",
@@ -1109,7 +1126,7 @@
         "hs": 42
       },
       {
-        "rank": 66,
+        "rank": 67,
         "playerId": "d15e04f9-478a-494c-9ce8-048252fa35a5",
         "nickname": "-heav",
         "country": "ru",
@@ -1126,7 +1143,7 @@
         "hs": 43
       },
       {
-        "rank": 67,
+        "rank": 68,
         "playerId": "c56fd130-6993-410f-ba48-6994e4df536f",
         "nickname": "nepizdinaxyi",
         "country": "ru",
@@ -1143,7 +1160,7 @@
         "hs": 46
       },
       {
-        "rank": 68,
+        "rank": 69,
         "playerId": "406aec0f-1443-49ff-97b8-a4dcdce8d57a",
         "nickname": "hannalozerxw",
         "country": "cn",
@@ -1160,7 +1177,7 @@
         "hs": 46
       },
       {
-        "rank": 69,
+        "rank": 70,
         "playerId": "80760c6e-c5c5-4599-852b-5464bf008247",
         "nickname": "-AM0RE",
         "country": "ru",
@@ -1177,7 +1194,7 @@
         "hs": 54
       },
       {
-        "rank": 70,
+        "rank": 71,
         "playerId": "57267a70-a8cf-4799-926f-fb88c1d484c1",
         "nickname": "BlinkzaPivom",
         "country": "ru",
@@ -1194,7 +1211,7 @@
         "hs": 45
       },
       {
-        "rank": 71,
+        "rank": 72,
         "playerId": "03cd4d7f-1ee0-401f-a9c5-079958417964",
         "nickname": "meger04ka",
         "country": "ru",
@@ -1211,7 +1228,7 @@
         "hs": 46
       },
       {
-        "rank": 72,
+        "rank": 73,
         "playerId": "bcbb38b0-9ea9-4b31-9499-c715bb7c88e4",
         "nickname": "ba06ape",
         "country": "ru",
@@ -1228,7 +1245,7 @@
         "hs": 51
       },
       {
-        "rank": 73,
+        "rank": 74,
         "playerId": "7bb21fb2-f428-46f7-bf87-59a062bdfb8f",
         "nickname": "emoshluha",
         "country": "jp",
@@ -1245,7 +1262,7 @@
         "hs": 46
       },
       {
-        "rank": 74,
+        "rank": 75,
         "playerId": "f010be4a-62d4-4278-a800-70d66b06f6b1",
         "nickname": "_aia",
         "country": "se",
@@ -1262,7 +1279,7 @@
         "hs": 53
       },
       {
-        "rank": 75,
+        "rank": 76,
         "playerId": "afde5dd9-817b-4f94-b9bc-17d0190d3249",
         "nickname": "Kayou",
         "country": "ru",
@@ -1279,7 +1296,7 @@
         "hs": 47
       },
       {
-        "rank": 76,
+        "rank": 77,
         "playerId": "4b3ca5a5-e5ab-4072-8bb6-b4de057da6bd",
         "nickname": "aufina",
         "country": "tm",
@@ -1296,7 +1313,7 @@
         "hs": 46
       },
       {
-        "rank": 77,
+        "rank": 78,
         "playerId": "3a747b3d-cdc9-4bad-a324-50dbdc351f22",
         "nickname": "psinkq",
         "country": "cz",
@@ -1313,7 +1330,7 @@
         "hs": 47
       },
       {
-        "rank": 78,
+        "rank": 79,
         "playerId": "9c91be29-2792-46bb-875a-4ea3bb96ded7",
         "nickname": "lilmommy-",
         "country": "ee",
@@ -1330,7 +1347,24 @@
         "hs": 48
       },
       {
-        "rank": 79,
+        "rank": 80,
+        "playerId": "8dcc612e-a924-4011-989a-0be4204f2424",
+        "nickname": "dreamtvix",
+        "country": "ru",
+        "elo": 1868,
+        "level": 9,
+        "winRate": 50,
+        "kd": 0.96,
+        "matches": 2407,
+        "wins": 1198,
+        "entry": 0.17,
+        "clutch": 0.06264494261758935,
+        "util": 2.94,
+        "sniper": 0.02,
+        "hs": 44
+      },
+      {
+        "rank": 81,
         "playerId": "5e0cebff-a0a0-49f8-90e7-598a7dc4a689",
         "nickname": "k3kew",
         "country": "kz",
@@ -1347,24 +1381,7 @@
         "hs": 50
       },
       {
-        "rank": 80,
-        "playerId": "8dcc612e-a924-4011-989a-0be4204f2424",
-        "nickname": "dreamtvix",
-        "country": "ru",
-        "elo": 1815,
-        "level": 9,
-        "winRate": 50,
-        "kd": 0.96,
-        "matches": 2405,
-        "wins": 1196,
-        "entry": 0.17,
-        "clutch": 0.06261164701679171,
-        "util": 2.94,
-        "sniper": 0.02,
-        "hs": 44
-      },
-      {
-        "rank": 81,
+        "rank": 82,
         "playerId": "cda1ce03-2658-428c-a8bd-d5b4154524be",
         "nickname": "hushteerr",
         "country": "se",
@@ -1381,7 +1398,7 @@
         "hs": 57
       },
       {
-        "rank": 82,
+        "rank": 83,
         "playerId": "c0b93155-5811-4d74-8860-e157002e0c80",
         "nickname": "senyashtern-",
         "country": "by",
@@ -1398,7 +1415,7 @@
         "hs": 42
       },
       {
-        "rank": 83,
+        "rank": 84,
         "playerId": "434d0aa9-aff7-451a-8ce9-079a7237585b",
         "nickname": "tallentlless",
         "country": "de",
@@ -1415,7 +1432,7 @@
         "hs": 48
       },
       {
-        "rank": 84,
+        "rank": 85,
         "playerId": "421bdc8c-ab50-4644-b46c-1f806ddf1e0d",
         "nickname": "ixwee",
         "country": "ru",
@@ -1432,7 +1449,7 @@
         "hs": 55
       },
       {
-        "rank": 85,
+        "rank": 86,
         "playerId": "285fc83c-be54-4e1b-91a0-fb9432cbf01d",
         "nickname": "victoriia",
         "country": "ru",
@@ -1449,7 +1466,7 @@
         "hs": 45
       },
       {
-        "rank": 86,
+        "rank": 87,
         "playerId": "5ddf84b7-f68a-4bfb-9ceb-05a8ca37e8f3",
         "nickname": "kerrllgan",
         "country": "ru",
@@ -1466,7 +1483,7 @@
         "hs": 46
       },
       {
-        "rank": 87,
+        "rank": 88,
         "playerId": "4bce911e-6f99-40da-9aba-a2aa342423a4",
         "nickname": "Adelechka",
         "country": "ru",
@@ -1483,7 +1500,7 @@
         "hs": 33
       },
       {
-        "rank": 88,
+        "rank": 89,
         "playerId": "5f74e246-b3d9-475e-810b-1d5d0893a018",
         "nickname": "1_Cherry_",
         "country": "es",
@@ -1500,7 +1517,7 @@
         "hs": 37
       },
       {
-        "rank": 89,
+        "rank": 90,
         "playerId": "8ad616d1-6d43-4a64-ad8c-ee749b9bc39b",
         "nickname": "xanaxce",
         "country": "kz",
@@ -1517,7 +1534,7 @@
         "hs": 49
       },
       {
-        "rank": 90,
+        "rank": 91,
         "playerId": "47bef695-0780-4bfa-b242-4f52714e94a5",
         "nickname": "bloodtears",
         "country": "ru",
@@ -1534,7 +1551,7 @@
         "hs": 53
       },
       {
-        "rank": 91,
+        "rank": 92,
         "playerId": "1aeaaa21-7231-4081-9db3-4929819bc645",
         "nickname": "Bukycuk",
         "country": "ru",
@@ -1551,7 +1568,7 @@
         "hs": 47
       },
       {
-        "rank": 92,
+        "rank": 93,
         "playerId": "8e5be19c-c93f-4f28-a28f-78f1548ff6af",
         "nickname": "4482",
         "country": "hk",
@@ -1568,7 +1585,24 @@
         "hs": 51
       },
       {
-        "rank": 93,
+        "rank": 94,
+        "playerId": "5fec01cb-4855-49cf-b766-6ddafc2517ba",
+        "nickname": "siyoka_",
+        "country": "qa",
+        "elo": 1662,
+        "level": 8,
+        "winRate": 49,
+        "kd": 1.02,
+        "matches": 3058,
+        "wins": 1498,
+        "entry": 0.27,
+        "clutch": 0.051340178690492067,
+        "util": 1.4,
+        "sniper": 0.24,
+        "hs": 43
+      },
+      {
+        "rank": 95,
         "playerId": "03170c4e-bac8-4ca5-8bc4-01ee24b1c82d",
         "nickname": "sal1fetka",
         "country": "by",
@@ -1585,7 +1619,7 @@
         "hs": 33
       },
       {
-        "rank": 94,
+        "rank": 96,
         "playerId": "c5a9113a-231a-46ec-b928-384fb4823954",
         "nickname": "p1sklya",
         "country": "ru",
@@ -1602,7 +1636,7 @@
         "hs": 43
       },
       {
-        "rank": 95,
+        "rank": 97,
         "playerId": "6ba1fe06-d886-4555-a162-591e6555a4a4",
         "nickname": "dkengap",
         "country": "kz",
@@ -1619,7 +1653,7 @@
         "hs": 45
       },
       {
-        "rank": 96,
+        "rank": 98,
         "playerId": "441ccc07-d2e6-49e0-9795-2cc99f060226",
         "nickname": "gofixurself",
         "country": "rs",
@@ -1636,7 +1670,7 @@
         "hs": 40
       },
       {
-        "rank": 97,
+        "rank": 99,
         "playerId": "0645dca3-1a12-49d9-ac7e-dc7357eb603a",
         "nickname": "lerkissao",
         "country": "by",
@@ -1653,7 +1687,7 @@
         "hs": 44
       },
       {
-        "rank": 98,
+        "rank": 100,
         "playerId": "cacbae0d-3e73-4050-bae3-757a619ba975",
         "nickname": "-panikaA",
         "country": "ru",
@@ -1670,24 +1704,7 @@
         "hs": 33
       },
       {
-        "rank": 99,
-        "playerId": "5fec01cb-4855-49cf-b766-6ddafc2517ba",
-        "nickname": "siyoka_",
-        "country": "qa",
-        "elo": 1525,
-        "level": 7,
-        "winRate": 49,
-        "kd": 1.02,
-        "matches": 3054,
-        "wins": 1494,
-        "entry": 0.27,
-        "clutch": 0.05137296206737973,
-        "util": 1.4,
-        "sniper": 0.23,
-        "hs": 43
-      },
-      {
-        "rank": 100,
+        "rank": 101,
         "playerId": "79f78efe-e9bb-44af-a88e-53494ba36855",
         "nickname": "kloynessa",
         "country": "ru",
@@ -1704,7 +1721,7 @@
         "hs": 47
       },
       {
-        "rank": 101,
+        "rank": 102,
         "playerId": "6d3757e5-1376-4558-b5a6-66338eada906",
         "nickname": "sonderr",
         "country": "ge",
@@ -1721,7 +1738,7 @@
         "hs": 50
       },
       {
-        "rank": 102,
+        "rank": 103,
         "playerId": "0ac5297c-4eef-462b-8adf-6190e80ad7c6",
         "nickname": "ne_kisa",
         "country": "ru",
@@ -1738,7 +1755,7 @@
         "hs": 50
       },
       {
-        "rank": 103,
+        "rank": 104,
         "playerId": "48945f22-c0d7-4456-999c-27c723bb0523",
         "nickname": "baffbaby",
         "country": "ru",
@@ -1755,7 +1772,7 @@
         "hs": 42
       },
       {
-        "rank": 104,
+        "rank": 105,
         "playerId": "6aaeacbd-cd3d-487c-ac30-598815542749",
         "nickname": "-MblSH-",
         "country": "ru",
@@ -1772,7 +1789,7 @@
         "hs": 48
       },
       {
-        "rank": 105,
+        "rank": 106,
         "playerId": "866d8018-31c2-47dc-af5c-6c80ce7810be",
         "nickname": "meyuka",
         "country": "wf",
@@ -1789,7 +1806,7 @@
         "hs": 53
       },
       {
-        "rank": 106,
+        "rank": 107,
         "playerId": "fb85bc6b-00ca-4a04-a47b-5157010f94c1",
         "nickname": "miyuki5",
         "country": "cn",
@@ -1806,7 +1823,7 @@
         "hs": 54
       },
       {
-        "rank": 107,
+        "rank": 108,
         "playerId": "2c68ba6f-c53e-492a-9ae2-a50ef20d757e",
         "nickname": "Pygovka17",
         "country": "ru",
@@ -1823,7 +1840,7 @@
         "hs": 38
       },
       {
-        "rank": 108,
+        "rank": 109,
         "playerId": "4248d9dc-100b-42cb-a835-017b8d475cef",
         "nickname": "LittleSun",
         "country": "ru",
@@ -1840,7 +1857,7 @@
         "hs": 39
       },
       {
-        "rank": 109,
+        "rank": 110,
         "playerId": "b2efe5fa-ed5d-4905-b191-5af8f15d6761",
         "nickname": "Perfect2007",
         "country": "ru",
@@ -1857,7 +1874,7 @@
         "hs": 44
       },
       {
-        "rank": 110,
+        "rank": 111,
         "playerId": "87a7e4d3-110a-4663-9678-ad7553282846",
         "nickname": "stasyanskii",
         "country": "ru",
@@ -1874,7 +1891,7 @@
         "hs": 38
       },
       {
-        "rank": 111,
+        "rank": 112,
         "playerId": "397235da-4b5b-4d3f-8861-e115b78be22f",
         "nickname": "justnadia",
         "country": "fr",
@@ -1891,7 +1908,7 @@
         "hs": 39
       },
       {
-        "rank": 112,
+        "rank": 113,
         "playerId": "75622570-a864-4fe0-9af1-ba6af06aacd1",
         "nickname": "1v3v3v7",
         "country": "ru",
@@ -1908,7 +1925,7 @@
         "hs": 41
       },
       {
-        "rank": 113,
+        "rank": 114,
         "playerId": "fd62c8a6-3af3-4a30-bb6a-761eb298bbef",
         "nickname": "tsuk1ro",
         "country": "jp",
@@ -1925,7 +1942,7 @@
         "hs": 42
       },
       {
-        "rank": 114,
+        "rank": 115,
         "playerId": "9fba716d-2d35-4408-9128-68352fd019df",
         "nickname": "marys9_",
         "country": "ru",
@@ -1942,7 +1959,7 @@
         "hs": 46
       },
       {
-        "rank": 115,
+        "rank": 116,
         "playerId": "6425b006-57fb-4ace-88c6-c8898d7b306f",
         "nickname": "ek-_-zo",
         "country": "jp",
@@ -1959,7 +1976,7 @@
         "hs": 45
       },
       {
-        "rank": 116,
+        "rank": 117,
         "playerId": "160da2f5-27be-4d26-8448-6d082ff500d5",
         "nickname": "Minnfri",
         "country": "ru",
@@ -1976,7 +1993,7 @@
         "hs": 41
       },
       {
-        "rank": 117,
+        "rank": 118,
         "playerId": "753a8837-96a7-4e13-8779-45ab33f1b235",
         "nickname": "DistanceTV",
         "country": "kz",
@@ -1993,7 +2010,7 @@
         "hs": 32
       },
       {
-        "rank": 118,
+        "rank": 119,
         "playerId": "3fda9f54-8b21-43be-85a0-ebedbb7ee2ae",
         "nickname": "ILUVFERFI",
         "country": "ua",
@@ -2010,7 +2027,7 @@
         "hs": 50
       },
       {
-        "rank": 119,
+        "rank": 120,
         "playerId": "ddc548f3-6cbb-4b80-b700-3908bc7c00f9",
         "nickname": "kierababyy",
         "country": "gb",
@@ -2027,7 +2044,7 @@
         "hs": 47
       },
       {
-        "rank": 120,
+        "rank": 121,
         "playerId": "c6712a5b-642a-4238-b36d-45bfb9eaadb9",
         "nickname": "uli4ko",
         "country": "ru",
@@ -2044,7 +2061,7 @@
         "hs": 45
       },
       {
-        "rank": 121,
+        "rank": 122,
         "playerId": "984d26da-7f78-4c1c-b66a-d76dcbec3cbd",
         "nickname": "OntoFoxy",
         "country": "jp",
@@ -2061,7 +2078,7 @@
         "hs": 46
       },
       {
-        "rank": 122,
+        "rank": 123,
         "playerId": "d1469dd3-c1cc-4307-ba3f-ee0d62d3bd5b",
         "nickname": "MissVikich",
         "country": "ua",
@@ -2078,7 +2095,7 @@
         "hs": 29
       },
       {
-        "rank": 123,
+        "rank": 124,
         "playerId": "4de64b89-b533-4bda-b4be-4fa8d8885827",
         "nickname": "St2lyx",
         "country": "ua",
@@ -2095,7 +2112,7 @@
         "hs": 37
       },
       {
-        "rank": 124,
+        "rank": 125,
         "playerId": "ec6bae42-c9be-4aee-b3d0-3229955eb2b6",
         "nickname": "Mizulina",
         "country": "ru",
@@ -2112,7 +2129,7 @@
         "hs": 38
       },
       {
-        "rank": 125,
+        "rank": 126,
         "playerId": "d814b4eb-36f7-4a18-a5c9-a2b738ee43a5",
         "nickname": "PizdaszOseni",
         "country": "by",
@@ -2129,7 +2146,7 @@
         "hs": 32
       },
       {
-        "rank": 126,
+        "rank": 127,
         "playerId": "dd4518eb-7fb2-4157-97ef-be6fc78e390f",
         "nickname": "aSpx-",
         "country": "ua",
@@ -2146,7 +2163,7 @@
         "hs": 34
       },
       {
-        "rank": 127,
+        "rank": 128,
         "playerId": "93e8ea68-cac0-40f9-8ff3-9e45f1d91765",
         "nickname": "Yunusova_A",
         "country": "ru",
