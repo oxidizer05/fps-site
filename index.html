@@ -65,7 +65,7 @@ body::before {
 
 /* ── Header ── */
 .header {
-  padding: 28px 24px 24px;
+  padding: 20px 24px 18px;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -84,7 +84,7 @@ body::before {
 }
 
 .avatar {
-  width: 76px; height: 76px;
+  width: 64px; height: 64px;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid var(--accent);
@@ -148,7 +148,9 @@ body::before {
   position: relative;
   border-bottom: 1px solid var(--border);
 }
-.banner img { display: block; width: 100%; }
+/* Баннер — полоса, а не полноразмерное фото: иначе кнопки уезжают за экран.
+   Пропорции картинки сохраняем обрезкой по центру. */
+.banner img { display: block; width: 100%; max-height: 110px; object-fit: cover; object-position: center 30%; }
 .banner::after {
   content: '';
   position: absolute;
@@ -158,7 +160,7 @@ body::before {
 }
 
 /* ── Hero ── */
-.hero { padding: 22px 24px 0; text-align: center; }
+.hero { padding: 16px 24px 0; text-align: center; }
 
 .hero h1 {
   font-weight: 800;
@@ -219,6 +221,75 @@ body::before {
   letter-spacing: 0.02em;
   color: #D9D9D9;
   line-height: 1.5;
+  text-align: left;
+  flex: 1;
+}
+/* Карточки — рабочие кнопки, поэтому выглядят нажимаемыми */
+a.feature, button.feature {
+  font-family: inherit;
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 150ms ease-out;
+}
+a.feature:hover, button.feature:hover { background: rgba(206,97,223,0.06); }
+a.feature:hover .feature-go, button.feature:hover .feature-go { color: var(--accent); transform: translateX(2px); }
+.feature-go {
+  color: rgba(255,255,255,0.25);
+  font-size: 14px;
+  flex-shrink: 0;
+  transition: color 150ms ease-out, transform 150ms ease-out;
+}
+
+/* ── Меню выбора игры ── */
+.sheet { position: fixed; inset: 0; z-index: 50; display: flex; align-items: flex-end; justify-content: center; }
+.sheet[hidden] { display: none; }
+.sheet-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.72); }
+.sheet-body {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  background: var(--bg);
+  border: 1px solid var(--border-accent);
+  border-radius: 16px 16px 0 0;
+  padding: 22px 20px 26px;
+  box-shadow: 0 -8px 40px rgba(0,0,0,0.7);
+  animation: sheet-up 180ms ease-out;
+}
+@keyframes sheet-up { from { transform: translateY(14px); opacity: 0; } to { transform: none; opacity: 1; } }
+.sheet-close {
+  position: absolute; top: 10px; right: 12px;
+  background: transparent; border: none; cursor: pointer;
+  color: var(--gray1); font-size: 22px; line-height: 1; padding: 4px 8px;
+}
+.sheet-close:hover { color: var(--white); }
+.sheet-title {
+  font-weight: 800; font-size: 14px; letter-spacing: 0.02em;
+  color: var(--white); text-align: center;
+}
+.sheet-note {
+  font-weight: 400; font-size: 11px; line-height: 1.55;
+  color: var(--gray1); text-align: center; margin-top: 8px;
+}
+.sheet-games { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
+.sheet-game {
+  display: flex; align-items: center; justify-content: center;
+  background: var(--surface);
+  border: 1px solid var(--border-accent);
+  border-radius: 8px;
+  padding: 13px 16px;
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 700; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+  transition: background 150ms ease-out, box-shadow 150ms ease-out;
+}
+.sheet-game:hover { background: var(--accent-subtle); box-shadow: 0 0 16px rgba(206,97,223,0.12); }
+@media (min-width: 900px) {
+  .sheet { align-items: center; }
+  .sheet-body { border-radius: 16px; max-width: 420px; }
 }
 
 /* ── Hub photo ── */
@@ -232,7 +303,7 @@ body::before {
 }
 
 /* ── Faceit CTA ── */
-.cta-wrap { padding: 20px 24px 4px; }
+.cta-wrap { padding: 16px 24px 4px; }
 .cta {
   display: flex;
   align-items: center;
@@ -246,7 +317,7 @@ body::before {
   font-size: 12px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  padding: 15px 20px;
+  padding: 14px 20px;
   border-radius: 8px;
   transition: box-shadow 150ms ease-out, transform 150ms ease-out;
 }
@@ -257,13 +328,15 @@ body::before {
 .cta:active { transform: translateY(0); }
 .cta svg { flex-shrink: 0; }
 
-.cta.discord { margin-top: 12px; }
+/* Кнопка с подписью — единый блок: так их можно ставить и столбиком, и в ряд */
+.cta-item + .cta-item { margin-top: 12px; }
+.cta.discord { margin-top: 0; }
 
 .cta.secondary {
   background: transparent;
   color: var(--accent);
   border: 1px solid var(--border-accent);
-  margin-top: 10px;
+  margin-top: 0;
 }
 .cta.secondary:hover {
   background: var(--accent-subtle);
@@ -277,7 +350,7 @@ body::before {
   text-transform: uppercase;
   color: var(--gray1);
   text-align: center;
-  margin-top: 10px;
+  margin-top: 7px;
 }
 .cta-sub .sub-link {
   color: var(--gray1);
@@ -385,19 +458,20 @@ body::before {
 @media (min-width: 900px) {
   body { padding: 48px 24px 64px; }
   .page { max-width: 1080px; }
-  .header { padding: 44px 48px 36px; }
+  .header { padding: 26px 48px 22px; }
   .header::after { width: 420px; height: 420px; top: -120px; }
   .lang-switch { top: 20px; right: 20px; }
-  .avatar { width: 96px; height: 96px; }
-  .wordmark { font-size: 34px; margin-top: 18px; }
+  .avatar { width: 78px; height: 78px; }
+  .wordmark { font-size: 30px; margin-top: 14px; }
   .tagline { font-size: 12px; margin-top: 8px; }
-  .hero { padding: 36px 48px 0; }
+  .banner img { max-height: 220px; }
+  .hero { padding: 26px 48px 0; }
   .hero h1 { font-size: 24px; }
   .games { gap: 10px; margin-top: 18px; }
   .game-badge { font-size: 12px; padding: 8px 16px; }
   .features {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 14px;
     padding: 30px 48px 0;
   }
@@ -410,13 +484,17 @@ body::before {
   .feature:last-child { border: 1px solid var(--border); }
   .feature-text { font-size: 13px; }
   .hub-photo { padding: 30px 48px 0; }
+  /* На широком экране кнопки идут в ряд — так весь главный блок помещается
+     в первый экран и до него не нужно прокручивать страницу. */
   .cta-wrap {
-    padding: 28px 48px 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    padding: 26px 48px 8px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    align-items: start;
   }
-  .cta { max-width: 380px; font-size: 13px; }
+  .cta-item + .cta-item { margin-top: 0; }
+  .cta { font-size: 13px; }
   .cta-sub { font-size: 10px; }
   .section-label { padding: 30px 48px 16px; }
   .socials { grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 0 48px; }
@@ -457,10 +535,42 @@ body::before {
       <span class="game-badge">Apex Legends</span>
     </div>
   </section>
+  <!-- Faceit CTA -->
+  <div class="cta-wrap">
+    <div class="cta-item">
+    <a class="cta" href="https://www.faceit.com/en/club/cd91474f-b1d0-412e-b210-6332dd7833fa" target="_blank" rel="noopener">
+      <span data-i18n="cta">Faceit Hub</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M7 17L17 7"/><path d="M7 7h10v10"/>
+      </svg>
+    </a>
+    <div class="cta-sub" data-i18n="ctaSub">Play in the women's hub on Faceit</div>
+    </div>
+    <div class="cta-item">
+    <!-- Постоянный инвайт в Discord. Встречается ещё в join.html и leaderboard.html. -->
+    <a class="cta discord" href="https://discord.gg/jMmutFF" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
+      <span data-i18n="ctaDiscord">Discord community</span>
+    </a>
+    <div class="cta-sub"><a class="sub-link" href="join.html" data-i18n="ctaDiscordSub">How to join and get your roles →</a></div>
+    </div>
+    <div class="cta-item">
+    <a class="cta secondary" href="leaderboard.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 4h10v5a5 5 0 0 1-10 0V4Z"/>
+        <path d="M17 5h3v2a3 3 0 0 1-3 3"/><path d="M7 5H4v2a3 3 0 0 0 3 3"/>
+      </svg>
+      <span data-i18n="rating">Player ranking</span>
+    </a>
+    <div class="cta-sub" data-i18n="ratingSub">Worldwide women's FACEIT ranking</div>
+    </div>
+  </div>
 
-  <!-- Features -->
-  <section class="features">
-    <div class="feature">
+
+
+  <!-- Features (ниже кнопок: до них не должно быть прокрутки) -->
+  <section class="features" id="features-anchor">
+    <a class="feature" href="tournaments.html">
       <div class="feature-icon">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
@@ -470,8 +580,9 @@ body::before {
         </svg>
       </div>
       <div class="feature-text" data-i18n="feat1">Women's tournaments</div>
-    </div>
-    <div class="feature">
+      <span class="feature-go">→</span>
+    </a>
+    <button class="feature" type="button" id="lfp-open">
       <div class="feature-icon">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
@@ -479,45 +590,31 @@ body::before {
         </svg>
       </div>
       <div class="feature-text" data-i18n="feat2">Find players for women's teams</div>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
-        </svg>
-      </div>
-      <div class="feature-text" data-i18n="feat3">Faceit hub for girls</div>
-    </div>
+      <span class="feature-go">→</span>
+    </button>
   </section>
+
+  <!-- Меню игр: ссылки на чаты не даём здесь — их присылает бот в Discord
+       после верификации, поэтому все кнопки ведут на страницу вступления. -->
+  <div class="sheet" id="lfp-sheet" hidden>
+    <div class="sheet-backdrop" data-close></div>
+    <div class="sheet-body" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+      <button class="sheet-close" type="button" data-close aria-label="Close">×</button>
+      <div class="sheet-title" id="sheet-title" data-i18n="sheetTitle">Which game are you looking for?</div>
+      <div class="sheet-note" data-i18n="sheetNote">Game chats are private: the bot sends you the link in Discord once your verification is approved.</div>
+      <div class="sheet-games">
+        <a class="sheet-game" href="join.html?game=cs2">CS2</a>
+        <a class="sheet-game" href="join.html?game=r6">Rainbow Six Siege</a>
+        <a class="sheet-game" href="join.html?game=tarkov">Tarkov Arena</a>
+        <a class="sheet-game" href="join.html?game=valorant">Valorant</a>
+        <a class="sheet-game" href="join.html?game=apex">Apex Legends</a>
+      </div>
+    </div>
+  </div>
 
   <!-- Hub photo -->
   <div class="hub-photo">
     <img src="assets/hub-team.jpg" data-i18n-alt="altTeam" alt="Women's team celebrating a tournament win">
-  </div>
-
-  <!-- Faceit CTA -->
-  <div class="cta-wrap">
-    <a class="cta" href="https://www.faceit.com/en/club/cd91474f-b1d0-412e-b210-6332dd7833fa" target="_blank" rel="noopener">
-      <span data-i18n="cta">Faceit Hub</span>
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M7 17L17 7"/><path d="M7 7h10v10"/>
-      </svg>
-    </a>
-    <div class="cta-sub" data-i18n="ctaSub">Play in the women's hub on Faceit</div>
-    <!-- Постоянный инвайт в Discord. Встречается ещё в join.html и leaderboard.html. -->
-    <a class="cta discord" href="https://discord.gg/jMmutFF" target="_blank" rel="noopener">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
-      <span data-i18n="ctaDiscord">Discord community</span>
-    </a>
-    <div class="cta-sub"><a class="sub-link" href="join.html" data-i18n="ctaDiscordSub">How to join and get your roles →</a></div>
-    <a class="cta secondary" href="leaderboard.html">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 4h10v5a5 5 0 0 1-10 0V4Z"/>
-        <path d="M17 5h3v2a3 3 0 0 1-3 3"/><path d="M7 5H4v2a3 3 0 0 0 3 3"/>
-      </svg>
-      <span data-i18n="rating">Player ranking</span>
-    </a>
-    <div class="cta-sub" data-i18n="ratingSub">Worldwide women's FACEIT ranking</div>
   </div>
 
   <!-- Socials -->
@@ -580,7 +677,8 @@ const I18N = {
     h1: 'A community of girls who play:',
     feat1: "Women's tournaments",
     feat2: "Find players for women's teams",
-    feat3: 'Faceit hub for girls',
+    sheetTitle: 'Which game are you looking for?',
+    sheetNote: 'Game chats are private: the bot sends you the link in Discord once your girl verification is approved.',
     cta: 'Faceit Hub',
     ctaSub: "Play in the women's hub on Faceit",
     ctaDiscord: 'Discord community',
@@ -596,7 +694,8 @@ const I18N = {
     h1: 'Cообщество девушек, играющих:',
     feat1: 'Женские турниры',
     feat2: 'Поиск игроков в женские команды',
-    feat3: 'Faceit хаб для девушек',
+    sheetTitle: 'По какой игре ищешь?',
+    sheetNote: 'Чаты по играм закрытые: ссылку пришлёт бот в Discord после того, как подтвердят верификацию девушки.',
     cta: 'Faceit хаб',
     ctaSub: 'Играй в женском хабе на Faceit',
     ctaDiscord: 'Discord-сообщество',
@@ -620,6 +719,17 @@ function setLang(lang) {
 }
 
 document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+
+// Меню выбора игры: закрывается кликом мимо, крестиком и Escape
+(function () {
+  const sheet = document.getElementById('lfp-sheet');
+  const openBtn = document.getElementById('lfp-open');
+  if (!sheet || !openBtn) return;
+  const close = () => { sheet.hidden = true; };
+  openBtn.addEventListener('click', () => { sheet.hidden = false; });
+  sheet.querySelectorAll('[data-close]').forEach(el => el.addEventListener('click', close));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !sheet.hidden) close(); });
+})();
 
 let savedLang = null;
 try { savedLang = localStorage.getItem('fpsg-lang'); } catch (e) {}

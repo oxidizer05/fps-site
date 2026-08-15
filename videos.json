@@ -1,0 +1,46 @@
+{
+  "_readme": [
+    "Видео для страницы /tournaments. Группируются по играм, внутри — по категориям.",
+    "Как добавить: скопируй id из адреса YouTube (watch?v=ЭТО_ID) и добавь запись в нужную игру.",
+    "Для плейлиста укажи ещё поле list (значение параметра &list=...).",
+    "Категории: tournament (турниры), event (ивенты), interview (интервью).",
+    "Игры без единого видео на странице не показываются — заглушек не будет."
+  ],
+  "games": [
+    {
+      "key": "cs2",
+      "title": "CS2",
+      "videos": [
+        {
+          "id": "DDbZ3WNw814",
+          "list": "PL1YF5awvXW06na4GKcseSskO1kDcRaVkU",
+          "category": "tournament",
+          "title": "Турниры по CS2"
+        }
+      ]
+    },
+    {
+      "key": "r6",
+      "title": "Rainbow Six Siege",
+      "videos": [
+        { "id": "D97XZZq-1Mc", "category": "tournament", "title": "Турнир по Rainbow Six Siege" },
+        { "id": "lqrlK3WD3s8", "category": "event", "title": "Ивент по Rainbow Six Siege" },
+        {
+          "id": "eCZ4Kl2jQuQ",
+          "list": "PL1YF5awvXW04W0oC60wrT9-ImodKZ7phQ",
+          "category": "event",
+          "title": "Serious Game — серия ивентов"
+        },
+        {
+          "id": "Qwiu9gzPJeI",
+          "list": "PL1YF5awvXW06O_I5BxBQOttCfTHwP3zNy",
+          "category": "interview",
+          "title": "Интервью с игроками"
+        }
+      ]
+    },
+    { "key": "tarkov", "title": "Tarkov Arena", "videos": [] },
+    { "key": "valorant", "title": "Valorant", "videos": [] },
+    { "key": "apex", "title": "Apex Legends", "videos": [] }
+  ]
+}
