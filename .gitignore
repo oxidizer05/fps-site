@@ -1,3 +1,7 @@
 .claude/settings.local.json
 Thumbs.db
 desktop.ini
+
+# служебные файлы macOS, которые Яндекс.Диск раскладывает рядом с обычными
+._*
+.DS_Store
