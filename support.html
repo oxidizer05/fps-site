@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Support the tournament — FPS Girls</title>
+<meta name="description" content="Support the FPS Girls women's CS2 tournament: prize pool for the top three teams and the live broadcast.">
+
+<style>
+@font-face { font-family: 'Montserrat'; src: url('fonts/Montserrat-Black.ttf') format('truetype');      font-weight: 900; font-display: swap; }
+@font-face { font-family: 'Montserrat'; src: url('fonts/Montserrat-ExtraBold.ttf') format('truetype');  font-weight: 800; font-display: swap; }
+@font-face { font-family: 'Montserrat'; src: url('fonts/Montserrat-Bold.ttf') format('truetype');       font-weight: 700; font-display: swap; }
+@font-face { font-family: 'Montserrat'; src: url('fonts/Montserrat-SemiBold.ttf') format('truetype');   font-weight: 600; font-display: swap; }
+@font-face { font-family: 'Montserrat'; src: url('fonts/Montserrat-Medium.ttf') format('truetype');     font-weight: 500; font-display: swap; }
+@font-face { font-family: 'Montserrat'; src: url('fonts/Montserrat-Regular.ttf') format('truetype');    font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Montserrat'; src: url('fonts/Montserrat-Light.ttf') format('truetype');      font-weight: 300; font-display: swap; }
+@font-face { font-family: 'Montserrat'; src: url('fonts/Montserrat-ExtraLight.ttf') format('truetype'); font-weight: 200; font-display: swap; }
+
+:root {
+  --accent:        #CE61DF;
+  --accent-glow:   rgba(206,97,223,0.30);
+  --accent-subtle: rgba(206,97,223,0.12);
+  --bg:            #0D0D0D;
+  --surface:       #111111;
+  --surface2:      #161318;
+  --border:        rgba(255,255,255,0.08);
+  --border-accent: rgba(206,97,223,0.40);
+  --white:         #FFFFFF;
+  --gray1:         #969696;
+  --gold:          #E8C15A;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #080808;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  font-family: 'Montserrat', sans-serif;
+  padding: 32px 16px 56px;
+  color: var(--white);
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.35;
+}
+
+.page {
+  width: 100%;
+  max-width: 720px;
+  position: relative;
+  z-index: 1;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 12px 60px rgba(0,0,0,0.8);
+}
+
+/* ── Header (единый со всеми страницами) ── */
+.header {
+  padding: 26px 24px 22px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(160deg, #180d20 0%, #0d0d14 60%, #0d0d0d 100%);
+  border-bottom: 1px solid var(--border);
+}
+.header::after {
+  content: '';
+  position: absolute;
+  top: -80px; left: 50%;
+  transform: translateX(-50%);
+  width: 320px; height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(206,97,223,0.16) 0%, transparent 70%);
+  pointer-events: none;
+}
+.avatar {
+  width: 66px; height: 66px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 20px var(--accent-glow);
+  position: relative; z-index: 1;
+}
+.wordmark {
+  font-weight: 900; font-size: 22px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  margin-top: 12px; line-height: 1;
+  position: relative; z-index: 1;
+}
+.tagline {
+  font-weight: 200; font-size: 10px;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--accent); margin-top: 6px;
+  position: relative; z-index: 1;
+}
+.home-link {
+  position: absolute; top: 16px; left: 16px; z-index: 2;
+  display: inline-flex; align-items: center; gap: 5px;
+  font-weight: 700; font-size: 10px; letter-spacing: 0.08em;
+  color: var(--gray1); text-decoration: none;
+  border: 1px solid var(--border); border-radius: 6px;
+  padding: 6px 10px; transition: color 150ms, border-color 150ms;
+}
+.home-link:hover { color: var(--white); border-color: var(--border-accent); }
+
+.lang-switch {
+  position: absolute; top: 16px; right: 16px; z-index: 2;
+  display: flex; gap: 2px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 6px; padding: 2px;
+}
+.lang-btn {
+  font-family: inherit; font-weight: 700; font-size: 10px; letter-spacing: 0.08em;
+  color: var(--gray1); background: transparent; border: none; border-radius: 4px;
+  padding: 5px 9px; cursor: pointer; transition: color 150ms, background 150ms;
+}
+.lang-btn:hover { color: var(--white); }
+.lang-btn.active { background: var(--accent); color: #fff; }
+
+/* ── Интро ── */
+.intro { padding: 24px 24px 0; text-align: center; }
+.intro h1 {
+  font-weight: 900; font-size: 21px; line-height: 1.25;
+  letter-spacing: 0.01em;
+}
+.intro p {
+  color: var(--gray1); font-size: 13px; font-weight: 400;
+  line-height: 1.6; margin-top: 10px;
+}
+
+/* ── Шкала цели ── */
+.goalbox {
+  margin: 20px 24px 0;
+  padding: 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.amount-row { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.raised { font-weight: 900; font-size: 30px; line-height: 1; }
+.raised .cur { font-size: 18px; color: var(--accent); margin-left: 2px; }
+.goal-of { color: var(--gray1); font-size: 12px; font-weight: 500; }
+.bar {
+  position: relative; height: 12px; margin: 16px 0 6px;
+  background: #1b1720; border-radius: 99px; overflow: visible;
+}
+.bar-track { position: absolute; inset: 0; border-radius: 99px; overflow: hidden; }
+.bar-fill {
+  height: 100%; width: 0;
+  background: linear-gradient(90deg, var(--accent), #8f4bd6);
+  border-radius: 99px;
+  transition: width 700ms ease;
+}
+.bar-mark { position: absolute; top: -5px; bottom: -5px; width: 2px; background: rgba(255,255,255,0.35); }
+.marks { position: relative; height: 14px; }
+.mark-label {
+  position: absolute; transform: translateX(-50%);
+  font-size: 9px; font-weight: 700; letter-spacing: 0.06em;
+  color: var(--gray1); white-space: nowrap;
+}
+.pct { text-align: right; font-size: 11px; font-weight: 700; color: var(--accent); }
+
+/* ── Кнопка ── */
+.cta {
+  display: block; margin: 18px 24px 0;
+  padding: 16px; text-align: center; text-decoration: none;
+  background: var(--accent); color: #fff;
+  font-weight: 800; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase;
+  border-radius: 10px;
+  box-shadow: 0 6px 24px var(--accent-glow);
+  transition: transform 150ms, box-shadow 150ms;
+}
+.cta:hover { transform: translateY(-1px); box-shadow: 0 10px 30px var(--accent-glow); }
+.hint {
+  padding: 10px 28px 0; text-align: center;
+  color: var(--gray1); font-size: 11px; line-height: 1.6;
+}
+
+/* ── Разделитель секции ── */
+.section-label { display: flex; align-items: center; gap: 10px; padding: 24px 24px 12px; }
+.section-label .line { flex: 1; height: 1px; background: rgba(206,97,223,0.2); }
+.section-label span {
+  font-weight: 700; font-size: 10px; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--accent);
+}
+
+/* ── Куда идут деньги ── */
+.tiers { display: grid; gap: 10px; padding: 0 24px; }
+.tier {
+  display: flex; gap: 14px; align-items: center;
+  padding: 14px; border: 1px solid var(--border);
+  border-radius: 10px; background: var(--surface);
+}
+.tier.reached { border-color: var(--border-accent); background: var(--surface2); }
+.tier-amt { font-weight: 900; font-size: 15px; color: var(--accent); min-width: 78px; }
+.tier-text { font-size: 12.5px; font-weight: 500; line-height: 1.5; }
+.tier-check { margin-left: auto; font-size: 14px; opacity: 0.9; }
+
+/* ── Донатеры ── */
+.podium { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 0 24px; }
+.pod {
+  text-align: center; padding: 16px 10px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+}
+.pod.first { border-color: rgba(232,193,90,0.45); background: linear-gradient(180deg, rgba(232,193,90,0.08), var(--surface)); }
+.pod-medal { font-size: 22px; line-height: 1; }
+.pod-name { font-weight: 800; font-size: 13px; margin-top: 8px; word-break: break-word; }
+.pod-sum { font-weight: 700; font-size: 12px; color: var(--accent); margin-top: 4px; }
+
+.donors { padding: 12px 24px 0; display: grid; gap: 1px; }
+.donor {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 2px; border-bottom: 1px solid rgba(255,255,255,0.05);
+  font-size: 12.5px;
+}
+.donor:last-child { border-bottom: none; }
+.donor-rank { color: var(--gray1); font-weight: 700; font-size: 11px; min-width: 22px; }
+.donor-name { font-weight: 600; }
+.donor-sum { margin-left: auto; font-weight: 700; color: var(--accent); }
+.empty {
+  margin: 0 24px; padding: 22px 18px; text-align: center;
+  color: var(--gray1); font-size: 12.5px; line-height: 1.6;
+  border: 1px dashed var(--border); border-radius: 12px;
+}
+
+/* ── Футер ── */
+.foot {
+  border-top: 1px solid var(--border); margin-top: 26px;
+  padding: 14px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 8px;
+}
+.foot a { color: var(--gray1); text-decoration: none; font-size: 11px; font-weight: 600; }
+.foot a:hover { color: var(--white); }
+.brand {
+  font-weight: 200; font-size: 9px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--gray1);
+}
+.updated { padding: 14px 24px 0; text-align: center; color: var(--gray1); font-size: 10px; }
+
+@media (max-width: 480px) {
+  .raised { font-size: 25px; }
+  .podium { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+
+<body>
+<div class="page">
+
+  <header class="header">
+    <a class="home-link" href="index.html">← <span data-i18n="home">Home</span></a>
+    <div class="lang-switch">
+      <button class="lang-btn active" type="button" data-lang="en">EN</button>
+      <button class="lang-btn" type="button" data-lang="ru">RU</button>
+    </div>
+    <img class="avatar" src="assets/logo.jpg" alt="FPS Girls">
+    <div class="wordmark">FPS Girls</div>
+    <div class="tagline" data-i18n="tagline">Support the tournament</div>
+  </header>
+
+  <div class="intro">
+    <h1 id="intro-title">Women's CS2 tournament</h1>
+    <p data-i18n="lead">We are raising the prize pool for our own women's tournament. Every ruble goes to the players and the broadcast — nothing else.</p>
+  </div>
+
+  <div class="goalbox">
+    <div class="amount-row">
+      <div class="raised"><span id="raised">0</span><span class="cur">₽</span></div>
+      <div class="goal-of"><span data-i18n="goalOf">of</span> <span id="goal">30 000</span> ₽</div>
+    </div>
+    <div class="bar">
+      <div class="bar-track"><div class="bar-fill" id="fill"></div></div>
+      <div class="bar-mark" id="mark"></div>
+    </div>
+    <div class="marks"><div class="mark-label" id="mark-label"></div></div>
+    <div class="pct" id="pct"></div>
+  </div>
+
+  <a class="cta" id="cta" href="#" target="_blank" rel="noopener" data-i18n="cta">Support the tournament</a>
+  <div class="hint" data-i18n="hint">Payment goes through CloudTips (T-Bank). Tick “cover the fee” in the form — then the full amount reaches the prize pool.</div>
+
+  <div class="section-label"><span data-i18n="whereTitle">Where the money goes</span><div class="line"></div></div>
+  <div class="tiers" id="tiers"></div>
+
+  <div class="section-label"><span data-i18n="hallTitle">Hall of fame</span><div class="line"></div></div>
+  <div id="hall"></div>
+
+  <div class="updated" id="updated"></div>
+
+  <footer class="foot">
+    <a href="index.html" data-i18n="backLink">← Back to the main page</a>
+    <div class="brand">Female Play Style</div>
+  </footer>
+
+</div>
+
+<script>
+// Данные сбора ведутся вручную в donations.json: у CloudTips нет открытого API,
+// а обновлять итог нужно редко — раз в день во время сбора достаточно.
+const I18N = {
+  en: {
+    title: 'Support the tournament — FPS Girls',
+    home: 'Home',
+    tagline: 'Support the tournament',
+    lead: 'We are raising the prize pool for our own women’s tournament. Every ruble goes to the players and the broadcast — nothing else.',
+    goalOf: 'of',
+    cta: 'Support the tournament',
+    hint: 'Payment goes through CloudTips (T‑Bank). Tick “cover the fee” in the form — then the full amount reaches the prize pool.',
+    whereTitle: 'Where the money goes',
+    hallTitle: 'Hall of fame',
+    backLink: '← Back to the main page',
+    reached: 'reached',
+    empty: 'No supporters yet — be the first one, and your name will be right here.',
+    others: 'Everyone who supported us',
+    anon: 'Anonymous',
+    updated: 'Updated',
+    loadFail: 'Could not load the fundraiser data. Please try again later.',
+  },
+  ru: {
+    title: 'Поддержать турнир — FPS Girls',
+    home: 'На главную',
+    tagline: 'Поддержать турнир',
+    lead: 'Собираем призовой фонд на свой женский турнир. Каждый рубль идёт игрокам и на трансляцию — больше ни на что.',
+    goalOf: 'из',
+    cta: 'Поддержать турнир',
+    hint: 'Оплата идёт через CloudTips (Т‑Банк). Поставь галочку «компенсировать комиссию» — тогда до фонда дойдёт вся сумма.',
+    whereTitle: 'Куда идут деньги',
+    hallTitle: 'Зал славы',
+    backLink: '← На главную',
+    reached: 'собрано',
+    empty: 'Пока никто не поддержал — стань первым, и имя будет здесь.',
+    others: 'Все, кто поддержал',
+    anon: 'Аноним',
+    updated: 'Обновлено',
+    loadFail: 'Не удалось загрузить данные сбора. Попробуй позже.',
+  },
+};
+
+let lang = 'en';
+let data = null;
+
+const t = () => I18N[lang] || I18N.en;
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const money = (n) => Number(n || 0).toLocaleString('ru-RU');
+
+// Донатер может поддержать несколько раз — складываем по имени и показываем один раз
+function rankDonors(donors) {
+  const byName = new Map();
+  (donors || []).forEach((d) => {
+    const name = (d.name || '').trim() || t().anon;
+    const key = name.toLowerCase();
+    byName.set(key, { name, amount: (byName.get(key)?.amount || 0) + Number(d.amount || 0) });
+  });
+  return [...byName.values()].sort((a, b) => b.amount - a.amount);
+}
+
+function renderGoal() {
+  const tiers = data.tiers || [];
+  const goal = tiers.length ? tiers[tiers.length - 1].amount : 0;
+  const raised = Number(data.raised || 0);
+  const pct = goal ? Math.min(100, (raised / goal) * 100) : 0;
+
+  document.getElementById('raised').textContent = money(raised);
+  document.getElementById('goal').textContent = money(goal);
+  document.getElementById('fill').style.width = pct + '%';
+  document.getElementById('pct').textContent = Math.round(pct) + '%';
+
+  // Отметка промежуточной цели (призовые) на шкале
+  const mark = document.getElementById('mark');
+  const label = document.getElementById('mark-label');
+  if (tiers.length > 1 && goal) {
+    const at = (tiers[0].amount / goal) * 100;
+    mark.style.left = at + '%';
+    label.style.left = at + '%';
+    label.textContent = money(tiers[0].amount) + ' ₽';
+    mark.style.display = '';
+  } else {
+    mark.style.display = 'none';
+    label.textContent = '';
+  }
+
+  const cta = document.getElementById('cta');
+  if (data.link) cta.href = data.link;
+
+  const name = (data.tournament || {})[lang] || (data.tournament || {}).en || '';
+  document.getElementById('intro-title').textContent = name;
+
+  document.getElementById('tiers').innerHTML = tiers.map((tier) => {
+    const reached = raised >= tier.amount;
+    return (
+      '<div class="tier' + (reached ? ' reached' : '') + '">' +
+        '<div class="tier-amt">' + money(tier.amount) + ' ₽</div>' +
+        '<div class="tier-text">' + esc(tier[lang] || tier.en || '') + '</div>' +
+        (reached ? '<div class="tier-check">✅</div>' : '') +
+      '</div>'
+    );
+  }).join('');
+}
+
+function renderHall() {
+  const ranked = rankDonors(data.donors);
+  const hall = document.getElementById('hall');
+  if (!ranked.length) {
+    hall.innerHTML = '<div class="empty">' + t().empty + '</div>';
+    return;
+  }
+  const medals = ['🥇', '🥈', '🥉'];
+  const top = ranked.slice(0, 3);
+  const rest = ranked.slice(3);
+
+  let html = '<div class="podium">' + top.map((d, i) =>
+    '<div class="pod' + (i === 0 ? ' first' : '') + '">' +
+      '<div class="pod-medal">' + medals[i] + '</div>' +
+      '<div class="pod-name">' + esc(d.name) + '</div>' +
+      '<div class="pod-sum">' + money(d.amount) + ' ₽</div>' +
+    '</div>'
+  ).join('') + '</div>';
+
+  if (rest.length) {
+    html += '<div class="section-label"><span>' + t().others + '</span><div class="line"></div></div>';
+    html += '<div class="donors">' + rest.map((d, i) =>
+      '<div class="donor">' +
+        '<div class="donor-rank">' + (i + 4) + '</div>' +
+        '<div class="donor-name">' + esc(d.name) + '</div>' +
+        '<div class="donor-sum">' + money(d.amount) + ' ₽</div>' +
+      '</div>'
+    ).join('') + '</div>';
+  }
+  hall.innerHTML = html;
+}
+
+function render() {
+  if (!data) return;
+  renderGoal();
+  renderHall();
+  const upd = document.getElementById('updated');
+  upd.textContent = data.updatedAt ? t().updated + ': ' + data.updatedAt : '';
+}
+
+function setLang(l) {
+  lang = I18N[l] ? l : 'en';
+  document.documentElement.lang = lang;
+  document.title = t().title;
+  document.querySelectorAll('[data-i18n]').forEach((el) => { el.textContent = t()[el.dataset.i18n]; });
+  document.querySelectorAll('.lang-btn').forEach((b) => b.classList.toggle('active', b.dataset.lang === lang));
+  try { localStorage.setItem('fpsg-lang', lang); } catch (e) {}
+  render();
+}
+
+document.querySelectorAll('.lang-btn').forEach((b) => b.addEventListener('click', () => setLang(b.dataset.lang)));
+
+let saved = null;
+try { saved = localStorage.getItem('fpsg-lang'); } catch (e) {}
+
+fetch('donations.json?t=' + Date.now(), { cache: 'no-store' })
+  .then((r) => (r.ok ? r.json() : null))
+  .then((d) => {
+    if (!d) throw new Error('no data');
+    data = d;
+    setLang(saved || 'en');
+  })
+  .catch(() => {
+    setLang(saved || 'en');
+    document.getElementById('hall').innerHTML = '<div class="empty">' + t().loadFail + '</div>';
+  });
+</script>
+</body>
+</html>

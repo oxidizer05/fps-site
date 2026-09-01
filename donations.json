@@ -1,0 +1,22 @@
+{
+  "updatedAt": "2026-08-28",
+  "link": "https://pay.cloudtips.ru/p/d0f59600",
+  "tournament": {
+    "ru": "Женский турнир по CS2",
+    "en": "Women's CS2 tournament"
+  },
+  "raised": 0,
+  "tiers": [
+    {
+      "amount": 20000,
+      "ru": "Призовой фонд — трём командам-призёрам",
+      "en": "Prize pool — for the three top teams"
+    },
+    {
+      "amount": 30000,
+      "ru": "Трансляция турнира: кастеры и продакшн",
+      "en": "Live broadcast: casters and production"
+    }
+  ],
+  "donors": []
+}
