@@ -306,8 +306,10 @@ body::before {
 </div>
 
 <script>
-// Данные сбора ведутся вручную в donations.json: у CloudTips нет открытого API,
-// а обновлять итог нужно редко — раз в день во время сбора достаточно.
+// Настройки сбора (цель, ступени, ссылка) лежат в donations.json, а живые цифры
+// отдаёт бот: он слушает виджеты CloudTips и знает сумму и донатеров в реальном
+// времени. Если бот недоступен, показываем то, что записано в файле.
+const BOT_API = 'https://fps-girls-discord-bot-production.up.railway.app/api/donations';
 const I18N = {
   en: {
     title: 'Support the tournament — FPS Girls',
@@ -465,10 +467,21 @@ try { saved = localStorage.getItem('fpsg-lang'); } catch (e) {}
 
 fetch('donations.json?t=' + Date.now(), { cache: 'no-store' })
   .then((r) => (r.ok ? r.json() : null))
-  .then((d) => {
-    if (!d) throw new Error('no data');
-    data = d;
+  .then((cfg) => {
+    if (!cfg) throw new Error('no data');
+    data = cfg;
     setLang(saved || 'en');
+    // Живые цифры от бота — поверх файла; молчание бота не ломает страницу
+    return fetch(BOT_API, { cache: 'no-store' })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((live) => {
+        if (!live) return;
+        if (typeof live.raised === 'number') data.raised = live.raised;
+        if (Array.isArray(live.donors) && live.donors.length) data.donors = live.donors;
+        if (live.updatedAt) data.updatedAt = new Date(live.updatedAt).toISOString().slice(0, 10);
+        render();
+      })
+      .catch(() => {});
   })
   .catch(() => {
     setLang(saved || 'en');
