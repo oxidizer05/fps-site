@@ -475,7 +475,8 @@ fetch('donations.json?t=' + Date.now(), { cache: 'no-store' })
     return fetch(BOT_API, { cache: 'no-store' })
       .then((r) => (r.ok ? r.json() : null))
       .then((live) => {
-        if (!live) return;
+        // updatedAt === 0 — бот ещё не видел ни одного доната: доверяем файлу
+        if (!live || !live.updatedAt) return;
         if (typeof live.raised === 'number') data.raised = live.raised;
         if (Array.isArray(live.donors) && live.donors.length) data.donors = live.donors;
         if (live.updatedAt) data.updatedAt = new Date(live.updatedAt).toISOString().slice(0, 10);
