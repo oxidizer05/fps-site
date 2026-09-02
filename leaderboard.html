@@ -325,6 +325,17 @@ tr.hidden { display: none; }
 }
 .board a.hltv:hover { color: #fff; border-color: var(--border-accent); background: var(--accent-subtle); }
 
+/* Кнопка поддержки: только у тех, кто сам добавил ссылку через бота */
+.board a.tip {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 18px; height: 18px; margin-left: 6px; flex: none;
+  border-radius: 5px; text-decoration: none; font-size: 10px; line-height: 1;
+  background: var(--accent-subtle);
+  border: 1px solid var(--border-accent);
+  transition: background 150ms, transform 150ms;
+}
+.board a.tip:hover { background: rgba(206,97,223,0.28); transform: translateY(-1px); }
+
 .note {
   padding: 0 24px; margin-top: 4px;
   font-weight: 400; font-size: 10px; line-height: 1.5; color: rgba(150,150,150,0.7); text-align: center;
@@ -457,6 +468,7 @@ const I18N = {
     note: 'В рейтинге — участницы FACEIT-клуба FPS Girls, подтверждённые администрацией клуба. Обновляется автоматически.',
     error: 'Не удалось загрузить рейтинг. Попробуйте обновить страницу позже.',
     empty: 'Пока нет данных для этой игры.',
+    supportTitle: 'Поддержать игрока — ссылка, которую она добавила сама',
     colPlayer: 'Игрок', colElo: 'ELO', colLvl: 'Ур.', colWr: 'Винрейт', colKd: 'K/D', colMatches: 'Матчи', colStab: 'Стаб.', colAct: 'Актив.', colCau: 'Остор.', colGren: 'Гран.', colAwp: 'AWP', colHs: 'Хедш.',
     players: 'игроков', updated: 'Обновлено', never: 'ещё не обновлялось',
     sortLabel: 'Сортировка', sortStab: 'Стабильность', sortAct: 'Активность', sortCau: 'Осторожность', sortGren: 'Мастер гранат', sortAwp: 'Мастер AWP', sortHs: 'Хедшотер',
@@ -473,6 +485,7 @@ const I18N = {
     note: 'The ranking lists FPS Girls FACEIT club members verified by the club admins. Updates automatically.',
     error: 'Could not load the ranking. Please try again later.',
     empty: 'No data for this game yet.',
+    supportTitle: 'Support this player — a link she added herself',
     colPlayer: 'Player', colElo: 'ELO', colLvl: 'Lvl', colWr: 'Win rate', colKd: 'K/D', colMatches: 'Matches', colStab: 'Stab.', colAct: 'Aggr.', colCau: 'Surv.', colGren: 'Nade', colAwp: 'AWP', colHs: 'HS',
     players: 'players', updated: 'Updated', never: 'not updated yet',
     sortLabel: 'Sort by', sortStab: 'Stability', sortAct: 'Aggression', sortCau: 'Survival', sortGren: 'Nade master', sortAwp: 'AWP master', sortHs: 'Headshot',
@@ -554,6 +567,16 @@ function faceitUrl(nick) { return 'https://www.faceit.com/en/players/' + encodeU
 // Liquipedia id профилей для CS не хранятся — проверено. Ключ — player_id
 // FACEIT, чтобы смена ника не рвала связь. Файл читается отдельно от world.json,
 // поэтому новую ссылку видно сразу после правки, без пересборки рейтинга.
+// Ссылки поддержки девушки добавляют себе сами через бота (/support link).
+// Сайт только показывает кнопку — денег не принимает и реквизитов не хранит.
+const SUPPORT_API = 'https://fps-girls-discord-bot-production.up.railway.app/api/support-links';
+let supportMap = {};
+function supportCell(r) {
+  const url = r.playerId ? supportMap[r.playerId] : null;
+  if (!url) return '';
+  return '<a class="tip" href="' + esc(url) + '" target="_blank" rel="noopener nofollow" title="' + esc(t().supportTitle) + '">💜</a>';
+}
+
 let hltvMap = {};
 function hltvCell(r) {
   const rec = r.playerId ? hltvMap[r.playerId] : null;
@@ -715,7 +738,8 @@ function render() {
     return '<tr data-nick="' + esc((r.nickname || '').toLowerCase()) + '">' +
       '<td class="rank">' + (i + 1) + '</td>' +
       '<td class="left"><div class="player"><span class="flag">' + flag(r.country) + '</span>' +
-        '<span class="nick"><a href="' + faceitUrl(r.nickname) + '" target="_blank" rel="noopener">' + esc(r.nickname) + '</a></span></div></td>' +
+        '<span class="nick"><a href="' + faceitUrl(r.nickname) + '" target="_blank" rel="noopener">' + esc(r.nickname) + '</a></span>' +
+        supportCell(r) + '</div></td>' +
       '<td class="col-hltv">' + hltvCell(r) + '</td>' +
       '<td class="elo' + mark(r.elo, 'elo') + '">' + num(r.elo) + '</td>' +
       '<td><span class="lvl" style="background:' + color + '">' + (r.level ?? '—') + '</span></td>' +
@@ -800,6 +824,12 @@ async function load() {
   fetch('hltv.json?t=' + Date.now(), { cache: 'no-store' })
     .then(r => (r.ok ? r.json() : null))
     .then(d => { if (d && d.players) { hltvMap = d.players; if (data) render(); } })
+    .catch(() => {});
+
+  // Ссылки поддержки тоже необязательные: бот молчит — просто нет кнопок
+  fetch(SUPPORT_API, { cache: 'no-store' })
+    .then(r => (r.ok ? r.json() : null))
+    .then(d => { if (d && d.links) { supportMap = d.links; if (data) render(); } })
     .catch(() => {});
 
   try {
