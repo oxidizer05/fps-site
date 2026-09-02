@@ -64,6 +64,7 @@ Font: **Montserrat** (local, `fonts/`), weights 200–900 all available.
 ## Assets
 
 - `fonts/Montserrat-{weight}.ttf` — full family, referenced via `@font-face`
+- `favicon.ico` (16/32/48) + `assets/favicon-32.png`, `assets/apple-touch-icon.png` (180), `assets/favicon-192.png` — иконка сайта: белое «FPS» на `#0D0D0D` и пурпурная полоса с «GIRLS», то есть миниатюра логотипа. Отрисована из шрифтов Montserrat (Black для «FPS», Light для «GIRLS») через PIL и уменьшена с 512 px, поэтому края чистые. **На мелких размерах (ico, 32) «GIRLS» намеренно не рисуется** — в 32 px мелкий текст превращается в грязь; сам `assets/logo.jpg` как favicon не годится по той же причине. Ссылки на иконку вставлены во все `*.html` сразу после `</title>` вместе с `theme-color`.
 - `assets/logo.jpg` — channel avatar
 - `assets/hero-banner.jpg` — header banner (generated with GPT Image 2, 1600px web version)
 - `assets/hub-team.jpg` — team photo above the Faceit CTA (same origin)
