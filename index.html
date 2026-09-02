@@ -147,27 +147,30 @@ body::before {
 }
 
 /* ── Lang switch ── */
+/* Переключатель лежит поверх key art, поэтому на узком экране он мелкий —
+   иначе перекрывает фигуру. Размер побольше возвращается с 900px. */
 .lang-switch {
   position: absolute;
-  top: 14px; right: 14px;
+  top: 10px; right: 10px;
   display: flex;
   gap: 2px;
-  background: rgba(255,255,255,0.04);
+  background: rgba(13,13,13,0.55);
+  backdrop-filter: blur(4px);
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: 5px;
   padding: 2px;
   z-index: 2;
 }
 .lang-btn {
   font-family: inherit;
   font-weight: 700;
-  font-size: 10px;
-  letter-spacing: 0.08em;
+  font-size: 8px;
+  letter-spacing: 0.06em;
   color: var(--gray1);
   background: transparent;
   border: none;
-  border-radius: 4px;
-  padding: 5px 9px;
+  border-radius: 3px;
+  padding: 3px 6px;
   cursor: pointer;
   transition: color 150ms ease-out, background 150ms ease-out;
 }
@@ -474,7 +477,8 @@ a.feature:hover .feature-go, button.feature:hover .feature-go { color: var(--acc
   body { padding: 48px 24px 64px; }
   .page { max-width: 1080px; }
   .header-id::before { width: 560px; height: 560px; }
-  .lang-switch { top: 20px; right: 20px; }
+  .lang-switch { top: 20px; right: 20px; border-radius: 6px; }
+  .lang-btn { font-size: 10px; letter-spacing: 0.08em; padding: 5px 9px; border-radius: 4px; }
   .avatar { width: 112px; height: 112px; }
   .wordmark { font-size: 52px; margin-top: 26px; }
   .tagline { font-size: 15px; margin-top: 14px; }
