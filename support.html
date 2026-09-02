@@ -398,11 +398,15 @@ function renderGoal() {
   const name = (data.tournament || {})[lang] || (data.tournament || {}).en || '';
   document.getElementById('intro-title').textContent = name;
 
-  document.getElementById('tiers').innerHTML = tiers.map((tier) => {
+  document.getElementById('tiers').innerHTML = tiers.map((tier, i) => {
     const reached = raised >= tier.amount;
+    // Первая ступень — сумма целиком, следующие — «+сколько добавить»:
+    // так видно, что стрим появляется за доплату, а не за новые 30 000
+    const delta = i === 0 ? tier.amount : tier.amount - tiers[i - 1].amount;
+    const amountLabel = (i === 0 ? '' : '+') + money(delta) + ' ₽';
     return (
       '<div class="tier' + (reached ? ' reached' : '') + '">' +
-        '<div class="tier-amt">' + money(tier.amount) + ' ₽</div>' +
+        '<div class="tier-amt">' + amountLabel + '</div>' +
         '<div class="tier-text">' + esc(tier[lang] || tier.en || '') + '</div>' +
         (reached ? '<div class="tier-check">✅</div>' : '') +
       '</div>'
