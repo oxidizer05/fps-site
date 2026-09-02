@@ -68,27 +68,51 @@ body::before {
 }
 
 /* ── Header ── */
+/* Шапка и key art — один блок: картинка задаёт высоту, логотип с надписями
+   лежит поверх её чёрного левого поля. */
 .header {
-  padding: 20px 24px 18px;
-  text-align: center;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(160deg, #180d20 0%, #0d0d14 60%, #0d0d0d 100%);
+  background: var(--bg);
   border-bottom: 1px solid var(--border);
 }
+.header-art { display: block; width: 100%; height: auto; }
+/* Затемнение слева — чтобы текст держался на любом кадре, а не только на этом */
 .header::after {
   content: '';
   position: absolute;
-  top: -60px; left: 50%;
-  transform: translateX(-50%);
-  width: 240px; height: 240px;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(13,13,13,0.94) 0%, rgba(13,13,13,0.72) 38%, rgba(13,13,13,0.12) 58%, transparent 70%),
+    linear-gradient(180deg, transparent 72%, rgba(13,13,13,0.65) 100%);
+  pointer-events: none;
+}
+.header-id {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 54%;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 12px;
+  text-align: center;
+}
+/* Фирменное свечение под логотипом — осталось от прежней шапки */
+.header-id::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 260px; height: 260px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(206,97,223,0.16) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(206,97,223,0.18) 0%, transparent 70%);
   pointer-events: none;
 }
 
 .avatar {
-  width: 64px; height: 64px;
+  width: 54px; height: 54px;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid var(--accent);
@@ -97,22 +121,25 @@ body::before {
   z-index: 1;
 }
 
+/* nowrap: в узкой колонке шапки «FPS GIRLS» иначе ломается на две строки */
 .wordmark {
   font-weight: 900;
-  font-size: 24px;
-  letter-spacing: 0.08em;
+  font-size: 19px;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
+  white-space: nowrap;
   color: var(--white);
-  margin-top: 14px;
+  margin-top: 10px;
   line-height: 1;
   position: relative;
   z-index: 1;
 }
 .tagline {
   font-weight: 200;
-  font-size: 10px;
-  letter-spacing: 0.22em;
+  font-size: 8px;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
+  white-space: nowrap;
   color: var(--accent);
   margin-top: 6px;
   position: relative;
@@ -146,22 +173,6 @@ body::before {
 }
 .lang-btn:hover { color: var(--white); }
 .lang-btn.active { background: var(--accent); color: #fff; }
-
-/* ── Banner ── */
-.banner {
-  position: relative;
-  border-bottom: 1px solid var(--border);
-}
-/* Баннер — полоса, а не полноразмерное фото: иначе кнопки уезжают за экран.
-   Пропорции картинки сохраняем обрезкой по центру. */
-.banner img { display: block; width: 100%; max-height: 110px; object-fit: cover; object-position: center 30%; }
-.banner::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(13,13,13,0.45) 0%, transparent 35%, transparent 65%, rgba(13,13,13,0.55) 100%);
-  pointer-events: none;
-}
 
 /* ── Hero ── */
 .hero { padding: 16px 24px 0; text-align: center; }
@@ -462,13 +473,11 @@ a.feature:hover .feature-go, button.feature:hover .feature-go { color: var(--acc
 @media (min-width: 900px) {
   body { padding: 48px 24px 64px; }
   .page { max-width: 1080px; }
-  .header { padding: 26px 48px 22px; }
-  .header::after { width: 420px; height: 420px; top: -120px; }
+  .header-id::before { width: 560px; height: 560px; }
   .lang-switch { top: 20px; right: 20px; }
-  .avatar { width: 78px; height: 78px; }
-  .wordmark { font-size: 30px; margin-top: 14px; }
-  .tagline { font-size: 12px; margin-top: 8px; }
-  .banner img { max-height: 220px; }
+  .avatar { width: 112px; height: 112px; }
+  .wordmark { font-size: 52px; margin-top: 26px; }
+  .tagline { font-size: 15px; margin-top: 14px; }
   .hero { padding: 26px 48px 0; }
   .hero h1 { font-size: 24px; }
   .games { gap: 10px; margin-top: 18px; }
@@ -518,15 +527,13 @@ a.feature:hover .feature-go, button.feature:hover .feature-go { color: var(--acc
       <button class="lang-btn active" type="button" data-lang="en">EN</button>
       <button class="lang-btn" type="button" data-lang="ru">RU</button>
     </div>
-    <img class="avatar" src="assets/logo.jpg" alt="FPS Girls">
-    <div class="wordmark">FPS Girls</div>
-    <div class="tagline">Female Play Style</div>
+    <img class="header-art" src="assets/keyart-clean.jpg" data-i18n-alt="altBanner" alt="Woman in engraved gothic armour, lit from behind against black">
+    <div class="header-id">
+      <img class="avatar" src="assets/logo.jpg" alt="FPS Girls">
+      <div class="wordmark">FPS Girls</div>
+      <div class="tagline">Female Play Style</div>
+    </div>
   </header>
-
-  <!-- Banner -->
-  <div class="banner">
-    <img src="assets/hero-castlecore.jpg" data-i18n-alt="altBanner" alt="Woman in engraved gothic armour, lit from behind against black">
-  </div>
 
   <!-- Hero -->
   <section class="hero">
