@@ -5,33 +5,33 @@
   <link>https://fpsgirls.com/</link>
   <description>Тестовая лента: проверяем, как ВКонтакте импортирует записи с картинками.</description>
   <language>ru</language>
-  <lastBuildDate>Thu, 08 Oct 2026 08:55:25 +0000</lastBuildDate>
+  <lastBuildDate>Thu, 08 Oct 2026 09:44:37 +0000</lastBuildDate>
   <atom:link href="https://fpsgirls.com/feed-test.xml" rel="self" type="application/rss+xml"/>
   <item>
-    <title>Тест 1: картинка только в enclosure</title>
-    <link>https://fpsgirls.com/?rss-test=1</link>
-    <guid isPermaLink="false">fpsg-rss-test-1</guid>
-    <pubDate>Thu, 08 Oct 2026 08:52:25 +0000</pubDate>
-    <description>Первая тестовая запись. Картинка приложена только тегом enclosure, текст простой.</description>
+    <title>Тест 4: картинка только в enclosure</title>
+    <link>https://fpsgirls.com/?rss-test=4</link>
+    <guid isPermaLink="false">fpsg-rss-test-4</guid>
+    <pubDate>Thu, 08 Oct 2026 09:44:37 +0000</pubDate>
+    <description>Четвёртая тестовая запись. Картинка приложена только тегом enclosure, текст простой.</description>
     <enclosure url="https://fpsgirls.com/assets/keyart-clean.jpg" length="131599" type="image/jpeg"/>
   </item>
   <item>
-    <title>Тест 2: картинка внутри текста</title>
-    <link>https://fpsgirls.com/?rss-test=2</link>
-    <guid isPermaLink="false">fpsg-rss-test-2</guid>
-    <pubDate>Thu, 08 Oct 2026 08:53:25 +0000</pubDate>
-    <description>Вторая тестовая запись. Картинка лежит внутри полного текста (content:encoded).</description>
-    <content:encoded><![CDATA[<p>Вторая тестовая запись. Картинка лежит внутри полного текста.</p><figure><img src="https://fpsgirls.com/assets/keyart-banner.png" alt="Тест"/><figcaption>Подпись под картинкой</figcaption></figure><p>Конец записи.</p>]]></content:encoded>
+    <title>Тест 5: картинка внутри текста</title>
+    <link>https://fpsgirls.com/?rss-test=5</link>
+    <guid isPermaLink="false">fpsg-rss-test-5</guid>
+    <pubDate>Thu, 08 Oct 2026 09:44:37 +0000</pubDate>
+    <description>Пятая тестовая запись. Картинка лежит внутри полного текста (content:encoded).</description>
+    <content:encoded><![CDATA[<p>Пятая тестовая запись. Картинка лежит внутри полного текста.</p><figure><img src="https://fpsgirls.com/assets/keyart-banner.png" alt="Тест"/><figcaption>Подпись под картинкой</figcaption></figure><p>Конец записи.</p>]]></content:encoded>
   </item>
   <item>
-    <title>Тест 3: картинка везде сразу</title>
-    <link>https://fpsgirls.com/?rss-test=3</link>
-    <guid isPermaLink="false">fpsg-rss-test-3</guid>
-    <pubDate>Thu, 08 Oct 2026 08:54:25 +0000</pubDate>
-    <description>Третья тестовая запись. Картинка и в enclosure, и в media:content, и внутри текста.</description>
+    <title>Тест 6: картинка везде сразу</title>
+    <link>https://fpsgirls.com/?rss-test=6</link>
+    <guid isPermaLink="false">fpsg-rss-test-6</guid>
+    <pubDate>Thu, 08 Oct 2026 09:44:37 +0000</pubDate>
+    <description>Шестая тестовая запись. Картинка и в enclosure, и в media:content, и внутри текста.</description>
     <enclosure url="https://fpsgirls.com/assets/keyart-clean.jpg" length="131599" type="image/jpeg"/>
     <media:content url="https://fpsgirls.com/assets/keyart-clean.jpg" medium="image" type="image/jpeg"/>
-    <content:encoded><![CDATA[<p>Третья тестовая запись. Картинка и в enclosure, и в media:content, и внутри текста.</p><p><img src="https://fpsgirls.com/assets/keyart-clean.jpg" alt="Тест"/></p>]]></content:encoded>
+    <content:encoded><![CDATA[<p>Шестая тестовая запись. Картинка и в enclosure, и в media:content, и внутри текста.</p><p><img src="https://fpsgirls.com/assets/keyart-clean.jpg" alt="Тест"/></p>]]></content:encoded>
   </item>
 </channel>
 </rss>
