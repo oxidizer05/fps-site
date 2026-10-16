@@ -121,7 +121,9 @@ async function fetchPlayer(playerId) {
   }
   // playerId кладём в снимок: ники на FACEIT меняются, id — нет. По нему
   // страница подтягивает ссылки на HLTV из hltv.json.
-  return { playerId, nickname: p.nickname, country: p.country ?? null, games };
+  // avatar — ссылка на аватарку FACEIT (пусто, если своей нет): по ней Telegram-бот
+  // делает глитч-портрет героини недели для поста «итоги недели»
+  return { playerId, nickname: p.nickname, country: p.country ?? null, avatar: p.avatar || null, games };
 }
 
 function rowsFor(players, game) {
@@ -133,6 +135,7 @@ function rowsFor(players, game) {
         playerId: p.playerId ?? null,
         nickname: p.nickname,
         country: p.country,
+        avatar: p.avatar ?? null,
         elo: g.elo,
         level: g.level,
         winRate: g.winRate ?? null,
