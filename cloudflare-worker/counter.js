@@ -13,9 +13,20 @@
 // агрегаты. После того как посетитель стал «частым», записи по нему
 // прекращаются, поэтому расход бесплатного лимита KV минимальный.
 //
+// Клики (добавлено 18.10.2026): сайт шлёт /click?b=<страница>_<куда> при
+// нажатии на кнопки Discord и FACEIT-хаба. Ключи c:<имя>, только из белого
+// списка CLICK_NAMES, чтобы никто не насоздавал мусорных ключей. Посмотреть
+// итог: https://fpsgirls.com/api/counter/clicks
+//
 // Настройка: см. cloudflare-worker/README.md. KV-биндинг должен называться COUNTER.
 
 const FREQUENT_AT = 3; // сколько дней-визитов = «часто заходит»
+
+const CLICK_NAMES = [
+  "home_discord", "home_hub",
+  "join_discord", "join_hub",
+  "board_discord", "board_hub",
+];
 
 function json(data) {
   return new Response(JSON.stringify(data), {
@@ -36,6 +47,23 @@ export default {
       total: parseInt(await KV.get("total")) || 0,
       frequent: parseInt(await KV.get("freq")) || 0,
     });
+
+    // Клик по кнопке: sendBeacon шлёт POST, поэтому метод не проверяем.
+    if (url.pathname.endsWith("/click")) {
+      const name = url.searchParams.get("b") || "";
+      if (CLICK_NAMES.includes(name)) {
+        const n = (parseInt(await KV.get("c:" + name)) || 0) + 1;
+        await KV.put("c:" + name, String(n));
+      }
+      return json({ ok: true });
+    }
+
+    // Сводка по кликам: сколько раз нажали каждую кнопку.
+    if (url.pathname.endsWith("/clicks")) {
+      const out = {};
+      for (const name of CLICK_NAMES) out[name] = parseInt(await KV.get("c:" + name)) || 0;
+      return json(out);
+    }
 
     // Регистрируем визит только на /hit; всё остальное — просто отдаём числа.
     if (request.method === "GET" && url.pathname.endsWith("/hit")) {
