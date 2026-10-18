@@ -805,6 +805,7 @@ if (startLang !== 'en') setLang(startLang);
 // Счётчик кликов по внешним кнопкам (Discord, FACEIT-хаб). Шлёт имя кнопки
 // в воркер /api/counter/click, без личных данных. Сравниваем с числом
 // использований инвайта в Discord и видим, сколько людей теряется по дороге.
+// Хаб = только ссылка на клуб FACEIT: ссылки на профили игроков в рейтинге не считаем.
 // Воркер недоступен — клики просто не считаются, кнопки работают как обычно.
 (function () {
   const PAGE = 'home';
@@ -812,7 +813,7 @@ if (startLang !== 'en') setLang(startLang);
     const a = e.target.closest && e.target.closest('a[href]');
     if (!a) return;
     const href = a.getAttribute('href') || '';
-    const target = href.includes('discord.gg') ? 'discord' : href.includes('faceit.com') ? 'hub' : '';
+    const target = href.includes('discord.gg') ? 'discord' : /faceit\.com\/.*\/club\//.test(href) ? 'hub' : '';
     if (!target) return;
     const url = '/api/counter/click?b=' + PAGE + '_' + target;
     try { if (!(navigator.sendBeacon && navigator.sendBeacon(url))) fetch(url, { method: 'POST', keepalive: true }).catch(() => {}); } catch (err) {}
