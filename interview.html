@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interviews on Twitch — FPS Girls</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta name="theme-color" content="#0D0D0D">
+<meta name="description" content="Интервью на Twitch у Саши: раз в месяц гость от FPS Girls. Оставь заявку на себя или предложи интересного человека из киберспорта.">
+
+<style>
+@font-face { font-family: 'Montserrat'; src: url('fonts/Montserrat-Black.ttf') format('truetype');      font-weight: 900; font-display: swap; }
+@font-face { font-family: 'Montserrat'; src: url('fonts/Montserrat-ExtraBold.ttf') format('truetype');  font-weight: 800; font-display: swap; }
+@font-face { font-family: 'Montserrat'; src: url('fonts/Montserrat-Bold.ttf') format('truetype');       font-weight: 700; font-display: swap; }
+@font-face { font-family: 'Montserrat'; src: url('fonts/Montserrat-SemiBold.ttf') format('truetype');   font-weight: 600; font-display: swap; }
+@font-face { font-family: 'Montserrat'; src: url('fonts/Montserrat-Medium.ttf') format('truetype');     font-weight: 500; font-display: swap; }
+@font-face { font-family: 'Montserrat'; src: url('fonts/Montserrat-Regular.ttf') format('truetype');    font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Montserrat'; src: url('fonts/Montserrat-Light.ttf') format('truetype');      font-weight: 300; font-display: swap; }
+@font-face { font-family: 'Montserrat'; src: url('fonts/Montserrat-ExtraLight.ttf') format('truetype'); font-weight: 200; font-display: swap; }
+
+:root {
+  --accent:        #CE61DF;
+  --accent-glow:   rgba(206,97,223,0.30);
+  --accent-subtle: rgba(206,97,223,0.12);
+  --bg:            #0D0D0D;
+  --surface:       #111111;
+  --surface2:      #161318;
+  --border:        rgba(255,255,255,0.08);
+  --border-accent: rgba(206,97,223,0.40);
+  --white:         #FFFFFF;
+  --gray1:         #969696;
+  --twitch:        #9146FF;
+  --error:         #FF6B81;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #080808;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  font-family: 'Montserrat', sans-serif;
+  padding: 32px 16px 56px;
+  color: var(--white);
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.35;
+}
+
+.page {
+  width: 100%;
+  max-width: 760px;
+  position: relative;
+  z-index: 1;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 12px 60px rgba(0,0,0,0.8);
+}
+
+/* ── Header (тот же, что на /join и рейтинге) ── */
+.header {
+  padding: 26px 24px 22px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(160deg, #180d20 0%, #0d0d14 60%, #0d0d0d 100%);
+  border-bottom: 1px solid var(--border);
+}
+.header::after {
+  content: '';
+  position: absolute;
+  top: -80px; left: 50%;
+  transform: translateX(-50%);
+  width: 320px; height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(206,97,223,0.16) 0%, transparent 70%);
+  pointer-events: none;
+}
+.avatar {
+  width: 66px; height: 66px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 20px var(--accent-glow);
+  position: relative; z-index: 1;
+}
+.wordmark {
+  font-weight: 900; font-size: 22px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  margin-top: 12px; line-height: 1;
+  position: relative; z-index: 1;
+}
+.tagline {
+  font-weight: 200; font-size: 10px;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--accent); margin-top: 6px;
+  position: relative; z-index: 1;
+}
+.home-link {
+  position: absolute; top: 16px; left: 16px; z-index: 2;
+  display: inline-flex; align-items: center; gap: 5px;
+  font-weight: 700; font-size: 10px; letter-spacing: 0.08em;
+  color: var(--gray1); text-decoration: none;
+  border: 1px solid var(--border); border-radius: 6px;
+  padding: 6px 10px; transition: color 150ms, border-color 150ms;
+}
+.home-link:hover { color: var(--white); border-color: var(--border-accent); }
+
+.lang-switch {
+  position: absolute; top: 16px; right: 16px; z-index: 2;
+  display: flex; gap: 2px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 6px; padding: 2px;
+}
+.lang-btn {
+  font-family: inherit; font-weight: 700; font-size: 10px; letter-spacing: 0.08em;
+  color: var(--gray1); background: transparent; border: none; border-radius: 4px;
+  padding: 5px 9px; cursor: pointer; transition: color 150ms, background 150ms;
+}
+.lang-btn:hover { color: var(--white); }
+.lang-btn.active { background: var(--accent); color: #fff; }
+
+/* ── Ведущая ── */
+.host {
+  display: flex; gap: 18px; align-items: center;
+  margin: 22px 24px 0; padding: 18px;
+  background: linear-gradient(150deg, rgba(145,70,255,0.12) 0%, var(--surface2) 65%);
+  border: 1px solid rgba(145,70,255,0.35);
+  border-radius: 12px;
+}
+.host-photo {
+  width: 104px; height: 104px; flex-shrink: 0;
+  border-radius: 12px; object-fit: cover;
+  border: 2px solid var(--twitch);
+  box-shadow: 0 0 24px rgba(145,70,255,0.35);
+}
+.host-body { min-width: 0; }
+.host-kicker {
+  font-weight: 700; font-size: 9px; letter-spacing: 0.16em;
+  text-transform: uppercase; color: #B58BFF;
+}
+.host-name { font-weight: 900; font-size: 24px; line-height: 1.15; margin-top: 4px; }
+.host-quote {
+  font-weight: 400; font-style: italic; font-size: 11.5px; color: var(--gray1);
+  margin-top: 4px;
+}
+.host-text {
+  font-weight: 400; font-size: 12px; line-height: 1.65; color: #C9C9C9; margin-top: 8px;
+}
+.twitch-btn {
+  display: inline-flex; align-items: center; gap: 7px; margin-top: 12px;
+  background: var(--twitch); color: #fff; text-decoration: none;
+  font-weight: 800; font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 9px 14px; border-radius: 7px;
+  transition: box-shadow 150ms, transform 150ms;
+}
+.twitch-btn:hover { box-shadow: 0 0 20px rgba(145,70,255,0.45); transform: translateY(-1px); }
+
+/* ── Следующий эфир (появляется, когда в interview.json задан next) ── */
+.next {
+  margin: 12px 24px 0; padding: 12px 14px;
+  background: var(--surface); border: 1px solid var(--border-accent);
+  border-radius: 10px; font-size: 12px; line-height: 1.6; color: #C9C9C9;
+}
+.next b { color: var(--white); font-weight: 700; }
+.next .lbl {
+  font-weight: 700; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--accent); display: block; margin-bottom: 2px;
+}
+
+/* ── Разделитель ── */
+.section-label { display: flex; align-items: center; gap: 10px; padding: 24px 24px 12px; }
+.section-label .line { flex: 1; height: 1px; background: rgba(206,97,223,0.2); }
+.section-label span {
+  font-weight: 700; font-size: 9px; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--accent);
+}
+
+/* ── Шаги ── */
+.steps { list-style: none; padding: 0 24px; }
+.step {
+  display: flex; gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.step:last-child { border-bottom: none; }
+.step-num {
+  width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+  background: var(--accent-subtle); border: 1px solid rgba(206,97,223,0.35);
+  color: var(--accent); font-weight: 800; font-size: 12px;
+  display: flex; align-items: center; justify-content: center;
+}
+.step-title { font-weight: 700; font-size: 13px; line-height: 1.4; }
+.step-text { font-weight: 400; font-size: 12px; line-height: 1.65; color: #B9B9B9; margin-top: 4px; }
+
+/* ── Героиня недели ── */
+.hero-week {
+  margin: 8px 24px 0; padding: 14px 16px;
+  background: var(--surface2); border: 1px solid var(--border);
+  border-left: 2px solid var(--accent); border-radius: 8px;
+  font-size: 12px; line-height: 1.65; color: #B9B9B9;
+}
+.hero-week b { color: #E4E4E4; font-weight: 700; }
+.hero-week a { color: var(--accent); font-weight: 600; }
+
+/* ── Форма ── */
+.form-wrap { padding: 0 24px; scroll-margin-top: 16px; }
+.tabs {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 6px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; padding: 4px;
+}
+.tab {
+  font-family: inherit; cursor: pointer;
+  font-weight: 700; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--gray1); background: transparent; border: none; border-radius: 7px;
+  padding: 11px 8px; transition: color 150ms, background 150ms;
+}
+.tab:hover { color: var(--white); }
+.tab.active { background: var(--accent); color: #fff; }
+.hero-note {
+  margin-top: 12px; padding: 10px 12px; border-radius: 8px;
+  background: var(--accent-subtle); border: 1px solid rgba(206,97,223,0.3);
+  font-size: 12px; line-height: 1.6; color: #E4E4E4;
+}
+form { margin-top: 14px; }
+.field { margin-bottom: 12px; }
+.field label, .field .label {
+  display: block; font-weight: 600; font-size: 11px; letter-spacing: 0.03em;
+  color: #D6D6D6; margin-bottom: 6px;
+}
+.field .opt { font-weight: 400; color: var(--gray1); }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+input[type="text"], input[type="url"], select, textarea {
+  width: 100%; font-family: inherit; font-size: 13px; color: var(--white);
+  background: #0A0A0A; border: 1px solid rgba(255,255,255,0.12); border-radius: 8px;
+  padding: 11px 12px; outline: none; transition: border-color 150ms, box-shadow 150ms;
+}
+select { appearance: none; cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23CE61DF' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 12px center; padding-right: 30px;
+}
+textarea { min-height: 96px; resize: vertical; line-height: 1.5; }
+input:focus, select:focus, textarea:focus { border-color: var(--border-accent); box-shadow: 0 0 0 3px var(--accent-subtle); }
+.invalid { border-color: var(--error) !important; }
+.hint-small { font-size: 10.5px; line-height: 1.5; color: var(--gray1); margin-top: 5px; }
+.consent {
+  display: flex; gap: 10px; align-items: flex-start; cursor: pointer;
+  font-size: 11.5px; line-height: 1.55; color: #C9C9C9; margin: 4px 0 14px;
+}
+.consent input { width: 16px; height: 16px; margin-top: 2px; accent-color: var(--accent); flex-shrink: 0; }
+/* ловушка для ботов: людям не видна */
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.submit {
+  width: 100%; font-family: inherit; cursor: pointer; border: none;
+  background: var(--accent); color: #fff;
+  font-weight: 800; font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 14px 12px; border-radius: 8px;
+  transition: box-shadow 150ms, transform 150ms, opacity 150ms;
+}
+.submit:hover { box-shadow: 0 0 24px var(--accent-glow); transform: translateY(-1px); }
+.submit:disabled { opacity: 0.55; cursor: wait; transform: none; box-shadow: none; }
+.form-note { font-size: 11px; line-height: 1.6; color: var(--gray1); margin-top: 10px; text-align: center; }
+.form-msg { margin-top: 12px; font-size: 12px; line-height: 1.6; text-align: center; min-height: 0; }
+.form-msg.err { color: var(--error); }
+.done {
+  margin-top: 14px; padding: 22px 18px; text-align: center;
+  background: var(--surface2); border: 1px solid var(--border-accent); border-radius: 12px;
+}
+.done-ico { font-size: 30px; }
+.done-title { font-weight: 800; font-size: 16px; margin-top: 8px; }
+.done-text { font-size: 12px; line-height: 1.65; color: #B9B9B9; margin-top: 6px; }
+.done button {
+  margin-top: 14px; font-family: inherit; cursor: pointer;
+  background: transparent; color: var(--accent); border: 1px solid var(--border-accent);
+  font-weight: 800; font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 9px 14px; border-radius: 7px;
+}
+
+/* ── Прошлые интервью (из videos.json) ── */
+.videos { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 0 24px; }
+.video {
+  display: block; text-decoration: none; color: var(--white);
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+  transition: border-color 150ms, transform 150ms;
+}
+.video:hover { border-color: var(--border-accent); transform: translateY(-1px); }
+.video img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; }
+.video span { display: block; padding: 10px 12px; font-weight: 600; font-size: 12px; line-height: 1.4; }
+
+/* ── FAQ ── */
+.faq { padding: 0 24px; }
+.faq details {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 8px; margin-bottom: 8px; transition: border-color 150ms;
+}
+.faq details[open] { border-color: var(--border-accent); }
+.faq summary {
+  list-style: none; cursor: pointer; padding: 13px 16px;
+  font-weight: 600; font-size: 12px; line-height: 1.45; color: #E4E4E4;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: '+'; color: var(--accent); font-weight: 700; font-size: 15px; flex-shrink: 0; }
+.faq details[open] summary::after { content: '−'; }
+.faq .a { padding: 0 16px 14px; font-weight: 400; font-size: 11.5px; line-height: 1.7; color: var(--gray1); }
+.faq .a a { color: var(--accent); }
+
+/* ── Кнопки внизу ── */
+.cta-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 22px 24px 0; }
+.cta {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  background: transparent; color: var(--accent); text-decoration: none;
+  border: 1px solid var(--border-accent);
+  font-weight: 800; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 14px 12px; border-radius: 8px; text-align: center;
+  transition: background 150ms, box-shadow 150ms;
+}
+.cta:hover { background: var(--accent-subtle); box-shadow: 0 0 20px rgba(206,97,223,0.12); }
+
+/* ── Подвал ── */
+.foot {
+  border-top: 1px solid var(--border); margin-top: 26px; padding: 14px 24px;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+}
+.foot-games { display: flex; gap: 10px; align-items: center; }
+.foot-games span { font-weight: 800; font-size: 9px; letter-spacing: 0.1em; color: rgba(255,255,255,0.25); }
+.foot-games .x { color: rgba(206,97,223,0.3); }
+.foot .brand { font-weight: 200; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(206,97,223,0.4); }
+
+@media (max-width: 560px) {
+  .host { flex-direction: column; text-align: center; }
+  .host-photo { width: 120px; height: 120px; }
+  .row2 { grid-template-columns: 1fr; }
+  .videos { grid-template-columns: 1fr; }
+  .cta-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+
+<body>
+<div class="page">
+
+  <header class="header">
+    <a class="home-link" href="index.html">← <span data-i18n="home">Home</span></a>
+    <div class="lang-switch">
+      <button class="lang-btn active" type="button" data-lang="en">EN</button>
+      <button class="lang-btn" type="button" data-lang="ru">RU</button>
+    </div>
+    <img class="avatar" src="assets/logo.jpg" alt="FPS Girls">
+    <div class="wordmark">FPS Girls</div>
+    <div class="tagline" data-i18n="tagline">Interviews on Twitch</div>
+  </header>
+
+  <section class="host">
+    <img class="host-photo" src="assets/sasha.jpg" alt="Саша" width="104" height="104">
+    <div class="host-body">
+      <div class="host-kicker" data-i18n="hostKicker">Collab with a Twitch streamer</div>
+      <div class="host-name" data-i18n="hostName">Sasha</div>
+      <div class="host-quote" data-i18n="hostQuote">“не «беременна в 16», но тоже ничего!” — from her Twitch</div>
+      <p class="host-text" data-i18n="hostText">Once a month Sasha invites a guest from FPS Girls to her stream: players, coaches, casters and anyone with a story from the scene. The best moments become highlights in our communities.</p>
+      <a class="twitch-btn" href="https://www.twitch.tv/alassssskka" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0 1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg>
+        <span data-i18n="twitchBtn">Watch on Twitch</span>
+      </a>
+    </div>
+  </section>
+
+  <div class="next" id="next" hidden></div>
+
+  <div class="section-label">
+    <div class="line"></div><span data-i18n="howLabel">How it works</span><div class="line"></div>
+  </div>
+  <ol class="steps" id="steps"></ol>
+
+  <p class="hero-week" id="hero-week"></p>
+
+  <div class="section-label">
+    <div class="line"></div><span data-i18n="formLabel">Application</span><div class="line"></div>
+  </div>
+
+  <section class="form-wrap" id="apply">
+    <div class="tabs">
+      <button class="tab active" type="button" data-kind="self" data-i18n="tabSelf">I want an interview</button>
+      <button class="tab" type="button" data-kind="nominate" data-i18n="tabNominate">Suggest a guest</button>
+    </div>
+    <p class="hero-note" id="hero-note" hidden data-i18n="heroNote">You are the player of the week — fill in the form and we will agree on a date with you.</p>
+
+    <form id="form" novalidate>
+      <div class="field">
+        <label for="f-name" data-i18n="lName">Nickname or name</label>
+        <input type="text" id="f-name" name="name" maxlength="60" autocomplete="nickname">
+      </div>
+      <div class="row2">
+        <div class="field">
+          <label for="f-role" data-i18n="lRole">Who are you</label>
+          <select id="f-role" name="role">
+            <option value="" data-i18n="optPick">Choose…</option>
+            <option value="player" data-i18n="rPlayer">Player</option>
+            <option value="coach" data-i18n="rCoach">Coach</option>
+            <option value="caster" data-i18n="rCaster">Caster / commentator</option>
+            <option value="organizer" data-i18n="rOrganizer">Tournament organizer</option>
+            <option value="streamer" data-i18n="rStreamer">Streamer / content creator</option>
+            <option value="other" data-i18n="rOther">Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-game" data-i18n="lGame">Game</label>
+          <select id="f-game" name="game">
+            <option value="" data-i18n="optPick">Choose…</option>
+            <option value="cs2">CS2</option>
+            <option value="r6">Rainbow Six Siege</option>
+            <option value="valorant">Valorant</option>
+            <option value="apex">Apex Legends</option>
+            <option value="tarkov">Tarkov Arena</option>
+            <option value="other" data-i18n="gOther">Another game</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label for="f-link" data-i18n="lLink">Link: FACEIT, Twitch or social profile</label>
+        <input type="url" id="f-link" name="link" maxlength="300" placeholder="faceit.com/…" inputmode="url">
+      </div>
+      <div class="field">
+        <label for="f-about" data-i18n="lAbout">What would you like to talk about</label>
+        <textarea id="f-about" name="about" maxlength="1200"></textarea>
+        <div class="hint-small" data-i18n="hAbout">Your path in the game, a team, a tournament, an unusual story — a couple of sentences is enough.</div>
+      </div>
+      <div class="field">
+        <label for="f-contact"><span data-i18n="lContact">How to reach you: Telegram or Discord</span> <span class="opt" id="contact-opt" hidden data-i18n="optional">(optional)</span></label>
+        <input type="text" id="f-contact" name="contact" maxlength="100" placeholder="@nickname">
+        <div class="hint-small" id="contact-hint" hidden data-i18n="hContactNominate">Leave it if you want us to tell you when the interview is out.</div>
+      </div>
+      <label class="consent" id="consent-row">
+        <input type="checkbox" id="f-consent">
+        <span data-i18n="lConsent">I'm fine with clips from the interview being posted in the FPS Girls communities and on Sasha's channel.</span>
+      </label>
+      <div class="hp" aria-hidden="true">
+        <label for="f-website">Website</label>
+        <input type="text" id="f-website" name="website" tabindex="-1" autocomplete="off">
+      </div>
+      <button class="submit" type="submit" id="submit" data-i18n="submit">Send</button>
+      <p class="form-msg" id="form-msg" role="alert"></p>
+      <p class="form-note" data-i18n="formNote">There is one interview a month, so not everyone gets in. If your story fits, we will write to you ourselves.</p>
+    </form>
+
+    <div class="done" id="done" hidden>
+      <div class="done-ico">🎙</div>
+      <div class="done-title" data-i18n="doneTitle">Got it!</div>
+      <p class="done-text" id="done-text"></p>
+      <button type="button" id="again" data-i18n="again">Send another one</button>
+    </div>
+  </section>
+
+  <div id="videos-block" hidden>
+    <div class="section-label">
+      <div class="line"></div><span data-i18n="videosLabel">FPS Girls interviews</span><div class="line"></div>
+    </div>
+    <div class="videos" id="videos"></div>
+  </div>
+
+  <div class="section-label">
+    <div class="line"></div><span data-i18n="faqLabel">Questions</span><div class="line"></div>
+  </div>
+  <div class="faq" id="faq"></div>
+
+  <div class="cta-row">
+    <a class="cta" href="https://www.twitch.tv/alassssskka" target="_blank" rel="noopener"><span data-i18n="ctaTwitch">Sasha's Twitch</span></a>
+    <a class="cta" href="leaderboard.html"><span data-i18n="ctaBoard">Ranking</span></a>
+    <a class="cta" href="join.html"><span data-i18n="ctaJoin">How to join</span></a>
+  </div>
+
+  <footer class="foot">
+    <div class="foot-games">
+      <span>CS2</span><span>R6S</span><span>EFT</span><span>VAL</span><span>APEX</span>
+      <span class="x">×</span><span>FPS</span>
+    </div>
+    <div class="brand">Female Play Style</div>
+  </footer>
+
+</div>
+
+<script>
+// Заявки принимает Discord-бот на Railway (POST /api/interview) и пересылает
+// модераторам в Telegram. Если бот недоступен, форма честно говорит об ошибке.
+const API = 'https://fps-girls-discord-bot-production.up.railway.app/api/interview';
+const openedAt = Date.now();
+
+const I18N = {
+  en: {
+    title: 'Interviews on Twitch — FPS Girls',
+    home: 'Home', tagline: 'Interviews on Twitch',
+    hostKicker: 'Collab with a Twitch streamer', hostName: 'Sasha',
+    hostQuote: '“не «беременна в 16», но тоже ничего!” — her Twitch bio',
+    hostText: 'Once a month Sasha invites a guest from FPS Girls to her stream: players, coaches, casters and anyone with a story from the scene. The best moments become highlights in our communities.',
+    twitchBtn: 'Watch on Twitch',
+    howLabel: 'How it works', formLabel: 'Application',
+    tabSelf: 'I want an interview', tabNominate: 'Suggest a guest',
+    heroNote: 'You are the player of the week 🔥 Fill in the form and we will agree on a date with you.',
+    lName: 'Nickname or name', lNameN: 'Guest nickname or name',
+    lRole: 'Who are you', lRoleN: 'Who is the guest',
+    optPick: 'Choose…', rPlayer: 'Player', rCoach: 'Coach', rCaster: 'Caster / commentator',
+    rOrganizer: 'Tournament organizer', rStreamer: 'Streamer / content creator', rOther: 'Other',
+    lGame: 'Game', gOther: 'Another game',
+    lLink: 'Link: FACEIT, Twitch or social profile', lLinkN: 'Link to the guest: FACEIT, Twitch or social profile',
+    lAbout: 'What would you like to talk about', lAboutN: 'Why would they be interesting',
+    hAbout: 'Your path in the game, a team, a tournament, an unusual story — a couple of sentences is enough.',
+    hAboutN: 'What they did, what story they could tell — a couple of sentences is enough.',
+    lContact: 'How to reach you: Telegram or Discord', lContactN: 'Your contact: Telegram or Discord',
+    optional: '(optional)', hContactNominate: 'Leave it if you want us to tell you when the interview is out.',
+    lConsent: "I'm fine with clips from the interview being posted in the FPS Girls communities and on Sasha's channel.",
+    submit: 'Send application', sending: 'Sending…',
+    formNote: 'There is one interview a month, so not everyone gets in. If your story fits, we will write to you ourselves.',
+    doneTitle: 'Got it!',
+    doneSelf: 'Your application is with us. If the story fits the next stream, we will write to you on the contact you left.',
+    doneNominate: 'Thanks for the tip! We will take a look and reach out to the guest ourselves.',
+    again: 'Send another one',
+    errors: {
+      name: 'Write a nickname or name.', role: 'Choose who you are.', game: 'Choose a game.',
+      link: 'Add a link to FACEIT, Twitch or a social profile.', about: 'Write a couple of sentences — at least 10 characters.',
+      contact: 'Leave Telegram or Discord so we can reach you.', consent: 'Tick the box about publishing clips.',
+      rate: 'Too many applications in a row. Try again in an hour.',
+      network: 'Could not send. Check your connection and try again, or message us in Discord.',
+    },
+    videosLabel: 'FPS Girls interviews',
+    faqLabel: 'Questions',
+    ctaTwitch: "Sasha's Twitch", ctaBoard: 'Ranking', ctaJoin: 'How to join',
+  },
+  ru: {
+    title: 'Интервью на Twitch — FPS Girls',
+    home: 'На главную', tagline: 'Интервью на Twitch',
+    hostKicker: 'Коллаб со стримершей на Twitch', hostName: 'Саша',
+    hostQuote: '«не „беременна в 16“, но тоже ничего!» — из её Twitch',
+    hostText: 'Раз в месяц Саша зовёт к себе на стрим гостя от FPS Girls: игроков, тренеров, кастеров и всех, кому есть что рассказать о сцене. Лучшие моменты разговора выходят хайлайтами в наших сообществах.',
+    twitchBtn: 'Смотреть на Twitch',
+    howLabel: 'Как это устроено', formLabel: 'Заявка',
+    tabSelf: 'Хочу на интервью', tabNominate: 'Предложить гостя',
+    heroNote: 'Ты героиня недели 🔥 Заполни анкету, и мы договоримся с тобой о дате.',
+    lName: 'Ник или имя', lNameN: 'Ник или имя гостя',
+    lRole: 'Кто ты', lRoleN: 'Кто гость',
+    optPick: 'Выбери…', rPlayer: 'Игрок', rCoach: 'Тренер', rCaster: 'Кастер / комментатор',
+    rOrganizer: 'Организатор турниров', rStreamer: 'Стример / блогер', rOther: 'Другое',
+    lGame: 'Игра', gOther: 'Другая игра',
+    lLink: 'Ссылка: FACEIT, Twitch или соцсеть', lLinkN: 'Ссылка на гостя: FACEIT, Twitch или соцсеть',
+    lAbout: 'О чём хочешь рассказать', lAboutN: 'Чем человек интересен',
+    hAbout: 'Путь в игре, команда, турнир, необычная история — хватит пары предложений.',
+    hAboutN: 'Что сделал(а), какую историю может рассказать — хватит пары предложений.',
+    lContact: 'Как с тобой связаться: Telegram или Discord', lContactN: 'Твой контакт: Telegram или Discord',
+    optional: '(необязательно)', hContactNominate: 'Оставь, если хочешь узнать, когда выйдет интервью.',
+    lConsent: 'Я не против, что фрагменты интервью выйдут в сообществах FPS Girls и на канале Саши.',
+    submit: 'Отправить заявку', sending: 'Отправляем…',
+    formNote: 'Интервью одно в месяц, поэтому берём не всех. Если тема подойдёт, мы напишем тебе сами.',
+    doneTitle: 'Готово!',
+    doneSelf: 'Заявка у нас. Если тема подойдёт для ближайшего эфира, напишем тебе на контакт из заявки.',
+    doneNominate: 'Спасибо за наводку! Посмотрим на гостя и, если подойдёт, свяжемся с ним сами.',
+    again: 'Отправить ещё одну',
+    errors: {
+      name: 'Напиши ник или имя.', role: 'Выбери, кто ты.', game: 'Выбери игру.',
+      link: 'Добавь ссылку на FACEIT, Twitch или соцсеть.', about: 'Напиши пару предложений, хотя бы 10 символов.',
+      contact: 'Оставь Telegram или Discord, чтобы мы могли написать.', consent: 'Поставь галочку про публикацию фрагментов.',
+      rate: 'Слишком много заявок подряд. Попробуй через час.',
+      network: 'Не получилось отправить. Проверь интернет и попробуй ещё раз или напиши нам в Discord.',
+    },
+    videosLabel: 'Интервью FPS Girls',
+    faqLabel: 'Вопросы',
+    ctaTwitch: 'Twitch Саши', ctaBoard: 'Рейтинг', ctaJoin: 'Как вступить',
+  },
+};
+
+// Тексты, где нужна разметка (шаги, героиня недели, FAQ).
+const CONTENT = {
+  en: {
+    steps: [
+      { t: 'Apply', d: 'Tell us about yourself or suggest someone interesting. It takes a couple of minutes.' },
+      { t: 'We pick a guest', d: 'There is one interview a month. We choose the guest together with Sasha and write to them ourselves. If your story does not fit this month, the application stays with us for the next ones.' },
+      { t: 'Stream and highlights', d: 'The talk goes live on Sasha\'s stream. The best moments are then posted in the FPS Girls Telegram, Discord and other communities.' },
+    ],
+    hero: '<b>🏆 Player of the week.</b> Every Saturday we sum up the FPS Girls community ranking. The player of the week can get an invitation without applying, so you can simply play. <a href="leaderboard.html">Open the ranking →</a>',
+    next: (n) => '<span class="lbl">Next stream</span><b>' + n.name + '</b>' + (n.date ? ' · ' + n.date : '') + (n.about ? '<br>' + n.about : ''),
+    faq: [
+      { q: 'Who do you invite?', a: 'Players of any level, coaches, casters, tournament organizers, streamers. Skill matters less than the story: your path in the game, a team, a tournament, something unusual.' },
+      { q: 'How does the interview go?', a: 'It is a live talk on Sasha\'s Twitch stream. We agree on the time, how to connect and what to talk about with you in advance.' },
+      { q: 'Where will the highlights be posted?', a: 'In the FPS Girls Telegram channel, Discord and our other communities, always with a link to Sasha\'s channel.' },
+      { q: 'Can I suggest someone else?', a: 'Yes — use the «Suggest a guest» tab. Your contact is optional: leave it if you want to know when the interview is out.' },
+    ],
+  },
+  ru: {
+    steps: [
+      { t: 'Заявка', d: 'Расскажи о себе или предложи интересного человека. Это займёт пару минут.' },
+      { t: 'Выбираем гостя', d: 'Интервью одно в месяц. Гостя выбираем вместе с Сашей и сами ему пишем. Если тема не подошла в этом месяце, заявка остаётся у нас на следующие.' },
+      { t: 'Эфир и хайлайты', d: 'Разговор идёт вживую на стриме у Саши. Лучшие моменты потом выходят в Telegram, Discord и других сообществах FPS Girls.' },
+    ],
+    hero: '<b>🏆 Героиня недели.</b> Каждую субботу мы подводим итоги рейтинга сообщества FPS Girls. Героиня недели может получить приглашение без заявки, так что можно просто играть. <a href="leaderboard.html">Открыть рейтинг →</a>',
+    next: (n) => '<span class="lbl">Ближайший эфир</span><b>' + n.name + '</b>' + (n.date ? ' · ' + n.date : '') + (n.about ? '<br>' + n.about : ''),
+    faq: [
+      { q: 'Кого вы зовёте?', a: 'Игроков любого уровня, тренеров, кастеров, организаторов турниров, стримеров. Уровень FACEIT не главное, важна история: путь в игре, команда, турнир, что-то необычное.' },
+      { q: 'Как проходит интервью?', a: 'Это живой разговор на стриме у Саши в Twitch. Время, как подключиться и о чём поговорить, обсудим с тобой заранее.' },
+      { q: 'Где выйдут хайлайты?', a: 'В Telegram-канале, Discord и других сообществах FPS Girls, всегда со ссылкой на канал Саши.' },
+      { q: 'Можно предложить не себя?', a: 'Да, во вкладке «Предложить гостя». Твой контакт там необязателен: оставь его, если хочешь узнать, когда выйдет интервью.' },
+    ],
+  },
+};
+
+const params = new URLSearchParams(location.search);
+const fromHero = params.get('from') === 'hero';
+let lang = 'en';
+let kind = 'self';
+let nextGuest = null;
+const t = () => I18N[lang];
+const c = () => CONTENT[lang];
+const $ = (id) => document.getElementById(id);
+
+function esc(s) {
+  return String(s ?? '').replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+}
+
+function renderContent() {
+  $('steps').innerHTML = c().steps.map((s, i) =>
+    '<li class="step"><div class="step-num">' + (i + 1) + '</div><div><div class="step-title">' + s.t +
+    '</div><div class="step-text">' + s.d + '</div></div></li>'
+  ).join('');
+  $('hero-week').innerHTML = c().hero;
+  $('faq').innerHTML = c().faq.map(f =>
+    '<details><summary>' + f.q + '</summary><div class="a">' + f.a + '</div></details>'
+  ).join('');
+  if (nextGuest && nextGuest.name) {
+    const n = { name: esc(nextGuest.name), date: esc(nextGuest.date || ''), about: esc((nextGuest.about || {})[lang] || '') };
+    $('next').innerHTML = c().next(n);
+    $('next').hidden = false;
+  }
+}
+
+// Подписи полей зависят от вкладки: «о себе» или «о госте»
+function renderKind() {
+  const tr = t();
+  const n = kind === 'nominate';
+  document.querySelectorAll('.tab').forEach(b => b.classList.toggle('active', b.dataset.kind === kind));
+  document.querySelector('label[for="f-name"]').textContent = n ? tr.lNameN : tr.lName;
+  document.querySelector('label[for="f-role"]').textContent = n ? tr.lRoleN : tr.lRole;
+  document.querySelector('label[for="f-link"]').textContent = n ? tr.lLinkN : tr.lLink;
+  document.querySelector('label[for="f-about"]').textContent = n ? tr.lAboutN : tr.lAbout;
+  document.querySelector('[data-i18n="hAbout"]').textContent = n ? tr.hAboutN : tr.hAbout;
+  document.querySelector('[data-i18n="lContact"]').textContent = n ? tr.lContactN : tr.lContact;
+  $('contact-opt').hidden = !n;
+  $('contact-hint').hidden = !n;
+  $('consent-row').hidden = n;
+  $('hero-note').hidden = !(fromHero && !n);
+}
+
+function setLang(l) {
+  lang = I18N[l] ? l : 'en';
+  const tr = t();
+  document.documentElement.lang = lang;
+  document.title = tr.title;
+  document.querySelectorAll('[data-i18n]').forEach(el => { if (typeof tr[el.dataset.i18n] === 'string') el.textContent = tr[el.dataset.i18n]; });
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+  try { localStorage.setItem('fpsg-lang', lang); } catch (e) {}
+  renderContent();
+  renderKind();
+  if (!$('done').hidden) showDone();
+}
+
+function setKind(k) {
+  kind = k === 'nominate' ? 'nominate' : 'self';
+  $('form-msg').textContent = '';
+  document.querySelectorAll('.invalid').forEach(el => el.classList.remove('invalid'));
+  renderKind();
+}
+
+const FIELD_OF = { name: 'f-name', role: 'f-role', game: 'f-game', link: 'f-link', about: 'f-about', contact: 'f-contact', consent: 'f-consent' };
+
+function showError(code) {
+  const msg = t().errors[code] || t().errors.network;
+  $('form-msg').textContent = msg;
+  $('form-msg').className = 'form-msg err';
+  const el = FIELD_OF[code] && $(FIELD_OF[code]);
+  if (el) { el.classList.add('invalid'); el.focus(); }
+}
+
+// Та же проверка, что на сервере: чтобы человек увидел ошибку сразу
+function checkLocal(d) {
+  if (!d.name) return 'name';
+  if (!d.role) return 'role';
+  if (!d.game) return 'game';
+  if (!d.link) return 'link';
+  if (d.about.length < 10) return 'about';
+  if (d.kind === 'self' && !d.contact) return 'contact';
+  if (d.kind === 'self' && !d.consent) return 'consent';
+  return '';
+}
+
+function showDone() {
+  $('done-text').textContent = kind === 'nominate' ? t().doneNominate : t().doneSelf;
+  $('form').hidden = true;
+  $('done').hidden = false;
+}
+
+$('form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  document.querySelectorAll('.invalid').forEach(el => el.classList.remove('invalid'));
+  $('form-msg').textContent = '';
+  const data = {
+    kind,
+    name: $('f-name').value.trim(),
+    role: $('f-role').value,
+    game: $('f-game').value,
+    link: $('f-link').value.trim(),
+    about: $('f-about').value.trim(),
+    contact: $('f-contact').value.trim(),
+    consent: kind === 'self' ? $('f-consent').checked : undefined,
+    website: $('f-website').value,
+    elapsed: Date.now() - openedAt,
+    source: fromHero ? 'hero' : 'site',
+    lang,
+  };
+  const bad = checkLocal(data);
+  if (bad) return showError(bad);
+
+  const btn = $('submit');
+  btn.disabled = true;
+  btn.textContent = t().sending;
+  try {
+    const res = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+    const out = await res.json().catch(() => ({}));
+    if (res.ok && out.ok) {
+      $('form').reset();
+      showDone();
+    } else {
+      showError(out.error || 'network');
+    }
+  } catch (err) {
+    showError('network');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = t().submit;
+  }
+});
+
+$('again').addEventListener('click', () => {
+  $('done').hidden = true;
+  $('form').hidden = false;
+});
+document.querySelectorAll('.tab').forEach(b => b.addEventListener('click', () => setKind(b.dataset.kind)));
+document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+
+// Язык: сохранённый выбор, иначе язык браузера (русский для ru/be/kk/ky/uz/tg)
+function detectLang() {
+  const ls = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || ''];
+  return ls.some(l => /^(ru|be|kk|ky|uz|tg)\b/i.test(l)) ? 'ru' : 'en';
+}
+let saved = null;
+try { saved = localStorage.getItem('fpsg-lang'); } catch (e) {}
+setLang(saved || detectLang());
+if (params.get('kind') === 'nominate') setKind('nominate');
+if (fromHero) $('apply').scrollIntoView();
+
+// Ближайший эфир — из interview.json (ведётся вручную); нет файла — блок скрыт
+fetch('interview.json', { cache: 'no-store' })
+  .then(r => (r.ok ? r.json() : null))
+  .then(d => { if (d && d.next) { nextGuest = d.next; renderContent(); } })
+  .catch(() => {});
+
+// Прошлые интервью — из videos.json, категория interview (та же, что на /tournaments)
+fetch('videos.json', { cache: 'no-store' })
+  .then(r => (r.ok ? r.json() : null))
+  .then(d => {
+    const list = [];
+    (d && d.games || []).forEach(g => (g.videos || []).forEach(v => { if (v.category === 'interview') list.push(v); }));
+    if (!list.length) return;
+    $('videos').innerHTML = list.map(v => {
+      const href = 'https://www.youtube.com/watch?v=' + encodeURIComponent(v.id) + (v.list ? '&list=' + encodeURIComponent(v.list) : '');
+      return '<a class="video" href="' + href + '" target="_blank" rel="noopener"><img loading="lazy" alt="" src="https://i.ytimg.com/vi/' +
+        encodeURIComponent(v.id) + '/hqdefault.jpg"><span>' + esc(v.title || '') + '</span></a>';
+    }).join('');
+    $('videos-block').hidden = false;
+  })
+  .catch(() => {});
+</script>
+</body>
+</html>
