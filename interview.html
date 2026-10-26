@@ -291,7 +291,10 @@ input:focus, select:focus, textarea:focus { border-color: var(--border-accent); 
 }
 
 /* ── Прошлые интервью (из videos.json) ── */
-.videos { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 0 24px; }
+.videos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 0 24px; }
+/* Расширения-качалки (SaveFrom и т. п.) вставляют свою кнопку рядом с каждой
+   ссылкой на YouTube; в сетке она занимала ячейку и разбивала ряд. */
+.videos > :not(.video) { display: none !important; }
 .video {
   display: block; text-decoration: none; color: var(--white);
   background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
@@ -299,7 +302,7 @@ input:focus, select:focus, textarea:focus { border-color: var(--border-accent); 
 }
 .video:hover { border-color: var(--border-accent); transform: translateY(-1px); }
 .video img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; }
-.video span { display: block; padding: 10px 12px; font-weight: 600; font-size: 12px; line-height: 1.4; }
+.video span { display: block; padding: 8px 10px; font-weight: 600; font-size: 11px; line-height: 1.35; }
 .videos-more { text-align: center; padding: 14px 24px 0; }
 .more-btn { background: transparent; color: var(--accent); border: 1px solid var(--border-accent); margin-top: 0; }
 .more-btn:hover { background: var(--accent-subtle); box-shadow: 0 0 16px rgba(206,97,223,0.12); }
@@ -348,7 +351,7 @@ input:focus, select:focus, textarea:focus { border-color: var(--border-accent); 
   .host { flex-direction: column; text-align: center; }
   .host-photo { width: 120px; height: 120px; }
   .row2 { grid-template-columns: 1fr; }
-  .videos { grid-template-columns: 1fr; }
+  .videos { grid-template-columns: repeat(2, 1fr); gap: 8px; }
   .cta-row { grid-template-columns: 1fr; }
 }
 </style>

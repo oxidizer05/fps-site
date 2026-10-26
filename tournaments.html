@@ -163,6 +163,9 @@ body::before {
 }
 @media (min-width: 620px) { .grid { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 900px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+/* Расширения-качалки (SaveFrom и т. п.) вставляют свою кнопку рядом с каждой
+   ссылкой на YouTube; в сетке она занимала ячейку и разбивала ряд. */
+.grid > :not(.card) { display: none !important; }
 
 .card {
   display: block; text-decoration: none;
