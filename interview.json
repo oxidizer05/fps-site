@@ -1,0 +1,9 @@
+{
+  "_readme": [
+    "Ближайший эфир для страницы /interview. Пока next = null, блок на странице скрыт.",
+    "Когда гость выбран, заполни next, например:",
+    "\"next\": { \"name\": \"lonny_\", \"date\": \"15 ноября, 20:00 МСК\", \"about\": { \"ru\": \"Путь в 10 уровень FACEIT\", \"en\": \"The road to FACEIT level 10\" } }",
+    "После эфира верни next = null, а запись интервью добавь в videos.json с category: interview."
+  ],
+  "next": null
+}
