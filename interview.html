@@ -152,6 +152,7 @@ body::before {
   text-transform: uppercase; color: #B58BFF;
 }
 .host-name { font-weight: 900; font-size: 24px; line-height: 1.15; margin-top: 4px; }
+.host-nick { color: #B58BFF; }
 .host-quote {
   font-weight: 500; font-size: 11.5px; color: var(--gray1);
   margin-top: 4px;
@@ -365,10 +366,10 @@ input:focus, select:focus, textarea:focus { border-color: var(--border-accent); 
   </header>
 
   <section class="host">
-    <img class="host-photo" src="assets/sasha.jpg" alt="Саша" width="104" height="104">
+    <img class="host-photo" src="assets/sasha.jpg" alt="Саша «Alaska»" width="104" height="104">
     <div class="host-body">
-      <div class="host-kicker" data-i18n="hostKicker">Collab with a Twitch streamer</div>
-      <div class="host-name" data-i18n="hostName">Sasha</div>
+      <div class="host-kicker" data-i18n="hostKicker">Interviews on Twitch</div>
+      <div class="host-name"><span data-i18n="hostName">Sasha</span> <span class="host-nick" data-i18n="hostNick">"Alaska"</span></div>
       <div class="host-quote" data-i18n="hostQuote">@alassssskka on Twitch</div>
       <p class="host-text" data-i18n="hostText">Once a month Sasha invites a guest from FPS Girls to her stream: players, coaches, casters and anyone with a story from the scene. The best moments become highlights in our communities.</p>
       <a class="twitch-btn" href="https://www.twitch.tv/alassssskka" target="_blank" rel="noopener">
@@ -502,7 +503,7 @@ const I18N = {
   en: {
     title: 'Interviews on Twitch — FPS Girls',
     home: 'Home', tagline: 'Interviews on Twitch',
-    hostKicker: 'Collab with a Twitch streamer', hostName: 'Sasha',
+    hostKicker: 'Interviews on Twitch', hostName: 'Sasha', hostNick: '"Alaska"',
     hostQuote: '@alassssskka on Twitch',
     hostText: 'Once a month Sasha invites a guest from FPS Girls to her stream: players, coaches, casters and anyone with a story from the scene. The best moments become highlights in our communities.',
     twitchBtn: 'Watch on Twitch',
@@ -541,7 +542,7 @@ const I18N = {
   ru: {
     title: 'Интервью на Twitch — FPS Girls',
     home: 'На главную', tagline: 'Интервью на Twitch',
-    hostKicker: 'Коллаб со стримершей на Twitch', hostName: 'Саша',
+    hostKicker: 'Интервью на Twitch', hostName: 'Саша', hostNick: '«Alaska»',
     hostQuote: '@alassssskka на Twitch',
     hostText: 'Раз в месяц Саша зовёт к себе на стрим гостя от FPS Girls: игроков, тренеров, кастеров и всех, кому есть что рассказать о сцене. Лучшие моменты разговора выходят хайлайтами в наших сообществах.',
     twitchBtn: 'Смотреть на Twitch',
