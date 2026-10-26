@@ -3,7 +3,9 @@
     "Ближайший эфир для страницы /interview. Пока next = null, блок на странице скрыт.",
     "Когда гость выбран, заполни next, например:",
     "\"next\": { \"name\": \"lonny_\", \"date\": \"15 ноября, 20:00 МСК\", \"about\": { \"ru\": \"Путь в 10 уровень FACEIT\", \"en\": \"The road to FACEIT level 10\" } }",
-    "После эфира верни next = null, а запись интервью добавь в videos.json с category: interview."
+    "После эфира верни next = null, а запись интервью добавь в videos.json с category: interview.",
+    "playlist — плейлист всех интервью на YouTube: на странице показываются 6 первых интервью из videos.json и кнопка «Все интервью» на этот плейлист."
   ],
-  "next": null
+  "next": null,
+  "playlist": "PL1YF5awvXW06O_I5BxBQOttCfTHwP3zNy"
 }

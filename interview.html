@@ -300,6 +300,9 @@ input:focus, select:focus, textarea:focus { border-color: var(--border-accent); 
 .video:hover { border-color: var(--border-accent); transform: translateY(-1px); }
 .video img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; }
 .video span { display: block; padding: 10px 12px; font-weight: 600; font-size: 12px; line-height: 1.4; }
+.videos-more { text-align: center; padding: 14px 24px 0; }
+.more-btn { background: transparent; color: var(--accent); border: 1px solid var(--border-accent); margin-top: 0; }
+.more-btn:hover { background: var(--accent-subtle); box-shadow: 0 0 16px rgba(206,97,223,0.12); }
 
 /* ── FAQ ── */
 .faq { padding: 0 24px; }
@@ -470,6 +473,7 @@ input:focus, select:focus, textarea:focus { border-color: var(--border-accent); 
       <div class="line"></div><span data-i18n="videosLabel">FPS Girls interviews</span><div class="line"></div>
     </div>
     <div class="videos" id="videos"></div>
+    <div class="videos-more" id="videos-more" hidden><a class="twitch-btn more-btn" id="videos-all" href="#" target="_blank" rel="noopener"><span data-i18n="videosAll">All interviews on YouTube</span> →</a></div>
   </div>
 
   <div class="section-label">
@@ -535,7 +539,7 @@ const I18N = {
       rate: 'Too many applications in a row. Try again in an hour.',
       network: 'Could not send. Check your connection and try again, or message us in Discord.',
     },
-    videosLabel: 'FPS Girls interviews',
+    videosLabel: 'FPS Girls interviews', videosAll: 'All interviews on YouTube',
     faqLabel: 'Questions',
     ctaTwitch: "Sasha's Twitch", ctaBoard: 'Ranking', ctaJoin: 'How to join',
   },
@@ -574,7 +578,7 @@ const I18N = {
       rate: 'Слишком много заявок подряд. Попробуй через час.',
       network: 'Не получилось отправить. Проверь интернет и попробуй ещё раз или напиши нам в Discord.',
     },
-    videosLabel: 'Интервью FPS Girls',
+    videosLabel: 'Интервью FPS Girls', videosAll: 'Все интервью на YouTube',
     faqLabel: 'Вопросы',
     ctaTwitch: 'Twitch Саши', ctaBoard: 'Рейтинг', ctaJoin: 'Как вступить',
   },
@@ -767,11 +771,23 @@ setLang(saved || detectLang());
 if (params.get('kind') === 'nominate') setKind('nominate');
 if (fromHero) $('apply').scrollIntoView();
 
-// Ближайший эфир — из interview.json (ведётся вручную); нет файла — блок скрыт
+// Ближайший эфир и плейлист — из interview.json (ведётся вручную); нет файла — блоки скрыты
+const VIDEOS_SHOWN = 6;
+let playlistId = '';
 fetch('interview.json', { cache: 'no-store' })
   .then(r => (r.ok ? r.json() : null))
-  .then(d => { if (d && d.next) { nextGuest = d.next; renderContent(); } })
+  .then(d => {
+    if (d && d.next) { nextGuest = d.next; renderContent(); }
+    if (d && d.playlist) { playlistId = d.playlist; showMore(); }
+  })
   .catch(() => {});
+
+let videoCount = 0;
+function showMore() {
+  if (!playlistId || videoCount <= VIDEOS_SHOWN) return;
+  $('videos-all').href = 'https://www.youtube.com/playlist?list=' + encodeURIComponent(playlistId);
+  $('videos-more').hidden = false;
+}
 
 // Прошлые интервью — из videos.json, категория interview (та же, что на /tournaments)
 fetch('videos.json', { cache: 'no-store' })
@@ -780,12 +796,14 @@ fetch('videos.json', { cache: 'no-store' })
     const list = [];
     (d && d.games || []).forEach(g => (g.videos || []).forEach(v => { if (v.category === 'interview') list.push(v); }));
     if (!list.length) return;
-    $('videos').innerHTML = list.map(v => {
+    videoCount = list.length;
+    $('videos').innerHTML = list.slice(0, VIDEOS_SHOWN).map(v => {
       const href = 'https://www.youtube.com/watch?v=' + encodeURIComponent(v.id) + (v.list ? '&list=' + encodeURIComponent(v.list) : '');
       return '<a class="video" href="' + href + '" target="_blank" rel="noopener"><img loading="lazy" alt="" src="https://i.ytimg.com/vi/' +
         encodeURIComponent(v.id) + '/hqdefault.jpg"><span>' + esc(v.title || '') + '</span></a>';
     }).join('');
     $('videos-block').hidden = false;
+    showMore();
   })
   .catch(() => {});
 </script>

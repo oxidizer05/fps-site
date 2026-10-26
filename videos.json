@@ -23,8 +23,16 @@
       "key": "r6",
       "title": "Rainbow Six Siege",
       "videos": [
-        { "id": "D97XZZq-1Mc", "category": "tournament", "title": "Турнир по Rainbow Six Siege" },
-        { "id": "lqrlK3WD3s8", "category": "event", "title": "Ивент по Rainbow Six Siege" },
+        {
+          "id": "D97XZZq-1Mc",
+          "category": "tournament",
+          "title": "Турнир по Rainbow Six Siege"
+        },
+        {
+          "id": "lqrlK3WD3s8",
+          "category": "event",
+          "title": "Ивент по Rainbow Six Siege"
+        },
         {
           "id": "eCZ4Kl2jQuQ",
           "list": "PL1YF5awvXW04W0oC60wrT9-ImodKZ7phQ",
@@ -33,14 +41,70 @@
         },
         {
           "id": "Qwiu9gzPJeI",
-          "list": "PL1YF5awvXW06O_I5BxBQOttCfTHwP3zNy",
           "category": "interview",
-          "title": "Интервью с игроками"
+          "title": "Amentalia — интервью, RU"
+        },
+        {
+          "id": "n7KBRVyCsSI",
+          "category": "interview",
+          "title": "Try.Batten — интервью, RU"
+        },
+        {
+          "id": "athMdfjDSIg",
+          "category": "interview",
+          "title": "Elly Nell — большое интервью, RU"
+        },
+        {
+          "id": "o6eXJFTK1MM",
+          "category": "interview",
+          "title": "Elly Nell — большое интервью, EN"
+        },
+        {
+          "id": "R8jmEwYfz_U",
+          "category": "interview",
+          "title": "FoxTai1 — большое интервью, RU"
+        },
+        {
+          "id": "gIRIbbuZFVA",
+          "category": "interview",
+          "title": "ELO4 — интервью с английскими субтитрами"
+        },
+        {
+          "id": "JGzUhfPd4Ys",
+          "category": "interview",
+          "title": "iSira — большое интервью, EN"
+        },
+        {
+          "id": "jVUV1xUQvPQ",
+          "category": "interview",
+          "title": "kerrllgan — большое интервью, RU"
+        },
+        {
+          "id": "gr6fyeYqrv4",
+          "category": "interview",
+          "title": "Anna i Maslo — большое интервью, RU"
+        },
+        {
+          "id": "RhP_wf_SBTY",
+          "category": "interview",
+          "title": "Fiishman — интервью вживую, RU"
         }
       ]
     },
-    { "key": "tarkov", "title": "Tarkov Arena", "videos": [] },
-    { "key": "valorant", "title": "Valorant", "videos": [] },
-    { "key": "apex", "title": "Apex Legends", "videos": [] }
+    {
+      "key": "tarkov",
+      "title": "Tarkov Arena",
+      "videos": []
+    },
+    {
+      "key": "valorant",
+      "title": "Valorant",
+      "videos": []
+    },
+    {
+      "key": "apex",
+      "title": "Apex Legends",
+      "videos": []
+    }
   ]
 }
