@@ -271,6 +271,7 @@ const I18N = {
     loadFail: 'Could not load the video list. Please try again later.',
     ytLink: 'All videos on YouTube →',
     playlist: 'Playlist',
+    eventPage: 'Event page',
   },
   ru: {
     title: 'Турниры и видео — FPS Girls',
@@ -283,6 +284,7 @@ const I18N = {
     loadFail: 'Не удалось загрузить список видео. Попробуй обновить страницу позже.',
     ytLink: 'Все видео на YouTube →',
     playlist: 'Плейлист',
+    eventPage: 'Страница ивента',
   },
 };
 
@@ -290,7 +292,8 @@ const CATEGORIES = ['tournament', 'event', 'interview'];
 
 let lang = 'en';
 let data = null;
-let game = null;
+// Вкладку игры можно открыть ссылкой: tournaments.html#r6 (так ведёт «← Все ивенты» со страницы Serious Game)
+let game = location.hash.replace('#', '') || null;
 
 const t = () => I18N[lang] || I18N.en;
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -305,6 +308,18 @@ const thumbUrl = (v) => 'https://i.ytimg.com/vi/' + encodeURIComponent(v.id) + '
 const PLAY_ICON = '<svg width="16" height="16" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
 
 function card(v) {
+  // Запись с page — ссылка на страницу ивента на самом сайте (своя обложка, та же вкладка)
+  if (v.page) {
+    return (
+      '<a class="card" href="' + esc(v.page) + '">' +
+        '<div class="thumb">' +
+          '<img src="' + esc(v.image || '') + '" alt="" loading="lazy">' +
+          '<span class="badge">' + t().eventPage + '</span>' +
+        '</div>' +
+        '<div class="card-title">' + esc(v.title || '') + '</div>' +
+      '</a>'
+    );
+  }
   return (
     '<a class="card" href="' + videoUrl(v) + '" target="_blank" rel="noopener">' +
       '<div class="thumb">' +

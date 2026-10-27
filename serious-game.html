@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Serious Game — FPS Girls</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta name="theme-color" content="#0D0D0D">
+<meta name="description" content="Serious Game — ивент FPS Girls по Rainbow Six Siege: сильнейшие команды играют матч на деньги. Трансляция на Twitch по субботам в 20:00 Мск.">
+
+<style>
+/* Serious Game — страница ивента. Вёрстка перенесена из проекта r6-serious-game
+   (макет Figma «R6 Female Serious Game (Copy)», фрейм Main 1:3, 1440×7516).
+   На ширине от 900 px всё строится в «пикселях макета»: --u = ширина страницы / 1440,
+   поэтому раскладка совпадает с Figma и уменьшается вместе с окном. Ниже 900 px —
+   мобильная версия: секции идут потоком, коллажи масштабируются целиком.
+   Числа в style="--x/--y/--w/--h" — пиксели макета от верха секции. */
+
+@font-face { font-family: "Montserrat"; font-weight: 300; font-display: swap; src: url("fonts/Montserrat-Light.woff2") format("woff2"); }
+@font-face { font-family: "Montserrat"; font-weight: 500; font-display: swap; src: url("fonts/Montserrat-Medium.woff2") format("woff2"); }
+@font-face { font-family: "Montserrat"; font-weight: 800; font-display: swap; src: url("fonts/Montserrat-ExtraBold.woff2") format("woff2"); }
+@font-face { font-family: "Montserrat"; font-weight: 900; font-display: swap; src: url("fonts/Montserrat-Black.woff2") format("woff2"); }
+@font-face { font-family: "Inter"; font-weight: 600; font-display: swap; src: url("fonts/Inter-SemiBold.woff2") format("woff2"); }
+
+:root {
+  --bg: #131313;
+  --nav: #1c1c1c;
+  --text: #fff;
+  --muted: #e3e3e3;
+  --link: #f8f8f8;
+  --grad: linear-gradient(120.39deg, #6937f6 0%, #f637aa 100%);
+  /* 1 пиксель макета. cqw считается от body (контейнер), поэтому полоса прокрутки не мешает. */
+  --u: calc(min(100cqw, 1440px) / 1440);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--bg); color: var(--text); scroll-behavior: smooth; }
+body {
+  font-family: "Montserrat", system-ui, sans-serif;
+  container-type: inline-size;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; }
+a { color: inherit; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+/* ---------- Полоса сайта: обратно к ивентам и на главную ---------- */
+.site { background: #0D0D0D; border-bottom: 1px solid rgba(255, 255, 255, .08); }
+.site__in {
+  max-width: 1440px; margin: 0 auto; height: 44px;
+  padding: 0 max(16px, calc(122 * var(--u)));
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+.site__back {
+  font-weight: 500; font-size: 12px; letter-spacing: .08em; text-transform: uppercase;
+  color: #969696; text-decoration: none; white-space: nowrap; transition: color .2s;
+}
+.site__back:hover { color: #fff; }
+.site__brand {
+  display: flex; align-items: center; gap: 8px;
+  font-weight: 900; font-size: 13px; letter-spacing: .08em; text-transform: uppercase;
+  text-decoration: none; white-space: nowrap;
+}
+.site__brand img { width: 24px; height: 24px; border-radius: 50%; border: 1px solid #CE61DF; object-fit: cover; }
+
+/* ---------- Шапка ---------- */
+.nav { background: var(--nav); }
+.nav__in { position: relative; max-width: 1440px; margin: 0 auto; height: calc(133 * var(--u)); }
+.btn {
+  border-radius: calc(20 * var(--u));
+  background: var(--grad);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: calc(20 * var(--u)); line-height: 1.22;
+  color: #fff; text-decoration: none; white-space: nowrap;
+  transition: filter .2s, transform .2s;
+}
+.btn:hover { filter: brightness(1.12); transform: translateY(-1px); }
+.nav .btn {
+  position: absolute; left: calc(122 * var(--u)); top: calc(38 * var(--u));
+  width: calc(231 * var(--u)); height: calc(61 * var(--u));
+}
+.nav__link {
+  position: absolute; top: calc(58 * var(--u));
+  font-weight: 500; font-size: calc(20 * var(--u)); line-height: 1.22;
+  color: var(--muted); text-transform: uppercase; text-decoration: none; white-space: nowrap;
+  transition: color .2s;
+}
+.nav__link:hover { color: #fff; }
+.nav__link--about { left: calc(1029.84 * var(--u)); }
+.nav__link--contacts { left: calc(1202 * var(--u)); }
+
+/* ---------- Фон с крапинками ---------- */
+main {
+  background-color: var(--bg);
+  background-image: url("assets/serious-game/texture.webp");
+  background-size: calc(1438 * var(--u)) calc(809 * var(--u));
+  background-position: center calc(502 * var(--u));
+}
+
+/* ---------- Полноширинные картинки ---------- */
+.hero, .strip { max-width: 1440px; margin: 0 auto; }
+.hero img { width: 100%; height: auto; aspect-ratio: 1440 / 519; object-fit: cover; }
+.strip img { width: 100%; height: auto; aspect-ratio: 1440 / 478; object-fit: cover; }
+
+/* ---------- Секции-коллажи ---------- */
+.sec { position: relative; max-width: 1440px; margin: 0 auto; height: calc(var(--h) * var(--u)); }
+
+.sec > .abs {
+  position: absolute;
+  left: calc(var(--x) * var(--u)); top: calc(var(--y) * var(--u));
+  width: calc(var(--w) * var(--u));
+}
+.sec > img.abs { height: calc(var(--h) * var(--u)); }
+.sec > .btn { height: calc(61 * var(--u)); }
+.sec > .pic { object-fit: cover; }
+.flip { transform: scaleX(-1); }
+
+.h2 {
+  font-weight: 800; font-size: calc(39.385 * var(--u)); line-height: 1.22;
+  text-shadow: 0 calc(2.462 * var(--u)) calc(2.462 * var(--u)) rgba(0, 0, 0, .25);
+}
+.h2.up { text-transform: uppercase; }
+.h2.c { text-align: center; }
+.txt { font-weight: 500; font-size: calc(28 * var(--u)); line-height: calc(35 * var(--u)); }
+.txt a { text-underline-offset: .15em; transition: color .2s; }
+.txt a:hover { color: #f637aa; }
+
+/* Коллаж: своя система координат. --a = 1 пиксель макета внутри коллажа,
+   считается от ширины самого коллажа, поэтому на телефоне он уменьшается целиком. */
+.art {
+  position: absolute;
+  left: calc(var(--x) * var(--u)); top: calc(var(--y) * var(--u));
+  width: calc(var(--w) * var(--u)); height: calc(var(--h) * var(--u));
+  container-type: inline-size;
+  --aw: var(--w);
+}
+.art > * {
+  position: absolute;
+  left: calc(var(--x) * 100cqw / var(--aw)); top: calc(var(--y) * 100cqw / var(--aw));
+  width: calc(var(--w) * 100cqw / var(--aw)); height: calc(var(--h) * 100cqw / var(--aw));
+}
+.art > img { object-fit: cover; }
+.art > img[src$=".svg"] { object-fit: fill; }
+.rot { display: flex; align-items: center; justify-content: center; }
+.rot > img {
+  flex: none;
+  width: calc(var(--iw) * 100cqw / var(--aw)); height: calc(var(--ih) * 100cqw / var(--aw));
+  transform: rotate(var(--r));
+}
+
+/* Превью матчей ведут на плейлист Serious Game на YouTube */
+a.thumb { display: block; transition: transform .2s, filter .2s; }
+a.thumb:hover { transform: translateY(-3px); filter: brightness(1.1); }
+a.thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+.contacts { overflow: hidden; }
+
+/* ---------- Контакты ---------- */
+.contact { height: calc(181 * var(--u)); }
+.contact__title {
+  position: absolute; left: calc(3 * var(--u)); top: 0;
+  font-weight: 900; font-size: calc(40 * var(--u)); line-height: 1.22; white-space: nowrap;
+}
+.contact__row {
+  position: absolute; display: flex; align-items: center;
+  font-family: "Inter", system-ui, sans-serif; font-weight: 600;
+  font-size: calc(24 * var(--u)); line-height: 1.21; color: var(--link);
+  text-decoration: none; white-space: nowrap;
+}
+.contact__row--vk { left: 0; top: calc(62 * var(--u)); gap: calc(15 * var(--u)); }
+.contact__row--vk .contact__icon { width: calc(62 * var(--u)); height: calc(62 * var(--u)); }
+.contact__row--vk .contact__text { text-decoration: underline; text-decoration-skip-ink: none; }
+.contact__row--mail { left: calc(2 * var(--u)); top: calc(126 * var(--u)); gap: calc(20 * var(--u)); }
+.contact__row--mail .contact__icon { width: calc(55 * var(--u)); height: calc(55 * var(--u)); }
+.contact__row:hover .contact__text { color: #fff; text-decoration: underline; }
+
+/* ---------- Подвал ---------- */
+.foot {
+  background: #000; text-align: center;
+  padding: calc(41 * var(--u)) 16px calc(40 * var(--u));
+}
+.foot__title { font-weight: 900; font-size: calc(32 * var(--u)); line-height: 1.22; }
+.foot__sub { font-weight: 300; font-size: calc(14 * var(--u)); line-height: 1.22; margin-top: calc(9 * var(--u)); }
+.foot__sub a { text-decoration: none; color: #CE61DF; }
+.foot__sub a:hover { text-decoration: underline; }
+
+/* =========================================================
+   Телефоны и узкие планшеты
+   ========================================================= */
+@media (max-width: 899px) {
+  .site__in { padding: 0 16px; }
+  .nav__in { height: 64px; display: flex; align-items: center; gap: 12px; padding: 0 16px; }
+  .btn { border-radius: 14px; font-size: 14px; }
+  .nav .btn { position: static; width: auto; height: 40px; padding: 0 16px; }
+  .nav__links { margin-left: auto; display: flex; gap: 16px; }
+  .nav__link { position: static; font-size: 12px; }
+
+  main { background-size: 720px 405px; background-position: center 200px; }
+
+  .sec { height: auto; max-width: 640px; padding: 44px 16px; }
+  .sec > .abs { position: static; width: auto; }
+  .sec > img.abs { height: auto; }
+  .sec > .deco { display: none; }
+  .sec > .btn { height: 48px; font-size: 16px; }
+  br.d { display: none; }
+
+  .h2 { font-size: 24px; text-shadow: 0 2px 2px rgba(0, 0, 0, .25); }
+  .txt { font-size: 17px; line-height: 1.5; }
+  .sec > :not(.deco) { margin-top: 24px; }
+  .sec > :first-child { margin-top: 0; }
+
+  .art { position: relative; left: auto; top: auto; width: 100%; height: auto; aspect-ratio: var(--w) / var(--h); }
+  .sec > .pic { width: 100%; aspect-ratio: 1230 / 972; }
+
+  .rules .art { width: 82%; margin-left: auto; margin-right: auto; }
+  .mission .art--warden { width: 90%; margin-left: auto; margin-right: auto; }
+
+  .art--videos { aspect-ratio: auto; display: grid; gap: 16px; }
+  .art--videos > .scr { display: none; }
+  .art--videos > .thumb { position: static; width: 100%; height: auto; aspect-ratio: 345 / 193; }
+
+  .contacts { padding-top: 24px; }
+  .art--sledge { width: calc(100% + 32px); margin-left: -16px; }
+  .art--sledge > .scr { display: none; }
+  .contact { margin-top: 24px; height: auto; display: grid; gap: 14px; }
+  .contact__title { position: static; font-size: 26px; margin-bottom: 4px; }
+  .contact__row { position: static; font-size: 16px; gap: 12px; white-space: normal; word-break: break-all; }
+  .contact__row--vk .contact__icon, .contact__row--mail .contact__icon { width: 36px; height: 36px; flex: none; }
+
+  .foot { padding: 28px 16px; }
+  .foot__title { font-size: 22px; }
+  .foot__sub { font-size: 12px; margin-top: 6px; }
+}
+</style>
+</head>
+<body>
+
+<div class="site">
+  <div class="site__in">
+    <a class="site__back" href="tournaments.html#r6">← Все ивенты</a>
+    <a class="site__brand" href="index.html"><img src="assets/logo.jpg" alt="">FPS Girls</a>
+  </div>
+</div>
+
+<header class="nav">
+  <div class="nav__in">
+    <!-- Куда ведёт «Принять участие», владелец ещё не решил; пока — как остальные кнопки участия на сайте. -->
+    <a class="btn" href="join.html?game=r6">Принять участие</a>
+    <nav class="nav__links" aria-label="Разделы">
+      <a class="nav__link nav__link--about" href="#about">об ивенте</a>
+      <a class="nav__link nav__link--contacts" href="#contacts">Контакты</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <h1 class="sr-only">Serious Game — ивент FPS Girls по Rainbow Six Siege</h1>
+
+  <section class="hero">
+    <img src="assets/serious-game/hero.webp" width="1440" height="519"
+         alt="Serious Game, Rainbow Six Siege: суббота, 20:00 Мск. Twitch-канал R6FEMALE_RU">
+  </section>
+
+  <section class="sec about" id="about" style="--h:420">
+    <h2 class="abs h2" style="--x:122;--y:84;--w:462">Об ивенте</h2>
+    <p class="abs txt" style="--x:122;--y:178;--w:710">Serious Game — ивент FPS Girls <br class="d">по Rainbow Six Siege. Сильнейшие <br class="d">команды играют матч на деньги, <br class="d">а мы показываем его на Twitch.</p>
+    <div class="art" style="--x:755;--y:56;--w:613;--h:362">
+      <div class="rot" style="--x:0;--y:73.14;--w:330.379;--h:251.082;--iw:313.137;--ih:226;--r:-4.95deg"><img src="assets/serious-game/scribble-ash.svg" alt=""></div>
+      <img src="assets/serious-game/ash-dokkaebi.webp" style="--x:24;--y:0;--w:589;--h:362" alt="Оперативники Rainbow Six Siege">
+    </div>
+    <img class="abs deco" src="assets/serious-game/line-about.svg" style="--x:293;--y:411.5;--w:1055.5;--h:20" alt="">
+  </section>
+
+  <section class="strip">
+    <img src="assets/serious-game/operators-strip.webp" width="1440" height="478" loading="lazy" alt="Оперативники Rainbow Six Siege">
+  </section>
+
+  <section class="sec rules" style="--h:940">
+    <p class="abs txt" style="--x:122;--y:121;--w:1216">Любая команда может принять участие в матче. Но при условии, что в команде будет хотя бы одна девушка и ранг игроков будет не ниже платины.</p>
+    <img class="abs deco" src="assets/serious-game/line-twitch.svg" style="--x:550;--y:552.5;--w:788.981;--h:7" alt="">
+    <div class="art" style="--x:24;--y:206;--w:661;--h:768">
+      <img src="assets/serious-game/twitch-logo.webp" style="--x:0;--y:0;--w:454.41;--h:443.463" alt="Twitch">
+      <img src="assets/serious-game/iana.webp" style="--x:162;--y:51;--w:499;--h:717" loading="lazy" alt="">
+    </div>
+    <p class="abs txt" style="--x:669;--y:471;--w:710">Трансляция будет проходить на <a href="https://www.twitch.tv/r6female_ru" target="_blank" rel="noopener">Twitch</a> каждую субботу в 20:00 Мск.</p>
+    <img class="abs deco" src="assets/serious-game/lightning.svg" style="--x:876.1;--y:611.6;--w:329.681;--h:321.296" alt="">
+  </section>
+
+  <section class="sec mission" style="--h:770">
+    <p class="abs txt" style="--x:124;--y:71;--w:708">Наша цель — заинтересовать молодёжь <br class="d">киберспортом и подарить новый опыт <br class="d">и эмоции и игрокам, и зрителям.</p>
+    <div class="art art--warden" style="--x:102;--y:207;--w:596;--h:502">
+      <img src="assets/serious-game/warden.webp" style="--x:0;--y:0;--w:596;--h:502" loading="lazy" alt="">
+      <img src="assets/serious-game/warden-glasses.svg" style="--x:287.84;--y:123.08;--w:107.607;--h:46.073" alt="">
+    </div>
+    <div class="art art--people" style="--x:778;--y:2.51;--w:619.8;--h:710.5">
+      <img src="assets/serious-game/scribble-people.svg" style="--x:222.6;--y:-1.5;--w:398.649;--h:435.639" alt="">
+      <img src="assets/serious-game/people.webp" style="--x:0;--y:75.49;--w:564;--h:635" loading="lazy" alt="Игроки и зрители ивента">
+    </div>
+    <img class="abs deco" src="assets/serious-game/line-people-bottom.svg" style="--x:102;--y:691.5;--w:1268;--h:23" alt="">
+    <img class="abs deco" src="assets/serious-game/line-people-right.svg" style="--x:1334.76;--y:78.09;--w:4.609;--h:677.609" alt="">
+  </section>
+
+  <section class="sec stats" style="--h:960">
+    <h2 class="abs h2 up c" style="--x:71;--y:56;--w:1298">интерес со стороны зрителей в цифрах</h2>
+    <img class="abs deco" src="assets/serious-game/line-stats.svg" style="--x:328;--y:95.5;--w:814;--h:6" alt="">
+    <p class="abs txt" style="--x:122;--y:200;--w:1216">В среднем трансляция идёт 2 часа. Прошло уже три трансляции, и уже на второй среднее число зрителей выросло с 40 до 65, в пике — 100 зрителей, а всего матч пришли посмотреть больше 300 человек.</p>
+    <div class="art" style="--x:137;--y:416;--w:1117;--h:535" role="img" aria-label="Число зрителей выросло с 40 до 65">
+      <img src="assets/serious-game/marker.webp" style="--x:663;--y:0;--w:454;--h:376" loading="lazy" alt="">
+      <img src="assets/serious-game/num-40.webp" style="--x:0;--y:315;--w:158;--h:87" loading="lazy" alt="">
+      <div class="rot" style="--x:114;--y:275;--w:691.71;--h:260;--iw:677;--ih:204;--r:4.81deg"><img src="assets/serious-game/arrow.webp" loading="lazy" alt=""></div>
+      <img src="assets/serious-game/num-65.webp" style="--x:757;--y:107;--w:280;--h:168" loading="lazy" alt="">
+      <img src="assets/serious-game/run.webp" style="--x:213;--y:54;--w:348;--h:348" loading="lazy" alt="">
+    </div>
+  </section>
+
+  <section class="sec sponsors" style="--h:400">
+    <h2 class="abs h2 up c" style="--x:23;--y:36;--w:1394">Зачем играть в Serious Game</h2>
+    <img class="abs deco flip" src="assets/serious-game/line-sponsor.svg" style="--x:82;--y:76.5;--w:1309;--h:14" alt="">
+    <p class="abs txt" style="--x:104;--y:181;--w:1251">Это матч на деньги в прямом эфире на Twitch — шанс показать себя <br class="d">зрителям и киберспортивным организациям, которым нужны молодые <br class="d">и талантливые игроки в составы по R6. Хотите поддержать ивент <br class="d">как спонсор — напишите нам, контакты внизу страницы.</p>
+  </section>
+
+  <section class="sec team" style="--h:1280">
+    <h2 class="abs h2 up c" style="--x:489;--y:36;--w:462">наша команда</h2>
+    <img class="abs deco" src="assets/serious-game/line-team.svg" style="--x:514.15;--y:75.9;--w:440.772;--h:5.434" alt="">
+    <img class="abs pic" src="assets/serious-game/team.webp" style="--x:105;--y:142;--w:1230;--h:972" width="1230" height="972" loading="lazy"
+         alt="Команда: MeDVeD (VK greenteateam), Vespertus (VK vesp_tv), Timasich (Twitch Timasich), Shpa1a (Telegram bot5hpa1a), Liminality (VK 1iminality), Fast Geus (VK fast_geu)">
+    <p class="abs txt" style="--x:104;--y:1181;--w:1251">Мы делаем ивент целиком: общаемся с командами, проводим трансляцию матча и рассказываем о нём в соцсетях.</p>
+  </section>
+
+  <section class="sec videos" style="--h:640">
+    <h2 class="abs h2 up c" style="--x:130;--y:214;--w:1180">послематчевые видосики для соцсетей</h2>
+    <img class="abs deco" src="assets/serious-game/line-videos.svg" style="--x:208;--y:252.5;--w:1030;--h:12" alt="">
+    <!-- Все три превью ведут на плейлист Serious Game на YouTube-канале FPS Girls (он же в videos.json). -->
+    <div class="art art--videos" style="--x:122;--y:298.69;--w:1196;--h:299">
+      <img class="scr" src="assets/serious-game/scribble-v3-top.svg" style="--x:870.97;--y:57.99;--w:160.303;--h:108.242" alt="">
+      <div class="rot scr" style="--x:142.1;--y:0;--w:274.523;--h:264.944;--iw:212.002;--ih:180.738;--r:-32.49deg"><img src="assets/serious-game/scribble-v1-top.svg" alt=""></div>
+      <img class="scr" src="assets/serious-game/scribble-v2-top.svg" style="--x:548.69;--y:73.67;--w:235.723;--h:44.779" alt="">
+      <a class="thumb" href="https://www.youtube.com/watch?v=eCZ4Kl2jQuQ&amp;list=PL1YF5awvXW04W0oC60wrT9-ImodKZ7phQ" target="_blank" rel="noopener" style="--x:0;--y:91.31;--w:345;--h:193"><img src="assets/serious-game/video-1.jpg" loading="lazy" alt="Serious Players: MRAZI против ARENA STARS — смотреть на YouTube"></a>
+      <a class="thumb" href="https://www.youtube.com/watch?v=eCZ4Kl2jQuQ&amp;list=PL1YF5awvXW04W0oC60wrT9-ImodKZ7phQ" target="_blank" rel="noopener" style="--x:425;--y:91.31;--w:345;--h:193"><img src="assets/serious-game/video-2.jpg" loading="lazy" alt="Serious Players: RANETKI против PODPIVAS GAMING — смотреть на YouTube"></a>
+      <a class="thumb" href="https://www.youtube.com/watch?v=eCZ4Kl2jQuQ&amp;list=PL1YF5awvXW04W0oC60wrT9-ImodKZ7phQ" target="_blank" rel="noopener" style="--x:851;--y:91.31;--w:345;--h:193"><img src="assets/serious-game/video-3.jpg" loading="lazy" alt="Serious Players: WHOASKED377 против AMOGUS — смотреть на YouTube"></a>
+      <img class="scr" src="assets/serious-game/scribble-v1-bottom.svg" style="--x:30.29;--y:276.46;--w:124.368;--h:22.417" alt="">
+      <img class="scr" src="assets/serious-game/scribble-v2-bottom.svg" style="--x:604.41;--y:277.62;--w:122.436;--h:20.58" alt="">
+      <img class="scr" src="assets/serious-game/scribble-v3-bottom.svg" style="--x:981.65;--y:284.12;--w:179.513;--h:13.131" alt="">
+    </div>
+  </section>
+
+  <section class="sec contacts" id="contacts" style="--h:830">
+    <div class="art art--sledge" style="--x:-100;--y:184.47;--w:1014;--h:645.53">
+      <div class="rot" style="--x:432.84;--y:0;--w:498.03;--h:421.473;--iw:400.763;--ih:480.984;--r:87.23deg"><img src="assets/serious-game/circle-contact.svg" alt=""></div>
+      <img class="scr" src="assets/serious-game/lines-contact.svg" style="--x:230;--y:20.74;--w:1148.53;--h:408.882" alt="">
+      <img src="assets/serious-game/sledge.webp" style="--x:0;--y:8.53;--w:1014;--h:637" loading="lazy" alt="">
+    </div>
+    <a class="abs btn" href="join.html?game=r6" style="--x:969;--y:520;--w:231">Принять участие</a>
+    <div class="abs contact" style="--x:969;--y:629;--w:430">
+      <h2 class="contact__title">Наши контакты</h2>
+      <a class="contact__row contact__row--vk" href="https://vk.com/r6fem" target="_blank" rel="noopener">
+        <img class="contact__icon" src="assets/serious-game/icon-vk.webp" alt="">
+        <span class="contact__text">vk.com/r6fem</span>
+      </a>
+      <a class="contact__row contact__row--mail" href="mailto:rainbowsixfemale@gmail.com">
+        <img class="contact__icon" src="assets/serious-game/icon-email.svg" alt="">
+        <span class="contact__text">rainbowsixfemale@gmail.com</span>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <p class="foot__title">SERIOUS GAME</p>
+  <p class="foot__sub">ивент <a href="index.html">FPS Girls</a> · R6 Female Community</p>
+</footer>
+
+</body>
+</html>
