@@ -4,6 +4,7 @@
     "Как добавить: скопируй id из адреса YouTube (watch?v=ЭТО_ID) и добавь запись в нужную игру.",
     "Для плейлиста укажи ещё поле list (значение параметра &list=...).",
     "Категории: tournament (турниры), event (ивенты), interview (интервью).",
+    "Ссылка на страницу ивента на самом сайте: вместо id укажи page (адрес страницы) и image (обложка 16:9).",
     "Игры без единого видео на странице не показываются — заглушек не будет."
   ],
   "games": [
@@ -27,6 +28,12 @@
           "id": "D97XZZq-1Mc",
           "category": "tournament",
           "title": "Турнир по Rainbow Six Siege"
+        },
+        {
+          "page": "serious-game.html",
+          "image": "assets/serious-game/cover.webp",
+          "category": "event",
+          "title": "Serious Game — матч на деньги по R6"
         },
         {
           "id": "lqrlK3WD3s8",
