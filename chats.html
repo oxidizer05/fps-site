@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Чаты FPS Girls по играм</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta name="theme-color" content="#0D0D0D">
+<meta name="description" content="Чаты девушек по играм: CS2, Rainbow Six, Tarkov Arena, Valorant, Apex. Только для девушек, вход по короткой анкете.">
+<!-- Превью ссылки в ВК и мессенджерах. Слова Telegram здесь нет нарочно:
+     эту страницу дают в постах ВК, а ВК может урезать охват за ссылки на Telegram. -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fpsgirls.com/chats">
+<meta property="og:title" content="Чаты FPS Girls по играм">
+<meta property="og:description" content="Только для девушек. CS2, Rainbow Six, Tarkov Arena, Valorant, Apex — вход по короткой анкете.">
+<meta property="og:image" content="https://fpsgirls.com/assets/chats/og.jpg">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="720">
+<meta name="twitter:card" content="summary_large_image">
+
+<style>
+@font-face { font-family: 'Montserrat'; src: url('fonts/Montserrat-Black.ttf') format('truetype');      font-weight: 900; font-display: swap; }
+@font-face { font-family: 'Montserrat'; src: url('fonts/Montserrat-ExtraBold.ttf') format('truetype');  font-weight: 800; font-display: swap; }
+@font-face { font-family: 'Montserrat'; src: url('fonts/Montserrat-Bold.ttf') format('truetype');       font-weight: 700; font-display: swap; }
+@font-face { font-family: 'Montserrat'; src: url('fonts/Montserrat-Regular.ttf') format('truetype');    font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Montserrat'; src: url('fonts/Montserrat-ExtraLight.ttf') format('truetype'); font-weight: 200; font-display: swap; }
+
+:root {
+  --accent:        #CE61DF;
+  --accent-glow:   rgba(206,97,223,0.30);
+  --accent-subtle: rgba(206,97,223,0.12);
+  --bg:            #0D0D0D;
+  --surface:       #111111;
+  --surface2:      #161318;
+  --border:        rgba(255,255,255,0.08);
+  --border-accent: rgba(206,97,223,0.40);
+  --white:         #FFFFFF;
+  --gray1:         #969696;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #080808;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  font-family: 'Montserrat', sans-serif;
+  padding: 32px 16px 56px;
+  color: var(--white);
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.35;
+}
+
+.page {
+  width: 100%;
+  max-width: 560px;
+  position: relative;
+  z-index: 1;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 12px 60px rgba(0,0,0,0.8);
+}
+
+/* ── Шапка (как на /join) ── */
+.header {
+  padding: 26px 24px 22px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(160deg, #180d20 0%, #0d0d14 60%, #0d0d0d 100%);
+  border-bottom: 1px solid var(--border);
+}
+.header::after {
+  content: '';
+  position: absolute;
+  top: -80px; left: 50%;
+  transform: translateX(-50%);
+  width: 320px; height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(206,97,223,0.16) 0%, transparent 70%);
+  pointer-events: none;
+}
+.avatar {
+  width: 66px; height: 66px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 20px var(--accent-glow);
+  position: relative; z-index: 1;
+}
+.wordmark {
+  font-weight: 900; font-size: 22px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  margin-top: 12px; line-height: 1;
+  position: relative; z-index: 1;
+}
+.tagline {
+  font-weight: 200; font-size: 10px;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--accent); margin-top: 6px;
+  position: relative; z-index: 1;
+}
+.home-link {
+  position: absolute; top: 16px; left: 16px; z-index: 2;
+  display: inline-flex; align-items: center; gap: 5px;
+  font-weight: 700; font-size: 10px; letter-spacing: 0.08em;
+  color: var(--gray1); text-decoration: none;
+  border: 1px solid var(--border); border-radius: 6px;
+  padding: 6px 10px; transition: color 150ms, border-color 150ms;
+}
+.home-link:hover { color: var(--white); border-color: var(--border-accent); }
+
+/* ── Интро ── */
+.intro { padding: 24px 24px 0; text-align: center; }
+.intro h1 { font-weight: 800; font-size: 22px; line-height: 1.3; letter-spacing: 0.02em; }
+.intro p {
+  font-weight: 400; font-size: 13px; line-height: 1.6;
+  color: var(--gray1); margin-top: 8px;
+}
+.intro p b { font-weight: 700; color: var(--accent); }
+
+/* ── Список чатов ── */
+.chats { list-style: none; padding: 20px 24px 0; display: grid; gap: 8px; }
+.chat {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; padding: 12px 14px;
+}
+.chat-name { font-weight: 700; font-size: 13px; letter-spacing: 0.02em; }
+.chat-tag {
+  flex-shrink: 0;
+  font-weight: 700; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
+  border-radius: 5px; padding: 4px 8px;
+}
+.chat-tag.live { color: #fff; background: var(--accent); }
+.chat-tag.new  { color: var(--accent); background: var(--accent-subtle); border: 1px solid rgba(206,97,223,0.3); }
+
+/* ── Как попасть ── */
+.section-label { display: flex; align-items: center; gap: 10px; padding: 24px 24px 4px; }
+.section-label .line { flex: 1; height: 1px; background: rgba(206,97,223,0.2); }
+.section-label span {
+  font-weight: 700; font-size: 9px; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--accent);
+}
+.steps { list-style: none; padding: 0 24px; }
+.step {
+  display: flex; gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.step:last-child { border-bottom: none; }
+.step-num {
+  width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+  background: var(--accent-subtle); border: 1px solid rgba(206,97,223,0.35);
+  color: var(--accent); font-weight: 800; font-size: 12px;
+  display: flex; align-items: center; justify-content: center;
+}
+.step-text { font-weight: 400; font-size: 12.5px; line-height: 1.6; color: #B9B9B9; padding-top: 4px; }
+.step-text b { font-weight: 700; color: #E4E4E4; }
+
+.cta {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  margin: 18px 24px 0;
+  background: var(--accent); color: #fff; text-decoration: none;
+  font-weight: 800; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 16px 12px; border-radius: 8px; text-align: center;
+  transition: box-shadow 150ms, transform 150ms;
+}
+.cta:hover { box-shadow: 0 0 24px var(--accent-glow); transform: translateY(-1px); }
+.cta svg { flex-shrink: 0; }
+.note {
+  padding: 12px 24px 0; text-align: center;
+  font-weight: 400; font-size: 11px; line-height: 1.6; color: var(--gray1);
+}
+
+/* ── Подвал ── */
+.foot {
+  border-top: 1px solid var(--border); margin-top: 26px;
+  padding: 14px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 8px;
+}
+.foot-games { display: flex; gap: 10px; align-items: center; }
+.foot-games span { font-weight: 800; font-size: 9px; letter-spacing: 0.1em; color: rgba(255,255,255,0.25); }
+.foot-games .x { color: rgba(206,97,223,0.3); }
+.foot .brand {
+  font-weight: 200; font-size: 9px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: rgba(206,97,223,0.4);
+}
+
+@media (max-width: 420px) {
+  .intro h1 { font-size: 19px; }
+}
+</style>
+</head>
+
+<body>
+<div class="page">
+
+  <header class="header">
+    <a class="home-link" href="index.html">← На главную</a>
+    <img class="avatar" src="assets/logo.jpg" alt="FPS Girls">
+    <div class="wordmark">FPS Girls</div>
+    <div class="tagline">Чаты по играм</div>
+  </header>
+
+  <section class="intro">
+    <h1>Чаты FPS Girls по играм</h1>
+    <p><b>Только для девушек.</b> Ищешь, с кем катать вечером, — заходи в чат своей игры.</p>
+  </section>
+
+  <ul class="chats">
+    <li class="chat"><span class="chat-name">CS2</span><span class="chat-tag live">живой чат</span></li>
+    <li class="chat"><span class="chat-name">Rainbow Six Siege</span><span class="chat-tag live">живой чат</span></li>
+    <li class="chat"><span class="chat-name">Tarkov Arena</span><span class="chat-tag new">только открылся</span></li>
+    <li class="chat"><span class="chat-name">Valorant</span><span class="chat-tag new">только открылся</span></li>
+    <li class="chat"><span class="chat-name">Apex Legends</span><span class="chat-tag new">только открылся</span></li>
+  </ul>
+
+  <div class="section-label">
+    <div class="line"></div><span>Как попасть</span><div class="line"></div>
+  </div>
+  <ol class="steps">
+    <li class="step"><span class="step-num">1</span><span class="step-text">Подпишись на <b>Telegram-канал FPS Girls</b> — кнопка ниже.</span></li>
+    <li class="step"><span class="step-num">2</span><span class="step-text">В описании канала — <b>короткая анкета</b>. Её смотрит модератор: чаты закрытые, пускаем только девушек.</span></li>
+    <li class="step"><span class="step-num">3</span><span class="step-text">После одобрения бот пришлёт <b>ссылки в чаты твоих игр</b>.</span></li>
+  </ol>
+
+  <!-- Именная ссылка-приглашение в канал: по ней телеграм-бот считает, сколько подписок
+       пришло с этой страницы (в боте: /link site-chats, отчёт — /links). -->
+  <a class="cta" id="channel-link" href="https://t.me/fpsgirlschannel" target="_blank" rel="noopener">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.94 4.3 18.9 19.06c-.23 1.03-.83 1.29-1.69.8l-4.66-3.43-2.25 2.16c-.25.25-.46.46-.94.46l.33-4.74 8.63-7.8c.38-.33-.08-.52-.58-.19L7.07 13.03l-4.6-1.44c-1-.31-1.02-1 .21-1.48L20.66 3.1c.83-.31 1.56.19 1.28 1.2Z"/></svg>
+    Открыть канал FPS Girls
+  </a>
+  <p class="note">Discord не нужен. Новости, турниры и рейтинг сообщества тоже там.</p>
+
+  <footer class="foot">
+    <div class="foot-games">
+      <span>CS2</span><span>R6S</span><span>EFT</span><span>VAL</span><span>APEX</span>
+      <span class="x">×</span><span>FPS</span>
+    </div>
+    <div class="brand">Female Play Style</div>
+  </footer>
+
+</div>
+</body>
+</html>
