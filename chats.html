@@ -261,7 +261,7 @@ body::before {
 // Откуда пришли → своя именная ссылка в канал, чтобы подписки считались раздельно:
 // с главной (окно «Поиск игроков») — site-home, всё остальное (посты ВК) — site-chats из разметки.
 const INVITES = {
-  home: 'SITE_HOME_LINK', // /link site-home
+  home: 'https://t.me/+rDoCt6kDlwczYzNi', // /link site-home
 };
 const from = new URLSearchParams(location.search).get('from');
 const invite = Object.prototype.hasOwnProperty.call(INVITES, from) ? INVITES[from] : '';
