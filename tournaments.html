@@ -252,6 +252,7 @@ body::before {
   <footer class="foot">
     <a class="yt" href="https://www.youtube.com/channel/UCc6ezXFutc3XZJVi0eg1qAg" target="_blank" rel="noopener" data-i18n="ytLink">All videos on YouTube →</a>
     <div class="brand">Female Play Style</div>
+    <p style="margin-top:16px"><a data-report-link href="report?from=/tournaments" style="color:#bbb;font-size:12px;text-decoration:underline;text-underline-offset:4px">Сообщить о проблеме</a></p>
   </footer>
 
 </div>
@@ -393,5 +394,6 @@ fetch('videos.json?t=' + Date.now(), { cache: 'no-store' })
     document.getElementById('content').innerHTML = '<div class="empty">' + t().loadFail + '</div>';
   });
 </script>
+<script src="report-link.js" defer></script>
 </body>
 </html>

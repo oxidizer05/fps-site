@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Сообщить о проблеме — FPS Girls</title>
+<meta name="description" content="Что-то не работает или не получается вступить? Сообщи модераторам FPS Girls.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0D0D0D">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="stylesheet" href="report.css">
+<script src="report.js" defer></script>
+</head>
+<body>
+<main class="page">
+  <header>
+    <a class="home" href="./" aria-label="FPS Girls"><img src="assets/logo.jpg" alt="FPS Girls" width="48" height="48"></a>
+    <div class="languages" aria-label="Language">
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      <button type="button" data-lang="ru" aria-pressed="true">RU</button>
+    </div>
+  </header>
+  <p class="eyebrow">FPS GIRLS · <span data-text="support">Помощь</span></p>
+  <h1 data-text="heading">Что пошло не так?</h1>
+  <p class="intro" data-text="intro">Ошибка на сайте, сложности со входом в чаты или верификацией? Расскажи — сообщение получат наши модераторы в Telegram.</p>
+  <form id="report-form">
+    <label for="kind" data-text="kind">С чем нужна помощь?</label>
+    <select id="kind" name="kind">
+      <option value="bug" data-text="bug">Ошибка на сайте</option>
+      <option value="access" data-text="access">Вступление в чаты / верификация</option>
+      <option value="other" data-text="other">Другая трудность</option>
+    </select>
+    <label for="description" data-text="description">Что случилось?</label>
+    <textarea id="description" name="description" rows="6" required minlength="20" maxlength="2000" aria-describedby="description-hint" placeholder="На какой шаге возникла проблема? Что ожидала увидеть и что произошло?"></textarea>
+    <p class="hint" id="description-hint" data-text="descriptionHint">От 20 до 2000 символов. Опиши шаги, чтобы мы могли повторить проблему.</p>
+    <label for="screenshot" data-text="screenshot">Скриншот · необязательно</label>
+    <input id="screenshot" type="file" accept="image/png,image/jpeg,image/webp" aria-describedby="screenshot-hint">
+    <p class="hint" id="screenshot-hint" data-text="screenshotHint">PNG, JPG или WebP до 5 МБ. Перед отправкой скрой личные данные на изображении.</p>
+    <div id="screenshot-preview" hidden>
+      <img id="screenshot-image" hidden alt="Превью скриншота">
+      <button type="button" id="screenshot-remove" data-text="removeScreenshot">Убрать скриншот</button>
+    </div>
+    <label for="page" data-text="page">На какой странице?</label>
+    <input id="page" name="page" value="/" required maxlength="240" spellcheck="false" aria-describedby="page-hint">
+    <p class="hint" id="page-hint" data-text="pageHint">Подставили страницу, с которой ты пришла. Можно изменить, например: /join.</p>
+    <label for="contact" data-text="contact">Куда ответить? · необязательно</label>
+    <input id="contact" name="contact" maxlength="120" autocomplete="off" placeholder="@telegram, email или Discord" aria-describedby="contact-hint">
+    <p class="hint" id="contact-hint" data-text="contactHint">Если хочешь получить ответ, оставь контакт. Можно отправить и без него.</p>
+    <div class="trap" aria-hidden="true"><label for="website">Website</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
+    <p class="privacy" data-text="privacy">Текст, скриншот, контакт, адрес страницы и данные браузера получат только модераторы FPS Girls. Не отправляй пароли, коды входа, документы и другие секреты.</p>
+    <button class="primary" id="submit" type="submit" data-text="submit">Отправить проблему</button>
+  </form>
+  <p id="status" role="status" aria-live="polite" tabindex="-1"></p>
+  <section id="done" hidden aria-labelledby="done-title">
+    <div class="success-mark" aria-hidden="true">✓</div>
+    <h2 id="done-title" data-text="doneTitle">Сообщение у модераторов</h2>
+    <p data-text="done">Спасибо! Мы посмотрим, что произошло. Если оставила контакт, сможем связаться с тобой. Ответ может занять время.</p>
+    <a class="primary" href="./" data-text="home">На главную</a>
+  </section>
+  <noscript><p>Для отправки включи JavaScript в браузере. Enable JavaScript to send a report.</p></noscript>
+  <footer><a href="./" data-text="back">← На главную</a><span>Female Play Style</span></footer>
+</main>
+</body>
+</html>

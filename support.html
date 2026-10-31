@@ -305,6 +305,7 @@ body::before {
   <footer class="foot">
     <a href="index.html" data-i18n="backLink">← Back to the main page</a>
     <div class="brand">Female Play Style</div>
+    <p style="margin-top:16px"><a data-report-link href="report?from=/support" style="color:#bbb;font-size:12px;text-decoration:underline;text-underline-offset:4px">Сообщить о проблеме</a></p>
   </footer>
 
 </div>
@@ -497,5 +498,6 @@ fetch('donations.json?t=' + Date.now(), { cache: 'no-store' })
     document.getElementById('hall').innerHTML = '<div class="empty">' + t().loadFail + '</div>';
   });
 </script>
+<script src="report-link.js" defer></script>
 </body>
 </html>
