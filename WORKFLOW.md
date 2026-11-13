@@ -21,7 +21,7 @@
 
 ### Start implementation with Claude
 
-> Follow CLAUDE.md and WORKFLOW.md. Implement this task with the smallest safe change: [TASK]. Run relevant checks and prepare the workspace for Codex review.
+> Follow DEVELOPMENT.md and WORKFLOW.md. Implement this task with the smallest safe change: [TASK]. Run relevant checks and prepare the workspace for Codex review.
 
 ### Start review with Codex
 

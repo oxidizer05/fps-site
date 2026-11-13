@@ -9,7 +9,8 @@ A portable set of project instructions for a two-agent workflow in Antigravity I
 
 ## Files
 
-- `CLAUDE.md` — implementation rules for Claude
+- [DEVELOPMENT.md](DEVELOPMENT.md) — site architecture and development rules
+- `.claude/CLAUDE.md` — loads the development guide in Claude Code
 - `CLAUDE_ENGINEERING.md` — general engineering rules for Claude
 - `AGENTS.md` — independent review rules for Codex
 - `WORKFLOW.md` — the shared development cycle and ready-to-use prompts
@@ -18,7 +19,7 @@ A portable set of project instructions for a two-agent workflow in Antigravity I
 
 ## Installation
 
-Extract all six files into the root of a project, next to the repository's main files.
+Copy the listed files into the project, keeping their relative paths.
 
 If the project already contains files with the same names, review and merge the instructions instead of overwriting project-specific rules.
 
@@ -26,7 +27,7 @@ If the project already contains files with the same names, review and merge the 
 
 In Claude, send:
 
-> Follow CLAUDE.md and WORKFLOW.md. Implement this task with the smallest safe change: [TASK]. Run relevant checks and prepare the workspace for Codex review.
+> Follow DEVELOPMENT.md and WORKFLOW.md. Implement this task with the smallest safe change: [TASK]. Run relevant checks and prepare the workspace for Codex review.
 
 When Claude finishes, send Codex:
 

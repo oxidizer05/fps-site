@@ -1,8 +1,6 @@
-# CLAUDE.md
+# FPS Girls site architecture and development
 
 Also follow the general engineering rules in CLAUDE_ENGINEERING.md.
-
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Project: fps-site
 
