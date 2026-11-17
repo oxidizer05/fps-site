@@ -163,6 +163,16 @@ body::before {
 .search::placeholder { color: var(--gray1); }
 .search:focus { border-color: var(--border-accent); }
 
+.donation-guide {
+  max-width: 700px; margin: 12px auto; padding: 0 20px;
+  font-size: 14px; line-height: 1.55; color: #ccc;
+}
+.donation-guide summary { color: var(--accent); cursor: pointer; font-weight: 700; text-align: center; }
+.donation-guide[open] summary { margin-bottom: 12px; }
+.donation-guide ol { padding-left: 1.5em; }
+.donation-guide li, .donation-guide p { margin: 8px 0; }
+.donation-guide a { color: var(--accent); text-decoration: underline; }
+
 /* ── Сортировка ── */
 .sort {
   display: flex; align-items: center; flex-wrap: wrap; gap: 4px;
@@ -426,6 +436,19 @@ tr.hidden { display: none; }
     <input class="search" type="text" data-i18n-ph="search" placeholder="Поиск по нику…" id="search">
   </div>
 
+  <details class="donation-guide" id="donations">
+    <summary data-i18n="donateTitle">💜 Добавить свою ссылку на донаты</summary>
+    <ol>
+      <li><span data-i18n="donateCopy">Скопируй ссылку, которую даёшь зрителям на стриме. Подойдёт, например, твоя страница DonationAlerts, Boosty или CloudTips.</span></li>
+      <li><span data-i18n="donateClick">В канале #start-here нажми «Мои донаты» под сообщением бота.</span> <a href="https://discord.com/channels/556777270212165634/556806955080089611/1527677024661930005" target="_blank" rel="noopener"><span data-i18n="donateOpen">Открыть сообщение в Discord</span></a></li>
+      <li><span data-i18n="donateSubmit">Вставь ссылку в форму. Если тебе уже есть 18 и ты хочешь показать её в рейтинге, поставь галочку и нажми «Отправить».</span></li>
+      <li><span data-i18n="donateCheck">После ответа «Готово!» обнови рейтинг и введи свой ник FACEIT в поиске. Нажми 💜 рядом с ником, чтобы проверить, куда ведёт ссылка.</span></li>
+    </ol>
+    <p><strong><span data-i18n="donateFirst">Впервые в Discord FPS Girls?</span></strong> <a href="https://discord.gg/DExYXEdDkK" target="_blank" rel="noopener"><span data-i18n="donateJoin">Вступи на сервер</span></a> <span data-i18n="donateRules">и прими правила. В #start-here кнопка «Роль девушки» ведёт на верификацию, а «Привязать FACEIT» связывает твой ник с рейтингом. Если оба шага уже пройдены, повторять их не нужно.</span></p>
+    <p><span data-i18n="donateFallback">Не видишь кнопку? В поле сообщения на сервере FPS Girls набери /support link и выбери команду из подсказки Discord. В url вставь ссылку, в confirm выбери True, если тебе есть 18 и ты согласна на публикацию. Отправь команду.</span></p>
+    <p><span data-i18n="donateManage">Чтобы заменить ссылку, снова открой «Мои донаты». Чтобы убрать 💜, выбери в Discord команду /support remove. Проверить сохранённый адрес можно командой /support show.</span></p>
+  </details>
+
   <div id="content">
     <div class="state"><div class="spinner"></div><span data-i18n="loading">Загружаем рейтинг…</span></div>
   </div>
@@ -464,6 +487,17 @@ const DATA_URL = new URLSearchParams(location.search).get('data') || 'world.json
 
 const I18N = {
   ru: {
+    donateTitle: "💜 Добавить свою ссылку на донаты",
+    donateCopy: "Скопируй ссылку, которую даёшь зрителям на стриме. Подойдёт, например, твоя страница DonationAlerts, Boosty или CloudTips.",
+    donateOpen: "Открыть сообщение в Discord",
+    donateClick: "В канале #start-here нажми «Мои донаты» под сообщением бота.",
+    donateSubmit: "Вставь ссылку в форму. Если тебе уже есть 18 и ты хочешь показать её в рейтинге, поставь галочку и нажми «Отправить».",
+    donateCheck: "После ответа «Готово!» обнови рейтинг и введи свой ник FACEIT в поиске. Нажми 💜 рядом с ником, чтобы проверить, куда ведёт ссылка.",
+    donateFirst: "Впервые в Discord FPS Girls?",
+    donateJoin: "Вступи на сервер",
+    donateRules: "и прими правила. В #start-here кнопка «Роль девушки» ведёт на верификацию, а «Привязать FACEIT» связывает твой ник с рейтингом. Если оба шага уже пройдены, повторять их не нужно.",
+    donateFallback: "Не видишь кнопку? В поле сообщения на сервере FPS Girls набери /support link и выбери команду из подсказки Discord. В url вставь ссылку, в confirm выбери True, если тебе есть 18 и ты согласна на публикацию. Отправь команду.",
+    donateManage: "Чтобы заменить ссылку, снова открой «Мои донаты». Чтобы убрать 💜, выбери в Discord команду /support remove. Проверить сохранённый адрес можно командой /support show.",
     title: 'Рейтинг игроков — FPS Girls', home: 'На главную', tagline: 'Рейтинг игроков',
     search: 'Поиск по нику…', loading: 'Загружаем рейтинг…',
     note: 'В рейтинге — участницы FACEIT-клуба FPS Girls, подтверждённые администрацией клуба. Обновляется автоматически.',
@@ -481,6 +515,17 @@ const I18N = {
     matchesShort: 'матчей'
   },
   en: {
+    donateTitle: "💜 Add my donation link",
+    donateCopy: "Copy the link you share with viewers on stream, such as your DonationAlerts, Boosty or CloudTips page.",
+    donateOpen: "Open the Discord message",
+    donateClick: "In #start-here, press «Мои донаты» (My donations) under the bot’s message.",
+    donateSubmit: "Paste your link into the form. If you are 18 or older and want it on the ranking, tick the box and press Submit.",
+    donateCheck: "After the bot confirms, refresh the ranking and search for your FACEIT nickname. Select the 💜 next to it to check where it goes.",
+    donateFirst: "New to the FPS Girls Discord?",
+    donateJoin: "Join the server",
+    donateRules: "and accept the rules. In #start-here, use «Роль девушки» to get verified and «Привязать FACEIT» to link your account. If you have done both, go straight to «Мои донаты».",
+    donateFallback: "Can’t see the button? In a message box on the FPS Girls server, type /support link and select it from Discord’s suggestions. Paste the link in url, choose True in confirm if you are 18 or older and want to publish it, then send.",
+    donateManage: "To replace the link, open «Мои донаты» again. To remove the 💜, select /support remove in Discord. Use /support show to see the saved address.",
     title: 'Player ranking — FPS Girls', home: 'Home', tagline: 'Player ranking',
     search: 'Search by nickname…', loading: 'Loading ranking…',
     note: 'The ranking lists FPS Girls FACEIT club members verified by the club admins. Updates automatically.',
@@ -819,6 +864,12 @@ function syncTabs() {
   document.querySelector('.tabs').style.display = visible.length > 1 ? '' : 'none';
   if (visible.length && !visible.includes(game)) setGame(visible[0]);
 }
+
+function openDonationGuide() {
+  if (location.hash === '#donations') document.getElementById('donations').open = true;
+}
+openDonationGuide();
+window.addEventListener('hashchange', openDonationGuide);
 
 async function load() {
   // Ссылки на HLTV — необязательные: не загрузились, просто нет столбца-ссылок
