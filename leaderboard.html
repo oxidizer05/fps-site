@@ -437,7 +437,7 @@ tr.hidden { display: none; }
   </div>
 
   <details class="donation-guide" id="donations">
-    <summary data-i18n="donateTitle">💜 Добавить свою ссылку на донаты</summary>
+    <summary data-i18n="donateTitle">💜 Хочешь получать донаты?</summary>
     <ol>
       <li><span data-i18n="donateCopy">Скопируй ссылку, которую даёшь зрителям на стриме. Подойдёт, например, твоя страница DonationAlerts, Boosty или CloudTips.</span></li>
       <li><span data-i18n="donateClick">В канале #start-here нажми «Мои донаты» под сообщением бота.</span> <a href="https://discord.com/channels/556777270212165634/556806955080089611/1527677024661930005" target="_blank" rel="noopener"><span data-i18n="donateOpen">Открыть сообщение в Discord</span></a></li>
@@ -487,7 +487,7 @@ const DATA_URL = new URLSearchParams(location.search).get('data') || 'world.json
 
 const I18N = {
   ru: {
-    donateTitle: "💜 Добавить свою ссылку на донаты",
+    donateTitle: "💜 Хочешь получать донаты?",
     donateCopy: "Скопируй ссылку, которую даёшь зрителям на стриме. Подойдёт, например, твоя страница DonationAlerts, Boosty или CloudTips.",
     donateOpen: "Открыть сообщение в Discord",
     donateClick: "В канале #start-here нажми «Мои донаты» под сообщением бота.",
@@ -515,7 +515,7 @@ const I18N = {
     matchesShort: 'матчей'
   },
   en: {
-    donateTitle: "💜 Add my donation link",
+    donateTitle: "💜 Want to receive donations?",
     donateCopy: "Copy the link you share with viewers on stream, such as your DonationAlerts, Boosty or CloudTips page.",
     donateOpen: "Open the Discord message",
     donateClick: "In #start-here, press «Мои донаты» (My donations) under the bot’s message.",
@@ -864,12 +864,6 @@ function syncTabs() {
   document.querySelector('.tabs').style.display = visible.length > 1 ? '' : 'none';
   if (visible.length && !visible.includes(game)) setGame(visible[0]);
 }
-
-function openDonationGuide() {
-  if (location.hash === '#donations') document.getElementById('donations').open = true;
-}
-openDonationGuide();
-window.addEventListener('hashchange', openDonationGuide);
 
 async function load() {
   // Ссылки на HLTV — необязательные: не загрузились, просто нет столбца-ссылок
